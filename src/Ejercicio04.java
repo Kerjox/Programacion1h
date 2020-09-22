@@ -1,4 +1,6 @@
-// Sacar el mayor de 3 números
+/*
+    Sacar el mayor de 3 números y mostrarlo por pantalla
+ */
 public class Ejercicio04 {
     public static void main(String[] args) {
         int x,y,z;

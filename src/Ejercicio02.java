@@ -1,3 +1,7 @@
+/*
+    Desit sí un número es mayor que el otro y mostrarlo por pantalla
+ */
+
 public class Ejercicio02 {
     public static void main(String[] args) {
         int x, y;

@@ -1,3 +1,7 @@
+/*
+    Sumar números y mostrarlos por pantalla
+ */
+
 public class Ejercicio01 {
 
     public static void main(String arg[]) {

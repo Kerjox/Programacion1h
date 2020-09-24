@@ -5,9 +5,10 @@
 import static java.lang.String.format;
 
 public class Ejercicio12 {
+
     public static void main(String[] args) {
 
-        int n = 2;
+        int n = 4;
         int m = 7;
         int divisorFactorial = m - n;
         int mFactorial = m;
@@ -33,5 +34,6 @@ public class Ejercicio12 {
         int sol = mFactorial / divisorFactorial;
 
         System.out.println(format("El resultado es: %s", sol));
+
     }
 }

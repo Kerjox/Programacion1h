@@ -20,7 +20,7 @@ public class Ejercicio15 {
 
         System.out.printf("El número más alto es %d \n", sol);
 
-        int posmax = 0;
+        int posmax = 1;
 
         for (int i = 0; i < vector.length; i++) {
 
@@ -31,7 +31,7 @@ public class Ejercicio15 {
             }
         }
 
-        System.out.printf("El número más alto es %d \n", posmax);
+        System.out.printf("La posición del número más alto es %d que es %d\n", posmax, vector[posmax]);
 
     }
 }

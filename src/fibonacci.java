@@ -1,11 +1,13 @@
-import java.util.Arrays;
+/*
+    Sucesion de Fibonacci
+ */
 
 public class fibonacci {
     public static void main(String[] args) {
 
         long n1 = 0;
         long n2 = 1;
-        int limit = 80;
+        int limit = 10;
 
         System.out.printf("Sucesión de fibonacci \n");
 
@@ -20,6 +22,3 @@ public class fibonacci {
         }
     }
 }
-/*
-
- */

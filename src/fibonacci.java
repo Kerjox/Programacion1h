@@ -1,5 +1,5 @@
 /*
-    Sucesion de Fibonacci
+    Sucesión de Fibonacci
  */
 
 public class fibonacci {

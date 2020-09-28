@@ -26,7 +26,7 @@ public class Ejercicio18 {
 
         for (int i = 0; i < datos.length; i++) {
 
-            if (i != 5) {
+            if (i != datos.length - 1) {
 
                 System.out.printf("%d, ", datos[i]);
 

@@ -9,7 +9,7 @@ public class Ejercicio15 {
         int vector[] = {-78, -45, -96, -12, -74};
         int sol = vector[0];
 
-        for (int i = 0; i < vector.length; i++) {
+        for (int i = 1; i < vector.length; i++) {
 
                 if (vector[i] > sol) {
 
@@ -20,9 +20,9 @@ public class Ejercicio15 {
 
         System.out.printf("El número más alto es %d \n", sol);
 
-        int posmax = 1;
+        int posmax = 0;
 
-        for (int i = 0; i < vector.length; i++) {
+        for (int i = 1; i < vector.length; i++) {
 
             if (vector[i] > vector[posmax]) {
 
@@ -31,7 +31,7 @@ public class Ejercicio15 {
             }
         }
 
-        System.out.printf("La posición del número más alto es %d que es %d\n", posmax, vector[posmax]);
+        System.out.printf("La posición del número más alto es %d que es %d \n", posmax, vector[posmax]);
 
     }
 }

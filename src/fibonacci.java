@@ -5,13 +5,16 @@
 public class fibonacci {
     public static void main(String[] args) {
 
+        System.out.printf("Sucesión de fibonacci \n");
+        doFibonacci(10);
+
+    }
+    private static void doFibonacci(int limit) {
+
         long n1 = 0;
         long n2 = 1;
-        int limit = 10;
 
-        System.out.printf("Sucesión de fibonacci \n");
-
-        for (int i = limit; i > 0; i--) {
+        for (int i = limit; i > 0; i--){
 
             long suma;
             suma = n1 + n2;
@@ -20,5 +23,6 @@ public class fibonacci {
             System.out.printf("%d \n", suma);
 
         }
+
     }
 }

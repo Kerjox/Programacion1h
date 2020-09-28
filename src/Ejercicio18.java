@@ -2,6 +2,8 @@
     Modificar un vector convirtiendo los negativos en positivos y los positivos los multiplicamos por 2.
  */
 
+import java.util.Arrays;
+
 public class Ejercicio18 {
 
     public static void main(String[] args) {
@@ -22,21 +24,7 @@ public class Ejercicio18 {
 
         }
 
-        System.out.printf("datos[");
-
-        for (int i = 0; i < datos.length; i++) {
-
-            if (i != datos.length - 1) {
-
-                System.out.printf("%d, ", datos[i]);
-
-            } else {
-
-                System.out.printf("%d]", datos[i]);
-
-            }
-
-        }
+        System.out.printf("datos%s", Arrays.toString(datos));
 
     }
 }

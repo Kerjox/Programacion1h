@@ -2,6 +2,8 @@
     desplazar todos los elementos de un array 1 puesto a la izquierda
  */
 
+import java.util.Arrays;
+
 public class Ejercicio20 {
 
     public static void main(String[] args) {
@@ -17,21 +19,7 @@ public class Ejercicio20 {
 
         }
 
-        System.out.printf("datos[");
-
-        for (int i = 0; i < datos.length; i++) {
-
-            if (i != datos.length - 1) {
-
-                System.out.printf("%d, ", datos[i]);
-
-            } else {
-
-                System.out.printf("%d]", datos[i]);
-
-            }
-
-        }
+        System.out.printf("datos%s", Arrays.toString(datos));
 
     }
 

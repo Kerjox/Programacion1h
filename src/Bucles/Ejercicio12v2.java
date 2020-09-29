@@ -1,3 +1,5 @@
+package Bucles;
+
 public class Ejercicio12v2 {
 
     public static void main(String[] args) {

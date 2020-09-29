@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     Primer bucle.
 
     Hay bubles en los que sabemos el número de ejecuciones, por ejemplo las tablas de multiplicar tienes 10 ejecuciones.

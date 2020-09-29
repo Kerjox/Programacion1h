@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     División mediante restas enteras
  */
 

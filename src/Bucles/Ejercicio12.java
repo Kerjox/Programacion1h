@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     Número de variaciones sin repetición
  */
 

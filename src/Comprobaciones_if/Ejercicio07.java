@@ -1,4 +1,4 @@
-/*
+package Comprobaciones_if;/*
     Con 2 números calcular su uno es múltiplo de otro o no y mostrarlo por pantalla
  */
 

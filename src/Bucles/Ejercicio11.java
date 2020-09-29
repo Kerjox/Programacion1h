@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     Multiplicacion mediante sumas y mostrar el resultado por pantalla
  */
 

@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     Cambiar el orden de los valosres del array, el primero con el último, el segundo con el penultimo.
  */
 

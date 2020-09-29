@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     Mostrar el valor más alto de un vector y el minimo
  */
 

@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     Mover los datos del array hacia la derecha hasta que queden como estaba
  */
 

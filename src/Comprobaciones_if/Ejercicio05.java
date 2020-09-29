@@ -1,3 +1,5 @@
+package Comprobaciones_if;
+
 /*
     Un nnumero y sacar si es par o impar y mostrarlo por mantalla
  */

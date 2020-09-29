@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     Hace el factorial de un número y mostrarlo por pantalla
  */
 

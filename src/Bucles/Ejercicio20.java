@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     Desplazar todos los elementos de un array 1 puesto a la izquierda y el primero al último.
  */
 

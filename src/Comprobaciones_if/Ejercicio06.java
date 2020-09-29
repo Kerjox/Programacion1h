@@ -1,4 +1,4 @@
-/*
+package Comprobaciones_if;/*
     Decir si un número termina en 5 o no y mostrarlo por pantalla
  */
 

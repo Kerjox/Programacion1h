@@ -1,4 +1,4 @@
-/*
+package Bucles;/*
     Hacer un bucle que hace una tabla de multiplicar y mostrarlo po pantalla
  */
 

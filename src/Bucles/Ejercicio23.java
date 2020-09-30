@@ -10,7 +10,7 @@ public class Ejercicio23 {
 
         int datos[] = {45, 25, 84, 2, 90};
 
-        System.out.printf("datos%s \n", Arrays.toString(datos));
+        System.out.printf("Daos iniciales datos%s \n", Arrays.toString(datos));
 
         for (int i = 0; i < datos.length; i++) {
 

@@ -6,7 +6,7 @@ package Bucles;
 
 import java.util.Arrays;
 
-public class Ejercico28 {
+public class Ejercicio28 {
 
     public static void main(String[] args) {
 

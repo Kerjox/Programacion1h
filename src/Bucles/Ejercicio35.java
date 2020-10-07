@@ -28,7 +28,7 @@ public class Ejercicio35 {
 
     private static void mejorPeorMediaAlumnos(int[][] notas, String[] alumnos) {
 
-        int[] medias = new int[5];
+        float[] medias = new float[notas.length];
         int posMediaMasAlta = 0;
         int posMediaMasBaja = 0;
 
@@ -42,26 +42,22 @@ public class Ejercicio35 {
 
             }
 
-            medias[x] = sumaMedias / notas[0].length;
+            medias[x] = (float) sumaMedias / notas[0].length;
 
-        }
+            if (medias[x] > medias[posMediaMasAlta]) {
 
-        for (int i = 1; i < medias.length; i++) {
+                posMediaMasAlta = x;
 
-            if (medias[i] > medias[posMediaMasAlta]) {
+            } else if (medias[x] < medias[posMediaMasAlta]) {
 
-                posMediaMasAlta = i;
-
-            } else if (medias[i] < medias[posMediaMasAlta]) {
-
-                posMediaMasBaja = i;
+                posMediaMasBaja = x;
 
             }
 
         }
 
-        System.out.printf("El alumno que tiene las notas mas altas es %s con una media de %d \n", alumnos[posMediaMasAlta], medias[posMediaMasAlta]);
-        System.out.printf("El alumno que tiene las notas mas bajas es %s con una media de %d \n\n", alumnos[posMediaMasBaja], medias[posMediaMasBaja]);
+        System.out.printf("El alumno que tiene las notas mas altas es %s con una media de %.2f \n", alumnos[posMediaMasAlta], medias[posMediaMasAlta]);
+        System.out.printf("El alumno que tiene las notas mas bajas es %s con una media de %.2f \n\n", alumnos[posMediaMasBaja], medias[posMediaMasBaja]);
 
     }
 
@@ -71,31 +67,30 @@ public class Ejercicio35 {
         int posMaxMedia = 0;
         int posMinMedia = 0;
 
-        for (int i = 0; i < notas[0].length; i++) {
+        for (int y = 0; y < notas[0].length; y++) {
 
             float sumaMediaMaterias = 0;
 
-            for (int o = 0; o < notas.length; o++) {
+            for (int x = 0; x < notas.length; x++) {
 
-                sumaMediaMaterias += notas[o][i];
+                sumaMediaMaterias += notas[x][y];
 
             }
 
-            mediaMaterias[i] = sumaMediaMaterias / notas[0].length;
+            mediaMaterias[y] = sumaMediaMaterias / notas[0].length;
 
-            if (mediaMaterias[i] > mediaMaterias[posMaxMedia]) {
+            if (mediaMaterias[y] > mediaMaterias[posMaxMedia]) {
 
-                posMaxMedia = i;
+                posMaxMedia = y;
 
-            } else if (mediaMaterias[i] < mediaMaterias[posMinMedia]) {
+            } else if (mediaMaterias[y] < mediaMaterias[posMinMedia]) {
 
-                posMinMedia = i;
+                posMinMedia = y;
 
             }
 
         }
 
-        //System.out.printf("MediasMaterias%s\n", Arrays.toString(mediaMaterias));
         System.out.printf("La asignatura con la media mas alta es %s con un %.2f \n", materias[posMaxMedia], mediaMaterias[posMaxMedia]);
         System.out.printf("La asignatura con la nota media mas baja es %s con un %.2f \n", materias[posMinMedia], mediaMaterias[posMinMedia]);
 

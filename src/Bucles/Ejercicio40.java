@@ -4,6 +4,8 @@
 
 package Bucles;
 
+import java.util.Arrays;
+
 public class Ejercicio40 {
 
     public static void main(String[] args) {
@@ -22,6 +24,18 @@ public class Ejercicio40 {
                 {16, 14, 15, 13}
         };
          */
+
+        int aux = 0;
+
+        for (int i = 0; i < data.length; i++) {
+
+            aux = data[i][data[0].length - i - 1];
+            data[i][data[0].length - i - 1] = data[i][i];
+            data[i][i] = aux;
+
+            System.out.printf("%s \n", Arrays.toString(data[i]));
+
+        }
 
     }
 

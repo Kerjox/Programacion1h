@@ -1,5 +1,5 @@
 /*
-    Hacemos un vector vidimensional y mostamos el contenido del vector
+    Hacemos un vector bidimensional y mostamos el contenido del vector
  */
 
 package Bucles;

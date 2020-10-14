@@ -1,6 +1,6 @@
 /*
-    En un array vidimensional tenenos el numero de goles que han metido 5 firbolistas en las 4 temporadas, 1 vector nobres_futbolistas
-    Sacar la media de goles / año de cada furbolista
+    En un array bidimensional tenemos el número de goles que han metido 5 futbolistas en las 4 temporadas, 1 vector nobres_futbolistas
+    Sacar la media de goles / año de cada futbolista
  */
 
 package Bucles;

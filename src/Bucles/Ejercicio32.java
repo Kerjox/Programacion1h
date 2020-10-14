@@ -1,5 +1,5 @@
 /*
-    Tenemos un cine con 4 salas y guardo en un array vidimensional cuantas entradas se venden en la semana.
+    Tenemos un cine con 4 salas y guardo en un array bidimensional cuantas entradas se venden en la semana.
     Sacar el día que más entradas se vendieron
  */
 

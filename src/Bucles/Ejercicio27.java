@@ -1,5 +1,5 @@
 package Bucles;/*
-    Cambiar de signo los numeros negativos de un vector vidimensional y multiplicar por 2 los positivos,
+    Cambiar de signo los numeros negativos de un vector bidimensional y multiplicar por 2 los positivos,
  */
 
 import java.util.Arrays;

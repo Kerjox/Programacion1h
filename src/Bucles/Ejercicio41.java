@@ -1,5 +1,5 @@
 /*
-    En un array vidimensional de edades con las edades de los 4 grupos de informática 1h, 2h, 1e, 2e, y en cada grupo hay 5 alumnos
+    En un array bidimensional de edades con las edades de los 4 grupos de informática 1h, 2h, 1e, 2e, y en cada grupo hay 5 alumnos
     Sacar la edad media / clase
  */
 

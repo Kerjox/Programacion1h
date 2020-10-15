@@ -18,7 +18,7 @@ public class Ejercicio41 {
 
     public static void main(String[] args) {
 
-        printMedianCalsses(getMedian());
+        printMedianClasses(getMedian());
     }
 
     private static int[] getMedian() {
@@ -42,11 +42,11 @@ public class Ejercicio41 {
 
     }
 
-    private static void printMedianCalsses(int[] agesMedian) {
+    private static void printMedianClasses(int[] agesMedian) {
 
         for (int x = 0; x < agesMedian.length; x++) {
 
-            System.out.printf("La edad media de %s es %d \n", classes[x], agesMedian[x]);
+            System.out.printf("La edad media de %s es %d años. \n", classes[x], agesMedian[x]);
 
         }
 

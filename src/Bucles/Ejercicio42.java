@@ -1,6 +1,6 @@
 /*
     En un array bidimensional tenemos el número de goles que han metido 5 futbolistas en las 4 temporadas, 1 vector nobres_futbolistas
-    Sacar la media de goles / año de cada futbolista
+    Sacar la media de goles / temporada de cada futbolista
  */
 
 package Bucles;
@@ -8,11 +8,11 @@ package Bucles;
 public class Ejercicio42 {
 
     static int[][] golesTemporada = {
-        {21, 42, 30, 10},
-        {23, 10, 15, 30},
-        {20, 25, 23, 26},
-        {15, 20, 21, 23},
-        {12, 13, 14, 12}
+        {18, 42, 30, 10},
+        {19, 10, 15, 30},
+        {22, 25, 23, 26},
+        {20, 20, 21, 23},
+        {33, 13, 14, 12}
     };
     static String[] futbolistas = {"Pepe", "Alfredo", "Marcelo", "Javier", "Juan"};
 
@@ -46,7 +46,7 @@ public class Ejercicio42 {
 
         for (int x = 0; x < medians.length; x++) {
 
-            System.out.printf("La media de goles por año de %s es de %d \n", futbolistas[x], medians[x]);
+            System.out.printf("La media de goles por temporada de %s es de %d goles. \n", futbolistas[x], medians[x]);
 
         }
 

@@ -2,11 +2,11 @@
     Método de ordenación de la burbuja
  */
 
-package Bucles;
+package Metodos_Ordenacion;
 
 import java.util.Arrays;
 
-public class Ejecicio43 {
+public class Ejercicio43 {
 
     public static void main(String[] args) {
 

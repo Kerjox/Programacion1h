@@ -16,9 +16,9 @@ public class Ejercicio43 {
 
         for (int o = 0; o < data.length; o++) {
 
-            int aux = 0;
-
             for (int i = data.length - 1; i > 0; i--) {
+
+                int aux = 0;
 
                 if (data[i] < data[i - 1]) {
 

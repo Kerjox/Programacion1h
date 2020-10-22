@@ -1,6 +1,8 @@
-package Funciones;
+/*
+    Hacer un afuncion que debuelva un array de lo que se ha pagado cada mes
+ */
 
-import java.util.Arrays;
+package Funciones;
 
 public class Ejercicio49 {
 
@@ -16,12 +18,17 @@ public class Ejercicio49 {
         String[] employees = {"Juan", "Pepe", "Iker", "Alberto", "Javier"};
         String[] months = {"Enero", "Febrero", "Marzo", "Albríl", "Mayo", "Junio"};//, "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
-        int[] totalSalarys = getTotalSalarys(salarys);
-        printsalarysEmployees(totalSalarys, employees);
+        int[] totalSalarys = getTotalSalarysPerEmployee(salarys);
+        printTotalSalarysEmployees(totalSalarys, employees);
+
+        System.out.printf("\n");
+
+        int[] totalSalarysPerMonth = getTotalSalarysPerMonth(salarys);
+        printSalarysPerMonth(totalSalarysPerMonth, months);
 
     }
 
-    private static int[] getTotalSalarys(int[][] data) {
+    private static int[] getTotalSalarysPerEmployee(int[][] data) {
 
         int[] res = new int[data.length];
 
@@ -39,11 +46,39 @@ public class Ejercicio49 {
 
     }
 
-    private static void printsalarysEmployees(int[] data, String[] employees) {
+    private static void printTotalSalarysEmployees(int[] data, String[] employees) {
 
         for (int i = 0; i < data.length; i++) {
 
             System.out.printf("El empleado '%s' ha cobrado '%d€' en el primer semestre \n", employees[i], data[i]);
+
+        }
+
+    }
+
+    private static int[] getTotalSalarysPerMonth(int[][] data) {
+
+        int[] res = new int[data[0].length];
+
+        for (int x = 0; x < data.length; x++) {
+
+            for (int y = 0; y < data[0].length; y++) {
+
+                res[y] += data[x][y];
+
+            }
+
+        }
+
+        return res;
+
+    }
+
+    private static void printSalarysPerMonth(int[] data, String[] months) {
+
+        for (int i = 0; i < data.length; i++) {
+
+            System.out.printf("El mes '%s' han pagado '%d€' a los empleados \n", months[i], data[i]);
 
         }
 

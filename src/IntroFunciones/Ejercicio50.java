@@ -2,7 +2,7 @@
     Hacer una función que reciba un array desordenado y lo ordene
  */
 
-package Funciones;
+package IntroFunciones;
 
 import java.util.Arrays;
 

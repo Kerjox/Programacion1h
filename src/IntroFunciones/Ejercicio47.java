@@ -2,7 +2,7 @@
     Funcion que debuelva el numero máximo de un vector
  */
 
-package Funciones;
+package IntroFunciones;
 
 public class Ejercicio47 {
 

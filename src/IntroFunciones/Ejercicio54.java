@@ -2,7 +2,7 @@
     Tenemos una tabla, crea una funcion que transforme la tabla multiplicando los valores por un numero.
  */
 
-package Funciones;
+package IntroFunciones;
 
 import java.util.Arrays;
 

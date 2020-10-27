@@ -2,7 +2,7 @@
     Tenemos lo kilos que se han vendido, calcular los € que se hanvendido cada día
  */
 
-package Funciones;
+package IntroFunciones;
 
 import java.util.Arrays;
 

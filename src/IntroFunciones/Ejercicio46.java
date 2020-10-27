@@ -2,7 +2,7 @@
     Manejo de metodos
  */
 
-package Funciones;
+package IntroFunciones;
 
 public class Ejercicio46 {
 

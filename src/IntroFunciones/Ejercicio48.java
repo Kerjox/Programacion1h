@@ -2,7 +2,7 @@
     Crear una funcion que pasando le una tabla debuelva la suma de todos los valores
  */
 
-package Funciones;
+package IntroFunciones;
 
 public class Ejercicio48 {
 

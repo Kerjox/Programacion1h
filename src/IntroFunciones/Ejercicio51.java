@@ -2,7 +2,7 @@
     Ordenar los 4 vectores de salarios
  */
 
-package Funciones;
+package IntroFunciones;
 
 import java.util.Arrays;
 

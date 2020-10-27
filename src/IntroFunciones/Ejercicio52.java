@@ -2,7 +2,7 @@
     Hacer la combinaciones de 5 elementos tomados de 2 en dos
  */
 
-package Funciones;
+package IntroFunciones;
 
 public class Ejercicio52 {
 

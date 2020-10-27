@@ -2,7 +2,7 @@
     Mostrar el total de dinero que ha ganado el empleado con una función que te sume los vectores por separado.
  */
 
-package Funciones;
+package IntroFunciones;
 
 public class Ejercicio53 {
 

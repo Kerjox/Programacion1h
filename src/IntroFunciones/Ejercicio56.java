@@ -2,7 +2,7 @@
     Lo mismo que en el 55 solo que hay que meter los valores dentro de una nueva tabla llamada ventas "sales"
  */
 
-package Funciones;
+package IntroFunciones;
 
 import java.util.Arrays;
 
@@ -10,7 +10,7 @@ public class Ejercicio56 {
 
     public static void main(String[] args) {
 
-        System.out.printf("Calcular el dinero que se ha ganado con cada producto todos lo días con la tabla de precios \n");
+        System.out.print("Calcular el dinero que se ha ganado con cada producto todos lo días con la tabla de precios \n\n");
 
         int[][] kgProductos = {
                 {20, 15, 13, 16, 2 , 4, 6},
@@ -19,11 +19,11 @@ public class Ejercicio56 {
         int[] pricesKg = {2, 4};
         int[][] sales = doProfitsPerDay(kgProductos, pricesKg);
 
-        System.out.printf("\n Dataos iniciales \n");
+        System.out.print("\n Dataos iniciales \n");
 
         printArray(kgProductos);
 
-        System.out.printf("\n Dataos multiplicados \n");
+        System.out.print("\n Dataos multiplicados \n");
 
         printArray(sales);
 

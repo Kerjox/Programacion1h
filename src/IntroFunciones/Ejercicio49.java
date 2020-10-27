@@ -2,7 +2,7 @@
     Hacer un afuncion que debuelva un array de lo que se ha pagado cada mes
  */
 
-package Funciones;
+package IntroFunciones;
 
 public class Ejercicio49 {
 

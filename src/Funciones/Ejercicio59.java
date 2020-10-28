@@ -12,7 +12,7 @@ public class Ejercicio59 {
         char[] frase;
         frase = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a'};
 
-        System.out.printf("El número de caracteres del char es: %d \n", numberWordsInChar(frase));;
+        System.out.printf("El número de palabras del char es: %d \n", numberWordsInChar(frase));;
 
     }
 

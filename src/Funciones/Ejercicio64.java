@@ -22,7 +22,7 @@ public class Ejercicio64 {
 
         int cont = 0;
 
-        for (char character: data) {
+        for (char character : data) {
 
             if (character == sustituir){
 

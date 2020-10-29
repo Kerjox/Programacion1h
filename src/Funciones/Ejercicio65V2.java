@@ -4,7 +4,7 @@
 
 package Funciones;
 
-public class Ejercicio65 {
+public class Ejercicio65V2 {
 
     public static void main(String[] args) {
 
@@ -23,25 +23,24 @@ public class Ejercicio65 {
 
         for (int x = 0; x <= data.length - thingToFind.length; x++) {
 
-            int verifyCharacters = 0;
+            if (data[x] == thingToFind[0]){
 
-            for (int i = x, o = 0; o < thingToFind.length; i++, o++) {
+                int o = 1;  // Indice subcadena
 
-                if (data[i] != thingToFind[o]){
+                while (o < thingToFind.length && data[x + o] == thingToFind[o]){
 
-                    break;
+                    o++;
 
                 }
 
-                verifyCharacters++;
+                if (o == thingToFind.length){
+
+                    numberOfConcordances++;
+
+                }
 
             }
 
-            if (verifyCharacters == thingToFind.length){
-
-                numberOfConcordances++;
-
-            }
 
         }
 
@@ -50,3 +49,4 @@ public class Ejercicio65 {
     }
 
 }
+

@@ -1,4 +1,4 @@
-package Introducción;/*
+package Introduccion;/*
     Sumar números y mostrarlos por pantalla
  */
 

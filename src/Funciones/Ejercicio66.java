@@ -28,7 +28,7 @@ public class Ejercicio66 {
             if (data[i] == ' '){
 
                 int posLastCharacterWord = i - 1;
-                switchCharacters(data, posFirstCharacterWord, posLastCharacterWord);
+                mirrorWord(data, posFirstCharacterWord, posLastCharacterWord);
                 posFirstCharacterWord = i + 1;
 
             }
@@ -50,18 +50,26 @@ public class Ejercicio66 {
 
             }
 
-            switchCharacters(data, posFirstCharacterWord, posLastCharacterWord - 1);
-            posFirstCharacterWord = ++posLastCharacterWord;
+            mirrorWord(data, posFirstCharacterWord, posLastCharacterWord - 1);
+            posFirstCharacterWord = posLastCharacterWord + 1;
 
         }
 
     }
 
-    private static void switchCharacters(char[] data, int posFirst, int posLast) {
+    private static void mirrorWord(char[] data, int posFirst, int posLast) {
 
-        char aux = data[posFirst];
-        data[posFirst] = data[posLast];
-        data[posLast] = aux;
+        int wordLength = posLast - posFirst;
+
+        for (int i = 0; i <= wordLength / 2; i++) {
+
+            char aux = data[posFirst + i];
+            data[posFirst + i] = data[posLast - i];
+            data[posLast - i] = aux;
+
+        }
+
+
 
     }
 

@@ -15,7 +15,6 @@ public class Ejercicio68 {
         char [] solve = copyPlusSustitution(frase, sustituir, sustitituto);
         printChar(solve);
 
-
     }
 
     private static char[] copyPlusSustitution(char[] data, char characterToFind, char[] chainToInsert){

@@ -10,37 +10,63 @@ public class Ejercicio68 {
 
         char[] frase = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
         char sustituir = 'l';
-        char[] sustitituto = new char[]{'g', 'g'};
-        //ddd(frase, 2);
-        printChar(frase);
+        char[] sustitituto = new char[]{'g', 'g', 'g'};
+
+        char [] solve = copyPlusSustitution(frase, sustituir, sustitituto);
+        printChar(solve);
 
 
     }
 
-    private static void copyPlusSustitution(char[] data, char characterToFind, char[] charactersToInsert){
+    private static char[] copyPlusSustitution(char[] data, char characterToFind, char[] chainToInsert){
 
-        char[] charMod = new char[data.length + findCharacter(data, characterToFind) * charactersToInsert.length];
-        charMod = data;
+        char[] charMod = new char[data.length + (findCharacter(data, characterToFind) * chainToInsert.length) - chainToInsert.length];
 
-        for (int i = 0, j = 0; i < data.length; i++, j++) {
+        copyChar(data, charMod);
 
-            if (charMod[j] == characterToFind){
+        for (int i = 0; i < charMod.length; i++) {
 
+            if (charMod[i] == characterToFind){
 
+                doSpaces(charMod, i, chainToInsert.length - 1);
+                insertChain(charMod, i, chainToInsert);
+                i += chainToInsert.length - 1;
 
             }
 
         }
 
+        return charMod;
+
     }
 
-    private static void ddd(char[] data, int index){
+    private static void copyChar(char[] data, char[] charMod) {
+        for (int i = 0; i < data.length; i++){
 
-        for (int i = index + 1; i < data.length; i++) {
+            charMod[i] = data[i];
 
-            int aux = data[i + 1];
-            data[i + 1] = data[i];
+        }
+    }
 
+    private static void insertChain(char[] data, int index, char[] chainToInsert){
+
+        for (int i = 0; i < chainToInsert.length; i++) {
+
+            data[index + i] = chainToInsert[i];
+
+        }
+
+    }
+
+    private static void doSpaces(char[] data, int index, int repetitions){
+
+        for (int j = 0; j < repetitions; j++) {
+
+            for (int i = data.length - 1; i > index; i--) {
+
+                data[i] = data[i - 1];
+
+            }
 
         }
 

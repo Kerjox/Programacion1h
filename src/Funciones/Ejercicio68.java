@@ -8,18 +8,23 @@ public class Ejercicio68 {
 
     public static void main(String[] args) {
 
-        char[] frase = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
-        char sustituir = 'l';
-        char[] sustitituto = new char[]{'g', 'g', 'g'};
+        char[] frise;
+        char find;
+        char[] replace;
+        char[] solve;
 
-        char [] solve = copyPlusSustitution(frase, sustituir, sustitituto);
-        printChar(solve);
+        frise = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
+        find = 'l';
+        replace = new char[]{'g', 'g', 'g'};
+        solve = copyPlusSubstitution(frise, find, replace);
+
+        System.out.println(solve);
 
     }
 
-    private static char[] copyPlusSustitution(char[] data, char characterToFind, char[] chainToInsert){
+    private static char[] copyPlusSubstitution(char[] data, char characterToFind, char[] chainToInsert){
 
-        char[] charMod = new char[data.length + (findCharacter(data, characterToFind) * chainToInsert.length) - chainToInsert.length];
+        char[] charMod = new char[data.length + (numbersCharactersToReplace(data, characterToFind) * chainToInsert.length) - chainToInsert.length];
 
         copyChar(data, charMod);
 
@@ -40,11 +45,13 @@ public class Ejercicio68 {
     }
 
     private static void copyChar(char[] data, char[] charMod) {
+
         for (int i = 0; i < data.length; i++){
 
             charMod[i] = data[i];
 
         }
+
     }
 
     private static void insertChain(char[] data, int index, char[] chainToInsert){
@@ -67,36 +74,27 @@ public class Ejercicio68 {
 
             }
 
+            index++;
+
         }
 
     }
 
-    private static int findCharacter(char[] data,char findCharacter){
+    private static int numbersCharactersToReplace(char[] data, char findCharacter){
 
-        int numberConcorances = 0;
+        int numberConcordances = 0;
 
         for (char character : data) {
 
             if (character == findCharacter){
 
-                numberConcorances++;
+                numberConcordances++;
 
             }
 
         }
 
-        return numberConcorances;
-
-    }
-
-    private static void printChar(char[] data){
-
-        for (char character : data) {
-
-            System.out.print(character);
-
-        }
-        System.out.println();
+        return numberConcordances;
 
     }
 

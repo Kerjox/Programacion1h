@@ -8,13 +8,13 @@ public class Ejercicio69 {
 
     public static void main(String[] args) {
 
-        char[] frise;
+        char[] sentence;
         char[] solve;
         int repetitions;
 
-        frise = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
+        sentence = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
         repetitions = 2;
-        solve = copyTwiceInNewChar(frise, repetitions);
+        solve = copyTwiceInNewChar(sentence, repetitions);
 
         System.out.println(solve);
 

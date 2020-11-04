@@ -8,15 +8,15 @@ public class Ejercicio68 {
 
     public static void main(String[] args) {
 
-        char[] frise;
+        char[] sentence;
         char find;
         char[] replace;
         char[] solve;
 
-        frise = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
+        sentence = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
         find = 'l';
         replace = new char[]{'g', 'g', 'g'};
-        solve = copyPlusSubstitution(frise, find, replace);
+        solve = copyPlusSubstitution(sentence, find, replace);
 
         System.out.println(solve);
 

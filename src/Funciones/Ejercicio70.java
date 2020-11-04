@@ -8,11 +8,11 @@ public class Ejercicio70 {
 
     public static void main(String[] args) {
 
-        char[] frise;
+        char[] sentence;
         char[] solve;
 
-        frise = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
-        solve = invertChar(frise);
+        sentence = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
+        solve = invertChar(sentence);
 
         System.out.println(solve);
 

@@ -33,11 +33,7 @@ public class Ejercicio71 {
 
     private static void copyChar(char[] data, char[] charMod, int index){
 
-        for (int i = 0; i < data.length; i++) {
-
-            charMod[index + i] = data[i];
-
-        }
+        System.arraycopy(data, 0, charMod, index, data.length);
 
     }
 

@@ -37,7 +37,7 @@ public class Ejercicio72 {
                 lastCharacterWord = i - 1;
                 wordToInsert = extractWord(data, firstCharacterWord, lastCharacterWord);
                 firstCharacterWord = i + 1;
-                invertedWordToInsert = invertText(wordToInsert);
+                invertedWordToInsert = invertWord(wordToInsert);
                 insertChar(charMod, invertedWordToInsert, i - invertedWordToInsert.length);
                 charMod[i] = ' ';
 
@@ -51,9 +51,9 @@ public class Ejercicio72 {
 
     private static void insertChar(char[] data, char[] wordToInsert, int index){
 
-        for (int i = 0; i < wordToInsert.length; i++) {
+        for (char word : wordToInsert) {
 
-            data[index++] = wordToInsert[i];
+            data[index++] = word;
 
         }
 
@@ -75,19 +75,19 @@ public class Ejercicio72 {
 
     }
 
-    private static char[] invertText(char[] data){
+    private static char[] invertWord(char[] data){
 
-        char[] charMod;
+        char[] invertedWord;
 
-        charMod = new char[data.length];
+        invertedWord = new char[data.length];
 
         for (int i = 0; i < data.length; i++) {
 
-            charMod[data.length - i - 1] = data[i];
+            invertedWord[data.length - i - 1] = data[i];
 
         }
 
-        return charMod;
+        return invertedWord;
 
     }
 

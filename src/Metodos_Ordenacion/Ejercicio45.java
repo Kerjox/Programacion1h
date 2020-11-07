@@ -12,14 +12,11 @@ public class Ejercicio45 {
 
         for (int i = 1; i < data.length; i++) {
 
-            int cont = i;
+            for (int j = i; j > 0 && data[j] < data[j - 1]; j--) {
 
-            while (cont > 0 && data[cont] < data[cont - 1]) {
-
-                int _aux = data[cont];
-                data[cont] = data[cont - 1];
-                data[cont - 1] = _aux;
-                cont--;
+                int aux = data[j];
+                data[j] = data[j - 1];
+                data[j - 1] = aux;
 
             }
 

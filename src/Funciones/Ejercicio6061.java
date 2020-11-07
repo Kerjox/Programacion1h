@@ -16,19 +16,17 @@ public class Ejercicio6061 {
         char[] charMod;
         charMod = modifyChar(frase);
 
-        String result = String.valueOf(charMod);
-
-        System.out.printf("%s \n", result);
+        System.out.println(charMod);
 
     }
 
     private static char[] modifyChar(char[] data){
 
-        int numberWordsInData = numberWordsInChar(data);
+        int numberWordsInChar = numberWordsInChar(data);
         char[] charMod;
-        charMod = new char[numberWordsInData + data.length];
+        charMod = new char[numberWordsInChar + data.length];
 
-        for (int i = 0,o = 0; i < data.length; i++, o++) {
+        for (int i = 0, o = 0; i < data.length; i++, o++) {
 
             if (i == data.length - 1) {
 
@@ -38,7 +36,6 @@ public class Ejercicio6061 {
 
                 charMod[o] = 'x';
                 o++;
-
 
             }
 

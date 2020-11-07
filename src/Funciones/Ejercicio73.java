@@ -13,9 +13,9 @@ public class Ejercicio73 {
         char[] replace;
         char[] solve;
 
-        sentence = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
-        find = new char[]{'h','o'};
-        replace = new char[]{'o', 'o', 'o', 'o'};
+        sentence = new char[]{'h', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
+        find = new char[]{'a', ' '};
+        replace = new char[]{'L', 'L', 'L', 'L'};
         solve = doExercise(sentence, find, replace);
 
         System.out.println(solve);
@@ -26,19 +26,20 @@ public class Ejercicio73 {
     private static char[] doExercise(char[] data, char[] chainToFind, char[] chainToReplace){
 
         char[] charMod;
+        int numberSubstitutions;
 
-        charMod = new char[data.length + numberOfCoincidences(data, chainToFind) * chainToReplace.length - chainToFind.length];
+        numberSubstitutions = numberOfCoincidences(data, chainToFind);
+
+        charMod = new char[data.length + numberSubstitutions * chainToReplace.length - chainToFind.length * numberSubstitutions];
 
         for (int i = 0, j = 0; i < data.length; i++, j++) {
 
             if (findConcordanceIn(data, chainToFind, i)){
 
-                for (int k = 0; k < chainToReplace.length; k++) {
+                System.arraycopy(chainToReplace, 0, charMod, j, chainToReplace.length);
 
-                    charMod[j + k] = chainToReplace[k];
-
-                }
-                j += chainToFind.length;
+                j += chainToReplace.length - 1;
+                i += chainToFind.length - 1;
 
             }else{
 
@@ -54,7 +55,7 @@ public class Ejercicio73 {
 
     private static boolean findConcordanceIn(char[] data, char[] chainToFind, int index){
 
-        boolean concordances = false;
+        boolean concordance = false;
 
         if (data[index] == chainToFind[0]){
 
@@ -68,13 +69,13 @@ public class Ejercicio73 {
 
             if (cont == chainToFind.length){
 
-                concordances = true;
+                concordance = true;
 
             }
 
         }
 
-        return concordances;
+        return concordance;
 
     }
 

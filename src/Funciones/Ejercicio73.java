@@ -55,8 +55,6 @@ public class Ejercicio73 {
 
     private static boolean findConcordanceIn(char[] data, char[] chainToFind, int index){
 
-        boolean concordance = false;
-
         if (data[index] == chainToFind[0]){
 
             int cont = 1;
@@ -69,23 +67,23 @@ public class Ejercicio73 {
 
             if (cont == chainToFind.length){
 
-                concordance = true;
+                return true;
 
             }
 
         }
 
-        return concordance;
+        return false;
 
     }
 
-    private static int numberOfCoincidences(char[] data, char[] chaintoFind){
+    private static int numberOfCoincidences(char[] data, char[] chainToFind){
 
         int cont = 0;
 
-        for (int i = 0; i < data.length - chaintoFind.length; i++) {
+        for (int i = 0; i < data.length - chainToFind.length; i++) {
 
-            if (findConcordanceIn(data, chaintoFind, i)){
+            if (findConcordanceIn(data, chainToFind, i)){
 
                 cont++;
 

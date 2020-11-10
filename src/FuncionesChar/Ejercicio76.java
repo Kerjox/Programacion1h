@@ -2,7 +2,7 @@
     Poner en mayusculas el primer caracter y el último de una palabra
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio76 {
 

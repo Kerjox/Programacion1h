@@ -2,7 +2,7 @@
     Tenermos que sustituir un caracter por otro
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio63 {
 

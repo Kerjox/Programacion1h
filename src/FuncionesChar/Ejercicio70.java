@@ -2,7 +2,7 @@
     Copiamos el priemer char dentro de otro invertido
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio70 {
 

@@ -2,7 +2,7 @@
     Invertir las palabras de la cadena sin cambiar el orden
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio72 {
 

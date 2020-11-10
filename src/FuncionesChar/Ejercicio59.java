@@ -1,7 +1,7 @@
 /*
     Contar el número de palabras de un char
  */
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio59 {
 

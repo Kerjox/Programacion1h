@@ -2,7 +2,7 @@
     Buscar una cadena de caracteres y sustutuirla por otra
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio73 {
 

@@ -2,7 +2,7 @@
     Creamos otro char y copiamos los datos del primer char en el segundo 2 veces
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio69 {
 

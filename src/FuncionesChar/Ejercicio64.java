@@ -2,7 +2,7 @@
     Hacer un nuevo char donde sustituimos
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio64 {
 

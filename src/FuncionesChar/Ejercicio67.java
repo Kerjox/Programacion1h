@@ -2,7 +2,7 @@
     Por palabra de la frase, todos sus caracteres se desplazan una posicion a la derecha.
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio67 {
 

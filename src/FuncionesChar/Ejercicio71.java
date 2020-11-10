@@ -2,7 +2,7 @@
     Concatenar cadenas copiando la cadena 1 en un nuevo char y cadena 2 invertida en el char creado
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio71 {
 

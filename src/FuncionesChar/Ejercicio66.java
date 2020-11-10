@@ -2,7 +2,7 @@
     Intercambiar el último carácter de una palabra con el primero de esa palabra
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio66 {
 

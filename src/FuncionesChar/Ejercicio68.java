@@ -2,7 +2,7 @@
     Cargar cadena1 en cadena2 y sustituir el caracter por la subcadena, reordenando
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio68 {
 

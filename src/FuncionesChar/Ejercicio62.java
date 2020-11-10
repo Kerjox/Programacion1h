@@ -2,7 +2,7 @@
     Utilizando la función de la clase Character 'toUpperCase' para convertir minúsculas en mayúsculas
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio62 {
 

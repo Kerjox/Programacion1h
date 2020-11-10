@@ -2,7 +2,7 @@
     Sobre la cadena eliminar el caracter especificado
  */
 
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio74 {
 

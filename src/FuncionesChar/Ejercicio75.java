@@ -1,4 +1,4 @@
-package Funciones;
+package FuncionesChar;
 
 public class Ejercicio75 {
 

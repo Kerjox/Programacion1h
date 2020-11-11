@@ -18,7 +18,7 @@ public class Ejercicio81 {
         System.out.println(indexOfal);
         System.out.println(lastIndexOfal);
         System.out.println(secondIndexOfal);
-        System.out.printf("El número de veces que se repite la String 'la' es %d", countRepetitions(sentence, "al"));
+        System.out.printf("El número de veces que se repite el String 'la' es %d", countRepetitions(sentence, "al"));
 
     }
 
@@ -26,10 +26,11 @@ public class Ejercicio81 {
 
         int cont = 0;
         int index = 0;
+        int k;
 
-        while(data.indexOf(stringToFind, index) != -1){
+        while((k = data.indexOf(stringToFind, index)) != -1){
 
-            index += data.indexOf(stringToFind, index) + stringToFind.length();
+            index = k + stringToFind.length();
             cont++;
 
         }

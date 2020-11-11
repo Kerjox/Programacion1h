@@ -5,7 +5,7 @@
 public class fibonacci {
     public static void main(String[] args) {
 
-        System.out.printf("Sucesión de fibonacci \n");
+        System.out.println("Sucesión de fibonacci");
         doFibonacci(10);
 
     }
@@ -16,13 +16,14 @@ public class fibonacci {
 
         for (int i = limit; i > 0; i--){
 
-            long suma;
-            suma = n1 + n2;
+            long summa;
+            summa = n1 + n2;
             n1 = n2;
-            n2 = suma;
-            System.out.printf("%d \n", suma);
+            n2 = summa;
+            System.out.printf("%d \n", summa);
 
         }
 
     }
+
 }

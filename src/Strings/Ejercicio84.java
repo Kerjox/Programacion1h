@@ -2,6 +2,7 @@
     Quitar los espacios sin utilizar .replace
  */
 
+
 package Strings;
 
 public class Ejercicio84 {
@@ -13,7 +14,7 @@ public class Ejercicio84 {
 
         for (int i = 0; i < sentence.length(); i++) {
 
-            if (sentence.charAt(i) != ' '){
+            if (sentence.charAt(i) != ' ') {
 
                 solve = solve.concat(sentence.substring(i, i + 1));
 

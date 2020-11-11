@@ -2,7 +2,7 @@
 
  */
 
-package FuncionesChar;
+package Strings;
 
 public class Ejercicio78 {
 

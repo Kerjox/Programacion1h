@@ -2,7 +2,7 @@
     Ordenar los nombres por orden alfabetico
  */
 
-package FuncionesChar;
+package Strings;
 
 import java.util.Arrays;
 

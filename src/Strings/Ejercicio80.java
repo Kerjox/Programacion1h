@@ -13,6 +13,12 @@ public class Ejercicio80 {
 
         System.out.println(substring);
 
+        for (int i = 0; i < sentence.length(); i++) {
+
+            System.out.println(sentence.substring(0, i));
+
+        }
+
     }
 
 }

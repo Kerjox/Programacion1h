@@ -76,13 +76,13 @@ public class Ejercicio86 {
 
 	private static int countWords(String data){
 
-		int cont = 1;
-
 		if (data.equals("")){
 
 			return 0;
 
 		}
+
+		int cont = 1;
 
 		for (int i = 0; i < data.length(); i++) {
 

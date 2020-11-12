@@ -29,6 +29,7 @@ public class Ejercicio86 {
 
 				solve = solve.concat(extractWord(data1, i));
 				solve = solve.concat(" ");
+
 			}
 
 			if (i < data2Words){

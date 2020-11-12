@@ -8,11 +8,9 @@ public class Ejercicio86 {
 
 	public static void main(String[] args) {
 
-		String str1 = "cero dos cuatro seis ocho nueve diez";
+		String str1 = "cero dos cuatro seis ocho nueve diez once doce";
 		String str2 = "uno tres cinco siete";
-		String solve = "";
-
-		solve = doExercise(str1, str2);
+		String solve = doExercise(str1, str2);
 
 		System.out.println(solve);
 
@@ -78,6 +76,12 @@ public class Ejercicio86 {
 	private static int countWords(String data){
 
 		int cont = 1;
+
+		if (data.equals("")){
+
+			return 0;
+
+		}
 
 		for (int i = 0; i < data.length(); i++) {
 

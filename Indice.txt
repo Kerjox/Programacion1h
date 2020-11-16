@@ -20,7 +20,7 @@ Ejercicio24 - Multiplicar Array por los multiplicadores
 Ejercicio25 - Tablas de multiplicar
 Ejercicio26 - Mostrar datos Array vidimensional
 Ejercicio27 - Cambiar de signo los numeros negativos de un vector bidimensional y multiplicar por 2 los positivos
-Ejercicio
+Ejercicio28 - El primer elemeto del vector de v1 multiplique a el primer vector de la tabla
 Ejercicio
 Ejercicio
 Ejercicio

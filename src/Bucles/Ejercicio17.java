@@ -2,6 +2,8 @@ package Bucles;/*
     Cambiar el orden de los valosres del array, el primero con el último, el segundo con el penultimo.
  */
 
+import java.util.Arrays;
+
 public class Ejercicio17 {
 
     public static void main(String[] args) {
@@ -23,11 +25,7 @@ public class Ejercicio17 {
 
             }
 
-            for (int i = 0; i < datos.length; i++) {
-
-                System.out.printf("Los datos del array son %d \n", datos[i]);
-
-            }
+                System.out.printf("Los datos del array son %s \n", Arrays.toString(datos));
 
         }
 

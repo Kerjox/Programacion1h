@@ -20,7 +20,7 @@ public class Ejercicio25 {
 
             }
 
-            System.out.printf("\n");
+            System.out.println(" ");
 
         }
 

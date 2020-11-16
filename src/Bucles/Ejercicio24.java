@@ -15,19 +15,19 @@ public class Ejercicio24 {
 
         System.out.printf("Datos iniciales %s \n\n", Arrays.toString(datos));
 
-        for (int i = 0; i < multiplicadores.length; i++) {
+        for (int multiplicador : multiplicadores){
 
-            int res[] = new int [datos.length];
+            int[] solve = new int[datos.length];
 
-            System.out.printf("Datos multiplicados por %d \n", multiplicadores[i]);
+            System.out.printf("Datos multiplicados por %d \n", multiplicador);
 
-            for (int o = 0; o < datos.length; o++) {
+            for (int i = 0; i < datos.length; i++) {
 
-                res[o] = datos[o] * multiplicadores[i];
+                solve[i] = datos[i] * multiplicador;
 
             }
 
-            System.out.printf("res%s \n\n", Arrays.toString(res));
+            System.out.printf("res%s \n\n", Arrays.toString(solve));
 
         }
 

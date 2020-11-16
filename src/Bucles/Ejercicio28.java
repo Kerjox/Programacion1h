@@ -19,7 +19,7 @@ public class Ejercicio28 {
 
         } else {
 
-            for (int i = 0; i < datos.length; i++) {
+            for (int i = 0; i < v1.length; i++) {
 
                 for (int o = 0; o < datos[i].length; o++) {
 
@@ -29,9 +29,9 @@ public class Ejercicio28 {
 
             }
 
-            for (int i = 0; i < datos.length; i++) {
+            for (int[] data : datos) {
 
-                System.out.printf("datos%s \n", Arrays.toString(datos[i]));
+                System.out.printf("datos%s \n", Arrays.toString(data));
 
             }
 

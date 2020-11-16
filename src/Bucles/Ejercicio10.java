@@ -1,6 +1,8 @@
-package Bucles;/*
-    Hace el factorial de un número y mostrarlo por pantalla
+/*
+    Hacer el factorial de un número y mostrarlo por pantalla
  */
+
+package Bucles;
 
 public class Ejercicio10 {
 
@@ -9,7 +11,7 @@ public class Ejercicio10 {
         long factorial = 7;
         long sol = factorial;
 
-        for (long i = factorial-1; i > 0; i--) {
+        for (long i = factorial - 1; i > 1; i--) {
 
             sol *= i;
 
@@ -18,11 +20,5 @@ public class Ejercicio10 {
         System.out.println(sol);
 
     }
-}
 
-/*
-for (long i = 1; i < factorial; i++) {
-            sol *= i;
-        }
-        System.out.println(sol);
- */
+}

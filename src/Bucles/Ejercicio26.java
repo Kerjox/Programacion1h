@@ -12,11 +12,9 @@ public class Ejercicio26 {
 
         int vector[][] = {{74, 25, 36, 2}, {32, 10, 23, 1}, {54, 5, 1, 9}, {9, 87, 5}};
 
-        for (int i = 0; i < vector.length; i++) {
+        for (int[] data : vector) {
 
-            System.out.printf("%s \n", Arrays.toString(vector[i]));
-
-            System.out.printf("\n");
+            System.out.printf("%s \n", Arrays.toString(data));
 
         }
 

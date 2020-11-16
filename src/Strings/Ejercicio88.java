@@ -9,6 +9,14 @@ public class Ejercicio88 {
 
 		String sentence1 = "Había una vez un circo ";
 
+		sentence1 = doExercise(sentence1);
+
+		System.out.println(sentence1);
+
+	}
+
+	private static String doExercise(String sentence1) {
+
 		int lastPos = sentence1.indexOf(" ");
 
 		while(lastPos != -1){
@@ -19,7 +27,7 @@ public class Ejercicio88 {
 
 		}
 
-		System.out.println(sentence1);
+		return sentence1;
 
 	}
 

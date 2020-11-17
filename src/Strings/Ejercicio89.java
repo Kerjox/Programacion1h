@@ -8,13 +8,14 @@ public class Ejercicio89 {
 
 	public static void main(String[] args) {
 
-		String sentence1 = "Había              una               vez               un               circo";
+		String sentence = "Había              una               vez               un               circo";
 		boolean firstSpace = true;
 		int pos = 0;
+		doExercise(sentence);
 
-		for (int i = 0; i < sentence1.length(); i++) {
+		for (int i = 0; i < sentence.length(); i++) {
 
-			if (sentence1.charAt(i) == ' ') {
+			if (sentence.charAt(i) == ' ') {
 
 				if (firstSpace) {
 
@@ -25,13 +26,13 @@ public class Ejercicio89 {
 
 					int k = i;
 
-					while (sentence1.charAt(k) == ' ') {
+					while (sentence.charAt(k) == ' ') {
 
 						k++;
 
 					}
 
-					sentence1 = sentence1.substring(0, pos).concat(sentence1.substring(k - 1));
+					sentence = sentence.substring(0, pos).concat(sentence.substring(k - 1));
 					firstSpace = true;
 
 				}
@@ -40,7 +41,40 @@ public class Ejercicio89 {
 
 		}
 
-		System.out.println(sentence1);
+		System.out.println(sentence);
+
+	}
+
+	private static String doExercise(String data){
+
+		int i = 0;
+		boolean firstSpace = true;
+
+		while(i < data.length()){
+
+			if (data.charAt(i) == ' '){
+
+				if (firstSpace){
+
+					firstSpace = false;
+					i++;
+
+				}else{
+
+					data = data.substring(0, i).concat(data.substring(i + 1));
+
+				}
+
+			}else{
+
+				firstSpace = true;
+				i++;
+
+			}
+
+		}
+
+		return data;
 
 	}
 

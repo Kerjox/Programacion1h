@@ -8,7 +8,7 @@ public class Ejercicio52 {
 
     public static void main(String[] args) {
 
-        System.out.printf("%.2f", doCombination(2, 5));
+        System.out.printf("%.2f \n", doCombination(2, 5));
 
     }
 

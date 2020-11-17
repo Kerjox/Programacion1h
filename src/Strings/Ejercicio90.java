@@ -13,7 +13,15 @@ public class Ejercicio90 {
 		String sentence2 = "";
 
 		int numberWords = countWords(sentenceBase);
-		boolean sentenceSwitch= true;
+
+		if (numberWords == 0){
+
+			System.out.println("Error: No hay palabras");
+			return;
+
+		}
+
+		boolean sentenceSwitch = true;
 
 		for (int i = 0; i < numberWords; i++) {
 

@@ -4,21 +4,23 @@
 
 package Recursividad;
 
+import java.math.BigInteger;
+
 public class Ejercicio92 {
 
 	public static void main(String[] args) {
 
-		int factorial = 5;
+		BigInteger factorial = new BigInteger("5");
 
 		System.out.printf("El factorial de %d es: %d", factorial, factorialRecursiva(factorial));
 
 	}
 
-	private static int factorialRecursiva(int number){
+	private static BigInteger factorialRecursiva(BigInteger number){
 
-		if (number > 1){
+		if (number.compareTo(BigInteger.valueOf(2)) > 0){
 
-			return number * factorialRecursiva(number - 1);
+			return number.multiply(factorialRecursiva(number.subtract(BigInteger.valueOf(1))));
 
 		}else{
 

@@ -30,7 +30,7 @@ public class Ejercicio91 {
 
 	private static int dividirRecursiva(int number, int div){
 
-		if ((number - div) >= 0){
+		if (number >= div){
 
 			return 1 + dividirRecursiva(number - div, div);
 

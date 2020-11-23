@@ -5,28 +5,22 @@
 
 package Repaso;
 
-import java.util.Arrays;
-
 public class Ejercicio97 {
 
 	public static void main(String[] args) {
 
 		final String[] PARTIDOS = {"p.p.", "P.S.O.E.", "Podemos", "Ciudadanos", "VOX"};
-		final int ESCANOS = 5;
+		final int ESCANOS = 7;
 		int[] votos = {119421, 157520, 57389, 46645, 91978};
 
-		int[] escanosPartido = doDHondt(PARTIDOS, ESCANOS, votos);
-		printResults(escanosPartido, PARTIDOS);
+		int[] escanosPartidos = doDHondt(PARTIDOS.length, ESCANOS, votos);
+		printResults(escanosPartidos, PARTIDOS);
 
 	}
 
-	private static int[] doDHondt(String[] PARTIDOS, int ESCANOS, int[] votos) {
+	private static int[] doDHondt(int numPartidos, int ESCANOS, int[] votos) {
 
-		int[] escanosPartido = new int[PARTIDOS.length];
-
-		int[] dividendos = new int[votos.length];
-
-		Arrays.fill(dividendos, 1);
+		int[] escanosPartido = new int[numPartidos];
 
 		for (int i = 0; i < ESCANOS; i++) {
 
@@ -34,21 +28,18 @@ public class Ejercicio97 {
 
 			for (int j = 0; j < votos.length; j++) {
 
-				_votos[j] = votos[j] / dividendos[j];
+				_votos[j] = votos[j] / (escanosPartido[j] + 1);
 
 			}
 
-			int maxPos = returnMaxPos(_votos);
-
-			dividendos[maxPos] += 1;
-			escanosPartido[maxPos] += 1;
+			escanosPartido[getMaxPos(_votos)]++;
 
 		}
 
 		return escanosPartido;
 	}
 
-	private static int returnMaxPos(int[] data) {
+	private static int getMaxPos(int[] data) {
 
 		int posMax = 0;
 

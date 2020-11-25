@@ -1,9 +1,7 @@
 /*
 	Añadir una s al final de cada palabra que termine po vocal
  */
-package Repaso;
-
-import java.util.Arrays;
+package RepasoClase;
 
 public class Ejercicio99 {
 

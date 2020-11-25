@@ -2,7 +2,7 @@
 	Eliminar la ultima letra de la palabra
  */
 
-package Repaso;
+package RepasoClase;
 
 public class Ejercicio100 {
 

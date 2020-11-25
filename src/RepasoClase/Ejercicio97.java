@@ -3,7 +3,7 @@
  */
 
 
-package Repaso;
+package RepasoClase;
 
 public class Ejercicio97 {
 

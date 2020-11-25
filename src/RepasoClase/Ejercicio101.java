@@ -1,7 +1,7 @@
 /*
 	Mostarar la frase con las palabras al reves
  */
-package Repaso;
+package RepasoClase;
 
 public class Ejercicio101 {
 
@@ -17,7 +17,7 @@ public class Ejercicio101 {
 		if (numberWordFind < 0) return;
 
 		System.out.print(extractWord(data, numberWordFind) + " ");
-
+		
 		invertWordsString(data, numberWordFind - 1);
 	}
 

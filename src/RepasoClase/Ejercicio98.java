@@ -3,7 +3,7 @@
 	Més que más defunciones y traslados fuera
 	Cuantas personas hay nuevas y cunatas se han ido
  */
-package Repaso;
+package RepasoClase;
 
 import java.util.Arrays;
 

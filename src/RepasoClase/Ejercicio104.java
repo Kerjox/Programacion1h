@@ -16,12 +16,12 @@ public class Ejercicio104 {
 
 		for (int i = 0; i < precios.length; i++) {
 
-			if (precios[i] < 50){
+			if (precios[i] <= 50){
 
 				preciosDescontados[i] = precios[i] * 0.90;
 				descuentosAplicados[i] = 10;
 
-			}else if (precios[i] < 100){
+			}else if (precios[i] <= 100){
 
 				preciosDescontados[i] = precios[i] * 0.20;
 				descuentosAplicados[i] = 20;

@@ -11,35 +11,34 @@ public class Ejercicio72 {
         char[] sentence;
         char[] solve;
 
-        sentence = new char[]{'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á', ' '};
-        solve = doExcercise(sentence);
+        sentence = new char[]{' ', 'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
+        solve = invertWordsInChar(sentence);
 
         System.out.println(solve);
 
     }
 
-    private static char[] doExcercise(char[] data){
+    private static char[] invertWordsInChar(char[] data){
 
         char[] charMod;
         int firstCharacterWord;
         int lastCharacterWord;
 
         charMod = new char[data.length];
-        firstCharacterWord = 0;
+        lastCharacterWord = data.length - 1;
 
-        for (int i = 0; i < data.length; i++) {
+        for (int i = data.length - 1; i >= 0; i--) {
 
             if (data[i] == ' '){
 
                 char[] wordToInsert;
                 char[] invertedWordToInsert;
 
-                lastCharacterWord = i - 1;
+                firstCharacterWord = i;
                 wordToInsert = extractWord(data, firstCharacterWord, lastCharacterWord);
-                firstCharacterWord = i + 1;
-                invertedWordToInsert = invertWord(wordToInsert);
-                insertChar(charMod, invertedWordToInsert, i - invertedWordToInsert.length);
-                charMod[i] = ' ';
+                lastCharacterWord = i - 1;
+                insertChar(charMod, wordToInsert, data.length - (i + wordToInsert.length));
+                charMod[data.length - (i + wordToInsert.length)] = ' ';
 
             }
 

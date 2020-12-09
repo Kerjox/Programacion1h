@@ -1,3 +1,5 @@
+package UBALDE_DANIEL_ExamenB;
+
 import java.util.Arrays;
 
 public class Ejercicio01 {

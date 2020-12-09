@@ -1,3 +1,5 @@
+package UBALDE_DANIEL_ExamenB;
+
 public class Ejercicio02 {
 
 	public static void main(String[] args) {

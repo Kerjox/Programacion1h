@@ -6,13 +6,13 @@ public class Ejercicio03 {
 
 		char[] chain = {'H', 'o', 'l', 'a', ' ', 'a', 'l', 'c', 'a', 'c', 'h', 'o', 'f', 'a' , ' ', 'e', 's', 'c', 'a', 'c', 'h', 'u', 'f', 'l', 'á'};
 
-		putFirstWordLastt(chain);
+		putFirstWordLast(chain);
 
 		System.out.println(chain);
 
 	}
 
-	private static void putFirstWordLastt(char[] data) {
+	private static void putFirstWordLast(char[] data) {
 
 		char index;
 

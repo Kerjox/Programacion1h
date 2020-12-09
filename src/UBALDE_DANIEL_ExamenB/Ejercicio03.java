@@ -14,13 +14,13 @@ public class Ejercicio03 {
 
 	private static void putFirstWordLast(char[] data) {
 
-		char index;
+		while (data[data.length - 1] != ' ') {
 
-		while ((index = data[0]) != ' ') {
+			char aux = data[0];
 
 			moveLeftChain(data);
 
-			data[data.length - 1] = index;
+			data[data.length - 1] = aux;
 
 		}
 

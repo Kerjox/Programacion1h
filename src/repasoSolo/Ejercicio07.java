@@ -2,6 +2,7 @@
 	Reemplazar string
  */
 
+
 package repasoSolo;
 
 public class Ejercicio07 {
@@ -24,11 +25,11 @@ public class Ejercicio07 {
 
 	}
 
-	private static String replaceChainString(String data, String find, String replace){
+	private static String replaceChainString(String data, String find, String replace) {
 
 		int index = 0;
 
-		while((index = data.indexOf(find, index)) != -1){
+		while ((index = data.indexOf(find, index)) != - 1) {
 
 			data = data.substring(0, index).concat(replace).concat(data.substring(index + find.length()));
 			index += replace.length();
@@ -39,9 +40,9 @@ public class Ejercicio07 {
 
 	}
 
-	private static String replaceChainStringRecursive(String data, String find, String replace, int index){
+	private static String replaceChainStringRecursive(String data, String find, String replace, int index) {
 
-		if ((index = data.indexOf(find, index)) == -1) return data;
+		if ((index = data.indexOf(find, index)) == - 1) return data;
 
 		data = data.substring(0, index).concat(replace).concat(data.substring(index + find.length()));
 

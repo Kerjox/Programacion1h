@@ -42,14 +42,14 @@ public class Chalet extends Casa {
 	public void printInfo() {
 
 		System.out.println("--------------------------");
-		System.out.println(nombre);
+		System.out.println(this.nombre);
 		System.out.println("--------------------------");
-		System.out.printf("La dirección es: %s \n", direccion);
-		System.out.printf("Tiene %d habitaciones \n", num_Habitaciones);
-		System.out.printf("Tiene %d metros de planta \n", num_Metros);
-		System.out.printf("Tiene %d baños \n", num_Banyos);
-		System.out.printf("Tiene %d metros de jardín \n", metros_Jardin);
-		System.out.printf("%s tiene piscina \n", (piscina)?"Si":"No");
+		System.out.printf("La dirección es: %s \n", this.direccion);
+		System.out.printf("Tiene %d habitaciones \n", this.num_Habitaciones);
+		System.out.printf("Tiene %d metros de planta \n", this.num_Metros);
+		System.out.printf("Tiene %d baños \n", this.num_Banyos);
+		System.out.printf("Tiene %d metros de jardín \n", this.metros_Jardin);
+		System.out.printf("%s tiene piscina \n", (this.piscina)?"Si":"No");
 		System.out.println("--------------------------");
 	}
 

@@ -3,6 +3,7 @@ package Ejercicio02;
 public class Canguro extends Animal {
 
 	private int salto;
+	private int velocidad;
 
 	public Canguro(int id, String nombre, String fechaNacimiento, boolean vacunado, int salto, int velocidad) {
 
@@ -10,8 +11,6 @@ public class Canguro extends Animal {
 		this.salto = salto;
 		this.velocidad = velocidad;
 	}
-
-	private int velocidad;
 
 	public int getVelocidad() {
 
@@ -35,7 +34,7 @@ public class Canguro extends Animal {
 
 	public void habla() {
 
-		System.out.printf("Soy un canguro, me llamo %s, ");
+		System.out.printf("Soy un canguro, me llamo %s, naci el %s, %s estoy vacunado \n", this.nombre, this.fechaNacimiento, (this.vacunado)?"si":"no");
 
 	}
 

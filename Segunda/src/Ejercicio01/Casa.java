@@ -1,3 +1,5 @@
+package Ejercicio01;
+
 public class Casa {
 
 	protected String direccion;

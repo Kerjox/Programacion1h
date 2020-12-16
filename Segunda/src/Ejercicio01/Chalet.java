@@ -1,3 +1,5 @@
+package Ejercicio01;
+
 public class Chalet extends Casa {
 
 	private int metros_Jardin;

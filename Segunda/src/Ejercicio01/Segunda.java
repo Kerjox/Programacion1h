@@ -1,3 +1,5 @@
+package Ejercicio01;
+
 public class Segunda {
 
 	public static void main(String[] args) {
@@ -6,7 +8,7 @@ public class Segunda {
 		Casa casa2 = new Casa("Casa2", "Calle del Tornado", 8, 500, 3);
 		Casa casa3 = new Casa("Casa3");
 		Chalet chalet1 = new Chalet("Chalet1", "Calle Chaletera 1", 14, 300, 5, 10, true);
-		Chalet agustinChalet = new Chalet("Agustin Chalet", 20, false);
+		Chalet agustinChalet = new Chalet("Agustin Ejercicio01.Chalet", 20, false);
 
 		casa1.printInfo();
 		casa2.printInfo();

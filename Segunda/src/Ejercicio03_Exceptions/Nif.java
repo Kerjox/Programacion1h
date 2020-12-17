@@ -1,10 +1,10 @@
-package Ejercicio03;
+package Ejercicio03_Exceptions;
 
 public class Nif {
 
 	private static final char[] lettres = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
 	private final int dni;
-	private char letter;
+	private final char letter;
 
 	public Nif(int dni, char letter) {
 
@@ -15,41 +15,21 @@ public class Nif {
 	public Nif(int dni) {
 
 		this.dni = dni;
+		this.letter = lettres[dni % 23];
 	}
 
-	public void check() {
+	public void check() throws NifException{
 
 		try {
 
 			if (lettres[this.dni % 23] == this.letter) {
 
-				System.out.println("La letra es correcta");
+				System.out.printf("La letra %c es correcta \n", this.letter);
 
 			} else {
 
-				System.out.println("La letra es incorrecta");
-
-			}
-
-		} catch (ArithmeticException a) {
-
-			System.out.println("No se puede dividir por 0");
-		}
-
-	}
-
-	public void check(char l) {
-
-		try {
-
-			if (lettres[this.dni % 23] == l) {
-
-				System.out.println("La letra es correcta");
-
-			} else {
-
-				System.out.println("La letra es incorrecta");
-
+				System.out.printf("La letra %c es incorrecta \n", this.letter);
+				throw new NifException("La letra " + this.letter + " no es correcta");
 			}
 
 		} catch (ArithmeticException a) {

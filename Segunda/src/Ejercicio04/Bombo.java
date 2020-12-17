@@ -34,7 +34,7 @@ public class Bombo {
 
 	private void removeBolas() {
 
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 1000000; i++) {
 
 			int index1 = (int) (Math.random() * totalNumbers);
 			int index2 = (int) (Math.random() * totalNumbers);
@@ -58,7 +58,7 @@ public class Bombo {
 
 	public void fillTickets(int[][] data) {
 
-		for (int i = 0, index = 0; i < tickets; i++) {
+		for (int i = 0; i < tickets; i++) {
 
 			for (int j = 0; j < numbersPerTicket; j++) {
 

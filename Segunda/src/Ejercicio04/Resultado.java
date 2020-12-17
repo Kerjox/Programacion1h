@@ -14,13 +14,18 @@ public class Resultado {
 
 		resultado = new int[tickets][numbersPerTicket];
 
+		System.out.println("El vector de arriba ha sido mezclado 1000000 veces");
+
 		bombo1.fillTickets(resultado);
 
 		System.out.println("--------------------------");
+		System.out.println("Los números son cogidos aleatoriamente del vector mezclado de arriba");
 
 		printResultado();
 
 		System.out.println("--------------------------");
+		System.out.println("Los números son cogidos aleatoriamente del vector mezclado de arriba");
+
 
 		bombo1.setTotalNumbers2(tickets * numbersPerTicket);
 

@@ -20,53 +20,23 @@ public class ProtocoloDeInvasion {
 		printSolve();
 	}
 
+	private static boolean ddd() {
+
+		if (ddd()) {
+
+
+		}
+
+		return false;
+
+	}
+
 	private static void printSolve() {
 
 		for (int[] ints : solvePanel) {
 
 			System.out.println(Arrays.toString(ints));
 		}
-	}
-
-	private static boolean checkCol(int inputIndex, int indexRow) {
-
-		int indexCol = 0;
-
-		while(indexRow < panel.length) {
-
-			if (panel[indexRow][indexCol].equals(input[inputIndex])) {
-
-				solvePanel[indexRow][indexCol] = inputIndex + 1;
-				return true;
-			}else {
-
-				indexRow++;
-
-			}
-
-		}
-
-		return false;
-	}
-
-	private static int checkRow(int inputIndex, int indexCol) {
-
-		int indexRow = 0;
-
-		while(indexCol < panel.length) {
-
-			if (panel[indexRow][indexCol].equals(input[inputIndex])) {
-
-				solvePanel[indexRow][indexCol] = inputIndex + 1;
-				return indexCol;
-			}else {
-
-				indexCol++;
-			}
-
-		}
-
-		return 0;
 	}
 
 

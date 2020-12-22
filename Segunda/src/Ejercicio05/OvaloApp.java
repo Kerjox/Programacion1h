@@ -2,30 +2,39 @@ package Ejercicio05;
 
 import java.awt.*;
 
-public class AvaloApp extends Frame {
+public class OvaloApp extends Frame {
+
+	Ovalo ovalo;
 
 	public static void main(String[] args) {
-		AvaloApp app = new AvaloApp();
 
+		OvaloApp app = new OvaloApp();
 	}
 
-	public AvaloApp() {
+	public OvaloApp() {
 
-		super("Hola");
+		super("Ovalos");
 
 		Button button1 = new Button("Siguiente");
 		Button button2 = new Button("Salir");
 		Panel panel1 = new Panel();
+		ovalo = new Ovalo();
 
 		panel1.add(button1);
 		panel1.add(button2);
 
 		this.add("South", panel1);
+		this.getGraphics();
 
 		this.pack();
 		this.resize(300, 300);
 		this.show();
 
+	}
+
+	public void paint(Graphics g) {
+
+		ovalo.dibujar(g);
 	}
 
 	public boolean handleEvent(Event ev) {
@@ -43,9 +52,18 @@ public class AvaloApp extends Frame {
 
 					System.exit(0);
 					return true;
+
+				} else if (ev.arg.equals("Siguiente")) {
+
+						ovalo.init();
+						repaint();
+						//paint(getGraphics());
+						return true;
+
 				}
 			}
 		}
+
 		return false;
 	}
 

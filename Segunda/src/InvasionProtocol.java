@@ -1,6 +1,10 @@
 import java.util.Arrays;
 
-public class ProtocoloDeInvasion {
+public class InvasionProtocol {
+
+	private static final int[][] panelSolved = new int[5][5];
+	private final String[] input;
+	private final String[][] panel;
 
 	public static void main(String[] args) {
 
@@ -11,16 +15,12 @@ public class ProtocoloDeInvasion {
 				{"BD", "BD", "1C", "BD", "BD"},
 				{"55", "1C", "1C", "55", "1C"}};
 
-		String[] input = {"E9", "1C", "1C", "1C", "E9"};
+		String[] input = {"E", "1C", "1C", "1C", "E9"};
 
-		ProtocoloDeInvasion panel1 = new ProtocoloDeInvasion(panel, input);
+		InvasionProtocol panel5x5 = new InvasionProtocol(panel, input);
 	}
 
-	private static final int[][] panelSolved = new int[5][5];
-	private final String[] input;
-	private final String[][] panel;
-
-	public ProtocoloDeInvasion(String[][] panel, String[] input) {
+	public InvasionProtocol(String[][] panel, String[] input) {
 
 		this.panel = panel;
 		this.input = input;
@@ -30,10 +30,9 @@ public class ProtocoloDeInvasion {
 
 		} else {
 
-			System.out.println("ERROR: El panel no tiene solución");
+			System.out.println("\u001B[31mERROR: The panel has no solution");
 
 		}
-
 	}
 
 	private static boolean solve(String[][] panel, String[] input, int x, int y, int index) {
@@ -77,7 +76,7 @@ public class ProtocoloDeInvasion {
 
 				}
 
-				if (x < panel[0].length) {
+				if (x < panel.length) {
 
 					panelSolved[x][y] = index + 1;
 
@@ -93,10 +92,7 @@ public class ProtocoloDeInvasion {
 						return solve(panel, input, x + 1, y, index);
 					}
 
-				} else {
-					return false;
-				}
-
+				} else return false;
 			}
 		}
 

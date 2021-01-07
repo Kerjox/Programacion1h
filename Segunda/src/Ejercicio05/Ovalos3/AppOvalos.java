@@ -30,8 +30,6 @@ public class AppOvalos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ovalo.init();
-				//container.validate();
-				//container.repaint();
 				paint(container.getGraphics());
 
 			}
@@ -40,7 +38,7 @@ public class AppOvalos extends JFrame {
 
 	@Override
 	public void paint(Graphics g) {
-
+		g.clearRect(0,0,400,400);         //Funciona pero no como se espera
 		ovalo.dibujar(g);
 	}
 

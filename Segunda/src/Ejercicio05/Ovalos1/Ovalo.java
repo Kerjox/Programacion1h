@@ -1,4 +1,4 @@
-package Ejercicio05.Ovalis1;
+package Ejercicio05.Ovalos1;
 
 import java.awt.*;
 import java.util.Random;

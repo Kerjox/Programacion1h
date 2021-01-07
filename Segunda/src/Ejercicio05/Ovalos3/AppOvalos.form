@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Ejercicio05.Ovalos3.AppOvalos">
   <grid id="27dc6" binding="OvalosApp" layout-manager="FormLayout">
-    <rowspec value="center:352px:grow"/>
+    <rowspec value="center:361px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:36px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
@@ -16,22 +16,6 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="4874f" binding="container" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="26" height="352"/>
-          </grid>
-          <forms defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <background color="-1"/>
-        </properties>
-        <border type="line">
-          <color color="-16777216"/>
-        </border>
-        <children/>
-      </grid>
       <component id="434c2" class="javax.swing.JButton" binding="nextButton">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
@@ -49,6 +33,17 @@
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
+      <grid id="20f04" binding="container" layout-manager="FormLayout">
+        <rowspec value="center:d:grow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
     </children>
   </grid>
 </form>

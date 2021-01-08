@@ -7,14 +7,12 @@ import java.awt.event.ActionListener;
 public class Ventana {
 
 	private JPanel panel1;
-	private JButton button1;
-	private JButton button2;
-	private JButton button3;
-	private JMenuItem Exit;
+	private JMenuItem openMenuItem;
+	private JMenuItem exitMenuItem;
 
 	public Ventana() {
 
-		Exit.addActionListener(new ActionListener() {
+		exitMenuItem.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -23,9 +21,10 @@ public class Ventana {
 		});
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
-		JFrame frame = new JFrame("Ventana2");
+		JFrame frame = new JFrame("Ventana");
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		frame.setContentPane(new Ventana().panel1);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();

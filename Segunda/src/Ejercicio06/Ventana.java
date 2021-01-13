@@ -9,12 +9,24 @@ import java.io.*;
 
 public class Ventana {
 
-	private JPanel panel1;
-	private JMenuItem newMenuItem;
-	private JTextArea text;
 	private JMenuItem exitMenuItem;
-	private JMenuItem saveMenuItem;
+	private File file;
+	private JMenuItem newMenuItem;
 	private JMenuItem openMenuItem;
+	private JPanel panel1;
+	private JMenuItem saveAsMenuItem;
+	private JMenuItem saveMenuItem;
+	private JTextArea text;
+
+	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+
+		JFrame frame = new JFrame("Window");
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		frame.setContentPane(new Ventana().panel1);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
+	}
 
 	public Ventana() {
 
@@ -32,6 +44,7 @@ public class Ventana {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				file = null;
 				text.setText("");
 			}
 		});
@@ -40,35 +53,52 @@ public class Ventana {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				JFileChooser openFileWindows = newFileWindow();
-				File file = openFileWindows.getSelectedFile();
-				try {
-					text.setText(getContentFile(file));
-				} catch (IOException ioException) {
-					ioException.printStackTrace();
-				}
+				openFileWindow();
+			}
+		});
+
+		saveMenuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (file != null) saveFile(); else saveAsWindow();
+			}
+		});
+		saveAsMenuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				saveAsWindow();
 			}
 		});
 	}
 
-	@NotNull
-	private String getContentFile(File file) throws IOException {
+	private void saveAsWindow() {
 
-		FileReader f = new FileReader(file);
-		BufferedReader b = new BufferedReader(f);
-		String line;
-		String content = "";
-
-		while((line = b.readLine()) != null) {
-
-			content = content.concat(line).concat("\n");
+		JFileChooser saveAsWindows = new JFileChooser();
+		saveAsWindows.setDialogTitle("Save As");
+		saveAsWindows.showSaveDialog(null);
+		file = saveAsWindows.getSelectedFile();
+		String filePath = file.getAbsolutePath();
+		if (! filePath.endsWith(".txt")) {
+			file = new File(filePath + ".txt");
 		}
-
-		b.close();
-		return content;
+		try {
+			FileWriter fw = new FileWriter(file);
+			fw.write(text.getText());
+			fw.close();
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+					"Error",
+					"No se pudo guardar el archivo",
+					JOptionPane.WARNING_MESSAGE);
+		}
 	}
 
-	private JFileChooser newFileWindow() {
+	private void openFileWindow() {
 
 		JFileChooser openFileWindows = new JFileChooser();
 		openFileWindows.setAcceptAllFileFilterUsed(true);
@@ -80,33 +110,80 @@ public class Ventana {
 				if (f.isDirectory()) {
 
 					return true;
-				}else {
+				} else {
 
 					return f.getName().endsWith(".txt");
 				}
 
-			};
+			}
 
 			@Override
 			public String getDescription() {
 
 				return "Text file (*.txt)";
 			}
-		};
+	};
 
 		openFileWindows.setFileFilter(filter);
 		openFileWindows.showOpenDialog(null);
-		return openFileWindows;
+		file = openFileWindows.getSelectedFile();
+		try {
+			text.setText(getContentFile(file));
+		} catch (IOException ioException) {
+
+			JOptionPane.showMessageDialog(null,
+					"Error",
+					"No se pudo leer el contenido del archivo",
+					JOptionPane.WARNING_MESSAGE);
+		}
 	}
 
-	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+	private void saveFile() {
 
-		JFrame frame = new JFrame("Window");
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		frame.setContentPane(new Ventana().panel1);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.pack();
-		frame.setVisible(true);
+		FileWriter f = null;
+		try {
+			f = new FileWriter(file);
+		} catch (IOException ioException) {
+
+			ioException.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+					"Error",
+					"No se pudo guardar el archivo",
+					JOptionPane.WARNING_MESSAGE);
+		}
+		assert f != null;
+		PrintWriter pw = new PrintWriter(f);
+		pw.println(text.getText());
+		pw.close();
+	}
+
+	@NotNull
+	private String getContentFile(File file) throws IOException {
+
+		FileReader fr = null;
+		try {
+			fr = new FileReader(file);
+		}catch (FileNotFoundException fileNotFoundException){
+			fileNotFoundException.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+					"Error",
+					"No se pudo obtener el contenido del archivo",
+					JOptionPane.WARNING_MESSAGE);
+		}
+		assert fr != null;
+		BufferedReader b = new BufferedReader(fr);
+		String line;
+		String content = "";
+
+		while ((line = b.readLine()) != null) {
+
+			content = content.concat(line).concat("\n");
+		}
+
+		content = content.substring(0, content.length() - 1);
+
+		b.close();
+		return content;
 	}
 
 }

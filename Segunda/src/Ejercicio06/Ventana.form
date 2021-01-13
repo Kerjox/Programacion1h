@@ -49,7 +49,13 @@
                   <text value="Save"/>
                 </properties>
               </component>
-              <component id="51d1b" class="javax.swing.JMenuItem" binding="exitMenuItem">
+              <component id="51d1b" class="javax.swing.JMenuItem" binding="saveAsMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Save As"/>
+                </properties>
+              </component>
+              <component id="bf475" class="javax.swing.JMenuItem" binding="exitMenuItem">
                 <constraints/>
                 <properties>
                   <text value="Exit"/>

@@ -20,7 +20,7 @@ public class Ventana {
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
-		JFrame frame = new JFrame("Window");
+		JFrame frame = new JFrame("Ejercicio06");
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		frame.setContentPane(new Ventana().panel1);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,23 +79,26 @@ public class Ventana {
 
 		JFileChooser saveAsWindows = new JFileChooser();
 		saveAsWindows.setDialogTitle("Save As");
-		saveAsWindows.showSaveDialog(null);
-		file = saveAsWindows.getSelectedFile();
-		String filePath = file.getAbsolutePath();
-		if (! filePath.endsWith(".txt")) {
-			file = new File(filePath + ".txt");
+		if (saveAsWindows.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
+
+			file = saveAsWindows.getSelectedFile();
+			String filePath = file.getAbsolutePath();
+			if (! filePath.endsWith(".txt")) {
+				file = new File(filePath + ".txt");
+			}
+			try {
+				FileWriter fw = new FileWriter(file);
+				fw.write(text.getText());
+				fw.close();
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+				JOptionPane.showMessageDialog(null,
+						"Error",
+						"No se pudo guardar el archivo",
+						JOptionPane.WARNING_MESSAGE);
+			}
 		}
-		try {
-			FileWriter fw = new FileWriter(file);
-			fw.write(text.getText());
-			fw.close();
-		} catch (IOException ioException) {
-			ioException.printStackTrace();
-			JOptionPane.showMessageDialog(null,
-					"Error",
-					"No se pudo guardar el archivo",
-					JOptionPane.WARNING_MESSAGE);
-		}
+
 	}
 
 	private void openFileWindow() {
@@ -122,19 +125,21 @@ public class Ventana {
 
 				return "Text file (*.txt)";
 			}
-	};
+		};
 
 		openFileWindows.setFileFilter(filter);
-		openFileWindows.showOpenDialog(null);
-		file = openFileWindows.getSelectedFile();
-		try {
-			text.setText(getContentFile(file));
-		} catch (IOException ioException) {
+		if (openFileWindows.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 
-			JOptionPane.showMessageDialog(null,
-					"Error",
-					"No se pudo leer el contenido del archivo",
-					JOptionPane.WARNING_MESSAGE);
+			file = openFileWindows.getSelectedFile();
+			try {
+				text.setText(getContentFile(file));
+			} catch (IOException ioException) {
+
+				JOptionPane.showMessageDialog(null,
+						"Error",
+						"No se pudo leer el contenido del archivo",
+						JOptionPane.WARNING_MESSAGE);
+			}
 		}
 	}
 

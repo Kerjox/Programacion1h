@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Ejercicio07.Ventana">
+  <grid id="27dc6" binding="spainButton" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <maximumSize width="600" height="400"/>
+      <preferredSize width="600" height="400"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="50f5c" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="197" height="28"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="21fb3" class="javax.swing.JMenuBar" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="7fda0" class="javax.swing.JMenu" binding="fileMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <popupMenuVisible value="false"/>
+                  <text value="File"/>
+                  <visible value="true"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="ee190" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="New"/>
+                    </properties>
+                  </component>
+                  <component id="d4080" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Open"/>
+                    </properties>
+                  </component>
+                  <component id="816df" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Save"/>
+                    </properties>
+                  </component>
+                  <component id="fd24d" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Save As"/>
+                    </properties>
+                  </component>
+                  <component id="4fc27" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Exit"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="925e7" class="javax.swing.JMenu" binding="archivoMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Archivo"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="7fe03" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Nuevo"/>
+                    </properties>
+                  </component>
+                  <component id="a69ba" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Abrir"/>
+                    </properties>
+                  </component>
+                  <component id="49dd1" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Guardar"/>
+                    </properties>
+                  </component>
+                  <component id="d45c8" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Gueardar Como"/>
+                    </properties>
+                  </component>
+                  <component id="79cef" class="javax.swing.JMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Salir"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="2fb8f" class="javax.swing.JMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Idioma"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="852e8" class="javax.swing.JRadioButtonMenuItem" binding="espanolRadioButtonMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Español"/>
+                    </properties>
+                  </component>
+                  <component id="d5cb0" class="javax.swing.JRadioButtonMenuItem" binding="englishRadioButtonMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="English"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <hspacer id="f3a42">
+                <constraints>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+            </children>
+          </grid>
+          <grid id="49dac" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="9a558" class="javax.swing.JButton" binding="button1" default-binding="true">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <icon value="Ejercicio07/images/spain.png"/>
+                  <iconTextGap value="4"/>
+                  <inheritsPopupMenu value="false"/>
+                  <text value=""/>
+                </properties>
+              </component>
+              <hspacer id="ee325">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="14" height="64"/>
+                  </grid>
+                </constraints>
+              </hspacer>
+              <component id="4a48e" class="javax.swing.JButton" binding="englishButton">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="83" height="64"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <icon value="Ejercicio07/images/british.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <vspacer id="29325">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+    </children>
+  </grid>
+</form>

@@ -10,9 +10,13 @@ public class Ventana {
 	private JRadioButtonMenuItem espanolRadioButtonMenuItem;
 	private JRadioButtonMenuItem englishRadioButtonMenuItem;
 	private JMenu fileMenu;
-	private JMenu archivoMenu;
 	private JButton button1;
 	private JButton englishButton;
+	private JMenuItem newMenuItem;
+	private JMenuItem openMenuItem;
+	private JMenuItem saveMenuItem;
+	private JMenuItem saveAsMenuItem;
+	private JMenuItem exitMenuItem;
 
 	public Ventana() {
 
@@ -51,6 +55,14 @@ public class Ventana {
 				changeLanguage(2);
 			}
 		});
+		exitMenuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				System.exit(0);
+			}
+		});
 	}
 
 	private void initWindow() {
@@ -64,24 +76,28 @@ public class Ventana {
 
 	private void changeLanguage(int n) {
 
-		hideMenus();
-
 		switch (n){
 
 			case 1:
-				archivoMenu.setVisible(true);
+				espanolRadioButtonMenuItem.setSelected(true);
+				fileMenu.setText("Archivo");
+				newMenuItem.setText("Nuevo");
+				openMenuItem.setText("Abrir");
+				saveMenuItem.setText("Guardar");
+				saveAsMenuItem.setText("Guardar Como");
+				exitMenuItem.setText("Salir");
 				break;
 
 			case 2:
-				fileMenu.setVisible(true);
+				englishRadioButtonMenuItem.setSelected(true);
+				fileMenu.setText("File");
+				newMenuItem.setText("New");
+				openMenuItem.setText("Open");
+				saveMenuItem.setText("Save");
+				saveAsMenuItem.setText("Save AS");
+				exitMenuItem.setText("Exit");
 				break;
 		}
-	}
-
-	private void hideMenus() {
-
-		fileMenu.setVisible(false);
-		archivoMenu.setVisible(false);
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {

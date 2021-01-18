@@ -1,22 +1,37 @@
 package Ejercicio07;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Ventana {
 
-	private JPanel spainButton;
+	private static JFrame frame;
+	private JPanel panel1;
 	private JRadioButtonMenuItem espanolRadioButtonMenuItem;
 	private JRadioButtonMenuItem englishRadioButtonMenuItem;
 	private JMenu fileMenu;
-	private JButton button1;
+	private JButton spanishButton;
 	private JButton englishButton;
 	private JMenuItem newMenuItem;
 	private JMenuItem openMenuItem;
 	private JMenuItem saveMenuItem;
 	private JMenuItem saveAsMenuItem;
 	private JMenuItem exitMenuItem;
+	private JButton changeTitleButton;
+	private JButton bgColorButton;
+	private JButton changeCursorButton;
+	private JButton setTextButton;
+	private JButton foregoundButton;
+	private JButton changeFontButton;
+	private JPanel centePanel;
+	private static boolean titleBoolean = false;
+	private static final int[] cursores = {Cursor.DEFAULT_CURSOR, Cursor.CROSSHAIR_CURSOR, Cursor.HAND_CURSOR};
+	private static int indexCursor = 0;
+	private static final String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+	private static int indexFont = 0;
 
 	public Ventana() {
 
@@ -39,7 +54,7 @@ public class Ventana {
 				changeLanguage(2);
 			}
 		});
-		button1.addActionListener(new ActionListener() {
+		spanishButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -63,6 +78,60 @@ public class Ventana {
 				System.exit(0);
 			}
 		});
+		changeTitleButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				changeFrameName();
+			}
+		});
+		bgColorButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Random r = new Random();
+				panel1.setBackground(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255)));
+			}
+		});
+		changeFontButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeFont();
+			}
+		});
+	}
+
+	private static void changeFont() {
+
+		frame.setFont(new Font(fonts[indexFont], Font.BOLD, 14));
+		indexFont++;
+	}
+
+	private static void changeCursor() {
+
+		if (indexCursor > 2) {
+			frame.setCursor(cursores[indexCursor]);
+			indexCursor++;
+		}else {
+			indexCursor = 0;
+			frame.setCursor(cursores[indexCursor]);
+
+		}
+
+	}
+
+	private static void changeFrameName() {
+
+		if (titleBoolean) {
+			titleBoolean = false;
+			frame.setTitle("Alcachofa");
+		}else {
+			titleBoolean = true;
+			frame.setTitle("Ejercicio07");
+		}
+
 	}
 
 	private void initWindow() {
@@ -72,6 +141,18 @@ public class Ventana {
 		radioButtonsGroup.add(englishRadioButtonMenuItem);
 		espanolRadioButtonMenuItem.setSelected(true);
 		changeLanguage(1);
+		int fontSize = 20;
+
+		Graphics g = frame.getGraphics();
+		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
+
+		g.setColor(Color.red);
+
+		g.drawString("www.java2s.com", 10, 20);
+	}
+
+	public void paint(Graphics g){
+		g.drawString("Hello to JavaTutorial.net", 10, 10);
 	}
 
 	private void changeLanguage(int n) {
@@ -102,9 +183,9 @@ public class Ventana {
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
-		JFrame frame = new JFrame("Ejercicio07");
+		frame = new JFrame("Ejercicio07");
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		frame.setContentPane(new Ventana().spainButton);
+		frame.setContentPane(new Ventana().panel1);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.pack();

@@ -143,6 +143,15 @@
       <item class="Ejercicio08.MytextField" icon="/com/intellij/uiDesigner/icons/textField.png" removable="true" auto-create-binding="false" can-attach-label="false">
         <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
       </item>
+      <item class="Ejercicio08.MyButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="Ejercicio08.MycomboBox" icon="/com/intellij/uiDesigner/icons/comboBox.png" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="Ejercicio08.MyList" icon="/com/intellij/uiDesigner/icons/list.png" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
     </group>
   </component>
 </project>

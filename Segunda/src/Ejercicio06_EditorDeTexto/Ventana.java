@@ -1,4 +1,4 @@
-package Ejercicio06;
+package Ejercicio06_EditorDeTexto;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +20,7 @@ public class Ventana {
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
-		JFrame frame = new JFrame("Ejercicio06");
+		JFrame frame = new JFrame("Ejercicio06_EditorDeTexto");
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		frame.setContentPane(new Ventana().panel1);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,4 +1,4 @@
-package Ejercicio08;
+package Ejercicio08_CustomClasses;
 
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class Ejercicio08 {
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
-		frame = new JFrame("Ejercicio08");
+		frame = new JFrame("Ejercicio08_CustomClasses");
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		frame.setContentPane(new Ejercicio08().mainPanel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

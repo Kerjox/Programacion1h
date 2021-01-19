@@ -26,7 +26,7 @@ public class Ventana {
 	private JButton setTextButton;
 	private JButton foregoundButton;
 	private JButton changeFontButton;
-	private JPanel centePanel;
+	private JPanel centerPanel;
 	private static boolean titleBoolean = false;
 	private static final int[] cursores = {Cursor.DEFAULT_CURSOR, Cursor.CROSSHAIR_CURSOR, Cursor.HAND_CURSOR};
 	private static int indexCursor = 0;
@@ -142,13 +142,6 @@ public class Ventana {
 		espanolRadioButtonMenuItem.setSelected(true);
 		changeLanguage(1);
 		int fontSize = 20;
-
-		Graphics g = frame.getGraphics();
-		g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
-
-		g.setColor(Color.red);
-
-		g.drawString("www.java2s.com", 10, 20);
 	}
 
 	public void paint(Graphics g){

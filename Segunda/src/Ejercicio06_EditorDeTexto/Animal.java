@@ -1,4 +1,4 @@
-package Ejercicio06;
+package Ejercicio06_EditorDeTexto;
 
 public class Animal {
 

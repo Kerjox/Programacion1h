@@ -26,7 +26,7 @@ public class Ventana {
 	private JButton setTextButton;
 	private JButton foregoundButton;
 	private JButton changeFontButton;
-	private JPanel centerPanel;
+	private centralPanel centralPanel1;
 	private static boolean titleBoolean = false;
 	private static final int[] cursores = {Cursor.DEFAULT_CURSOR, Cursor.CROSSHAIR_CURSOR, Cursor.HAND_CURSOR};
 	private static int indexCursor = 0;
@@ -91,22 +91,35 @@ public class Ventana {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Random r = new Random();
-				panel1.setBackground(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255)));
+				centralPanel1.setBackground(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255)));
 			}
 		});
 		changeFontButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeFont();
+				frame.setFont(new Font(fonts[indexFont], Font.BOLD, 14));
+				indexFont++;
 			}
 		});
-	}
 
-	private static void changeFont() {
+		setTextButton.addActionListener(new ActionListener() {
 
-		frame.setFont(new Font(fonts[indexFont], Font.BOLD, 14));
-		indexFont++;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+
+			}
+		});
+
+		foregoundButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Random r = new Random();
+				centralPanel1.setForeground(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255)));
+			}
+		});
 	}
 
 	private static void changeCursor() {
@@ -144,10 +157,6 @@ public class Ventana {
 		int fontSize = 20;
 	}
 
-	public void paint(Graphics g){
-		g.drawString("Hello to JavaTutorial.net", 10, 10);
-	}
-
 	private void changeLanguage(int n) {
 
 		switch (n){
@@ -183,6 +192,30 @@ public class Ventana {
 		frame.setResizable(false);
 		frame.pack();
 		frame.setVisible(true);
+	}
+
+	private void createUIComponents() {
+		// TODO: place custom component creation code here
+
+		centralPanel1 = new centralPanel();
+
+
+	}
+
+}
+
+class centralPanel extends JPanel {
+
+	public centralPanel() {
+
+		super();
+	}
+
+	@Override
+	public void paint(Graphics g) {
+
+		super.paint(g);
+		g.drawString("Hello World", 200, 100);
 	}
 
 }

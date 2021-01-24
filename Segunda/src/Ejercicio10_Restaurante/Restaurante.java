@@ -4,14 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Arrays;
 
 public class Restaurante {
 
 	private JPanel mainPanel;
 	private JComboBox<String> comidasComboBox;
 	private JLabel elijeTuComidaLabel;
-	private JList list1;
+	private JList<String> list1;
 	private String[] comidas = {"Desayuno", "Comida", "Cena"};
 	private String[][] platos = {{"Leche", "Colacao", "Café"}, {"Pasta", "Bocadillo", "Alubias"}, {"Sopa Castellana", "Hamburguesa", "Salchichas"}};
 
@@ -29,16 +28,43 @@ public class Restaurante {
 
 		initTitle();
 		initComboBox();
+		listeners();
+		setList("Desayuno");
+	}
+
+	private void listeners() {
 
 		comidasComboBox.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 
-				System.out.println(comidasComboBox.getItemAt(comidasComboBox.getSelectedIndex()));
-
+				setList(comidasComboBox.getItemAt(comidasComboBox.getSelectedIndex()));
 			}
 		});
+	}
+
+	private void setList(String itemAt) {
+
+		DefaultListModel<String> objets = new DefaultListModel<>();
+		int index = 0;
+		switch (itemAt) {
+			case "Desayuno":
+				index = 0;
+				break;
+			case "Comida":
+				index = 1;
+				break;
+			case "Cena":
+				index = 2;
+				break;
+		}
+		for (int i = 0; i < platos[index].length; i++) {
+
+			objets.addElement(platos[index][i]);
+		}
+
+		list1.setModel(objets);
 	}
 
 	private void initTitle() {

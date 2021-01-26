@@ -67,11 +67,17 @@
                   <text value="rectangulo"/>
                 </properties>
               </component>
+              <component id="e6eb0" class="javax.swing.JRadioButton" binding="lineaRadioButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="Linea"/>
+                </properties>
+              </component>
             </children>
           </grid>
         </children>
       </grid>
-      <component id="7ffae" class="Ejercicio11_Dibujar.Dibujar$JPanelDibujar" binding="dibujerPanel" custom-create="true">
+      <component id="7ffae" class="Ejercicio11_Dibujar.Dibujar$JPanelDibujar" binding="dibujarPanel" custom-create="true">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="600" height="300"/>

@@ -2,8 +2,9 @@ package Ejercicio11_Dibujar;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.List;
+import java.util.Map;
 
 public class Dibujar {
 
@@ -12,7 +13,10 @@ public class Dibujar {
 	private JRadioButton rectanguloRadioButton;
 	private JMenuItem nuevoMenuItem;
 	private JMenuItem salirMenuItem;
-	private JPanelDibujar dibujerPanel;
+	private JPanelDibujar dibujarPanel;
+	private JRadioButton lineaRadioButton;
+	private DosPuntos dp = new DosPuntos();
+	private ButtonGroup radioButtonsGroup;
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
@@ -26,8 +30,18 @@ public class Dibujar {
 
 	public Dibujar() {
 
+		initRadioButtons();
 		listeners();
+	}
 
+	private void initRadioButtons() {
+
+		radioButtonsGroup = new ButtonGroup();
+
+		radioButtonsGroup.add(obaloRadioButton);
+		radioButtonsGroup.add(rectanguloRadioButton);
+		radioButtonsGroup.add(lineaRadioButton);
+		obaloRadioButton.setSelected(true);
 	}
 
 	private void listeners() {
@@ -40,11 +54,62 @@ public class Dibujar {
 				System.exit(0);
 			}
 		});
+
+		nuevoMenuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				dp = new DosPuntos(20, 20, 100, 100, DosPuntos.OVALO);
+				dibujarPanel.paint(dibujarPanel.getGraphics());
+			}
+		});
+
+		dibujarPanel.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+				super.mousePressed(e);
+
+				dp = new DosPuntos(e.getX(), e.getY(), getSelectedRadioButton());
+				dibujarPanel.paint(dibujarPanel.getGraphics());
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+
+				super.mouseDragged(e);
+				int x = e.getX() - dp.getInicioX();
+				System.out.println(e.getX());
+				System.out.println(e.getY());
+				int y = e.getY() - dp.getInicioY();
+				dp.setFinX(x);
+				dp.setFinY(y);
+				dibujarPanel.paint(dibujarPanel.getGraphics());
+
+			}
+		});
+
+	}
+
+	private int getSelectedRadioButton() {
+
+		if (obaloRadioButton.isSelected()) {
+
+			return DosPuntos.OVALO;
+		}else if (rectanguloRadioButton.isSelected()) {
+
+			return DosPuntos.RECTANGULO;
+		} else {
+
+			return DosPuntos.LINEA;
+		}
 	}
 
 	private void createUIComponents() {
 
-		dibujerPanel = new JPanelDibujar();
+		dibujarPanel = new JPanelDibujar();
 	}
 
 	class JPanelDibujar extends JPanel {
@@ -53,6 +118,7 @@ public class Dibujar {
 
 			super();
 			this.setBackground(Color.BLACK);
+			this.setVisible(true);
 
 		}
 
@@ -60,8 +126,9 @@ public class Dibujar {
 		public void paint(Graphics g) {
 
 			super.paint(g);
+			g.setColor(Color.WHITE);
+			dp.pintar(g);
 		}
 
 	}
-
 }

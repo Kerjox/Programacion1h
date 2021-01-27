@@ -3,8 +3,8 @@ package Ejercicio11_Dibujar;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Dibujar {
 
@@ -15,8 +15,15 @@ public class Dibujar {
 	private JMenuItem salirMenuItem;
 	private JPanelDibujar dibujarPanel;
 	private JRadioButton lineaRadioButton;
+	private JRadioButton rojoRadioButton;
+	private JRadioButton verdeRadioButton;
+	private JRadioButton azulRadioButton;
+	private JRadioButton blancoRadioButton;
 	private DosPuntos dp = new DosPuntos();
-	private ButtonGroup radioButtonsGroup;
+	private ButtonGroup radioButtonsMenu2;
+	private ButtonGroup radioButtonsColors;
+	private List<DosPuntos> register = new ArrayList<>();
+	private Color color = Color.WHITE;
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
@@ -30,21 +37,44 @@ public class Dibujar {
 
 	public Dibujar() {
 
-		initRadioButtons();
+		initMenu2();
+		initColors();
 		listeners();
 	}
 
-	private void initRadioButtons() {
+	private void initColors() {
 
-		radioButtonsGroup = new ButtonGroup();
+		radioButtonsColors = new ButtonGroup();
 
-		radioButtonsGroup.add(obaloRadioButton);
-		radioButtonsGroup.add(rectanguloRadioButton);
-		radioButtonsGroup.add(lineaRadioButton);
+		radioButtonsColors.add(rojoRadioButton);
+		radioButtonsColors.add(azulRadioButton);
+		radioButtonsColors.add(verdeRadioButton);
+		radioButtonsColors.add(blancoRadioButton);
+
+		blancoRadioButton.setSelected(true);
+	}
+
+	private void initMenu2() {
+
+		radioButtonsMenu2 = new ButtonGroup();
+
+		radioButtonsMenu2.add(obaloRadioButton);
+		radioButtonsMenu2.add(rectanguloRadioButton);
+		radioButtonsMenu2.add(lineaRadioButton);
 		obaloRadioButton.setSelected(true);
 	}
 
 	private void listeners() {
+
+
+		ActionListener changeColor = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				color = (getColorSelected());
+			}
+		};
 
 		salirMenuItem.addActionListener(new ActionListener() {
 
@@ -60,7 +90,7 @@ public class Dibujar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				dp = new DosPuntos(20, 20, 100, 100, DosPuntos.OVALO);
+				dp = new DosPuntos(0, 0, 0, 0, DosPuntos.OVALO, color);
 				dibujarPanel.paint(dibujarPanel.getGraphics());
 			}
 		});
@@ -71,8 +101,8 @@ public class Dibujar {
 			public void mousePressed(MouseEvent e) {
 
 				super.mousePressed(e);
-
-				dp = new DosPuntos(e.getX(), e.getY(), getSelectedRadioButton());
+				register.add(dp);
+				dp = new DosPuntos(e.getX(), e.getY(), getSelectedRadioButton(), color);
 				dibujarPanel.paint(dibujarPanel.getGraphics());
 			}
 		});
@@ -91,6 +121,27 @@ public class Dibujar {
 			}
 		});
 
+		rojoRadioButton.addActionListener(changeColor);
+		verdeRadioButton.addActionListener(changeColor);
+		azulRadioButton.addActionListener(changeColor);
+		blancoRadioButton.addActionListener(changeColor);
+	}
+
+	private Color getColorSelected() {
+
+		if (rojoRadioButton.isSelected()){
+
+			return Color.RED;
+		}else if (verdeRadioButton.isSelected()) {
+
+			return Color.GREEN;
+		}else if (azulRadioButton.isSelected()) {
+
+			return Color.BLUE;
+		}else {
+
+			return Color.WHITE;
+		}
 	}
 
 	private int getSelectedRadioButton() {
@@ -126,7 +177,10 @@ public class Dibujar {
 		public void paint(Graphics g) {
 
 			super.paint(g);
-			g.setColor(Color.WHITE);
+
+			for (DosPuntos object: register) {
+				object.pintar(g);
+			}
 			dp.pintar(g);
 		}
 

@@ -75,19 +75,19 @@ public class Dibujar {
 				dp = new DosPuntos(e.getX(), e.getY(), getSelectedRadioButton());
 				dibujarPanel.paint(dibujarPanel.getGraphics());
 			}
+		});
+
+		dibujarPanel.addMouseMotionListener(new MouseMotionAdapter() {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
 
 				super.mouseDragged(e);
-				int x = e.getX() - dp.getInicioX();
-				System.out.println(e.getX());
-				System.out.println(e.getY());
-				int y = e.getY() - dp.getInicioY();
+				int x = e.getX();
+				int y = e.getY();
 				dp.setFinX(x);
 				dp.setFinY(y);
 				dibujarPanel.paint(dibujarPanel.getGraphics());
-
 			}
 		});
 

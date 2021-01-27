@@ -19,11 +19,11 @@ public class Dibujar {
 	private JRadioButton verdeRadioButton;
 	private JRadioButton azulRadioButton;
 	private JRadioButton blancoRadioButton;
-	private DosPuntos dp = new DosPuntos();
 	private ButtonGroup radioButtonsMenu2;
 	private ButtonGroup radioButtonsColors;
 	private List<DosPuntos> register = new ArrayList<>();
 	private Color color = Color.WHITE;
+	private DosPuntos dp = new DosPuntos();
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
@@ -90,6 +90,7 @@ public class Dibujar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				register.clear();
 				dp = new DosPuntos(0, 0, 0, 0, DosPuntos.OVALO, color);
 				dibujarPanel.paint(dibujarPanel.getGraphics());
 			}
@@ -181,6 +182,7 @@ public class Dibujar {
 			for (DosPuntos object: register) {
 				object.pintar(g);
 			}
+
 			dp.pintar(g);
 		}
 

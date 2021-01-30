@@ -140,31 +140,7 @@
       <item class="javax.swing.JPopupMenu" icon="" removable="true" auto-create-binding="false" can-attach-label="false">
         <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
       </item>
-      <item class="Ejercicio08.MytextField" icon="/com/intellij/uiDesigner/icons/textField.png" removable="true" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
-      </item>
-      <item class="Ejercicio08.MyButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="true" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
-      </item>
-      <item class="Ejercicio08.MycomboBox" icon="/com/intellij/uiDesigner/icons/comboBox.png" removable="true" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
-      </item>
-      <item class="Ejercicio08.MyList" icon="/com/intellij/uiDesigner/icons/list.png" removable="true" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
-      </item>
-      <item class="Ejercicio08_CustomClasses.MyCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.png" removable="true" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
-      </item>
-      <item class="Ejercicio08_CustomClasses.MyCanvas" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
-      </item>
-      <item class="Ejercicio07.centralPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
-      </item>
-      <item class="Ejercicio11_Dibujar.Dibujar$JPanelDibujar" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
-        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
-      </item>
-      <item class="Ejercicio12_Animacion1.drawPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
+      <item class="Ejercicio12_Animacion1.Animacion1$JPanelDraw" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
         <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
       </item>
     </group>

@@ -1,9 +1,10 @@
 package Ejercicio13;
 
+import javax.swing.*;
 import java.applet.Applet;
 import java.awt.*;
 
-public class primer_Applet extends Applet {
+public class primer_Applet extends JApplet {
 
 	private Thread thread;
 

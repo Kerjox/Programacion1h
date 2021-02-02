@@ -13,18 +13,16 @@ public class Pelota {
 	public static final int UR = 3;
 	private int x, y;
 	private int width = 20, height = 20;
-	private int radius;
 	private int speed;
 	private Color color;
-	private Random r;
+	private Random r = new Random();
 	private int direction;
 
-	public Pelota(int radius, int speed, Color color) {
+	public Pelota(int radius, Color color) {
 
-		this.x = 120 + r.nextInt(60);
-		this.y = 120 + r.nextInt(60);
-		this.radius = radius;
-		this.speed = speed;
+		this.x = r.nextInt(300);
+		this.y = r.nextInt(300);
+		this.width = this.height = radius * 2;
 		this.color = color;
 	}
 
@@ -34,12 +32,12 @@ public class Pelota {
 
 			case Pelota.DR:
 
-				this.y--;
 				this.x++;
+				this.y--;
 
-				if (this.y <= 300) {
+				if (this.y + height <= 300) {
 					this.direction = Pelota.UR;
-				}else if (this.x + height >= 300) {
+				}else if (this.x + width >= 300) {
 					this.direction = Pelota.DL;
 				}
 				//System.out.println("Arriba");
@@ -47,8 +45,8 @@ public class Pelota {
 
 			case Pelota.UL:
 
-				this.y++;
 				this.x--;
+				this.y++;
 
 				if (this.y >= 0) {
 					this.direction = Pelota.DL;
@@ -63,7 +61,7 @@ public class Pelota {
 				this.x++;
 				this.y++;
 
-				if (this.x >= 300) {
+				if (this.x + width >= 300) {
 					this.direction = Pelota.UL;
 				}else if (this.y >= 300) {
 					this.direction = Pelota.DR;
@@ -71,15 +69,24 @@ public class Pelota {
 				//System.out.println("Izquierda");
 				break;
 
-			case Mondrian2.Rectangulo.DERECHA:
+			case Pelota.DL:
 
-				this.x++;
-				if (this.x >= this.limitXR) {
-					this.direction = Mondrian2.Rectangulo.ABAJO;
+				this.x--;
+				this.y--;
+				if (this.x <= 0) {
+					this.direction = Pelota.DR;
+				}else if (this.y <= 0) {
+					this.direction = Pelota.UR;
 				}
 				//System.out.println(x);
 				break;
 		}
+	}
+
+	public void pintarPelota(Graphics g) {
+
+		g.setColor(color);
+		g.fillOval(x, y, width, height);
 	}
 
 }

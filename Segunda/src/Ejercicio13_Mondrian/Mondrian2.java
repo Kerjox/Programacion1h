@@ -6,23 +6,128 @@ import java.awt.*;
 
 public class Mondrian2 extends JApplet implements Runnable {
 
-	private static final int ARRIBA = 0;
-	private static final int ABAJO = 1;
-	private static final int IZQUIERDA = 2;
-	private static final int DERECHA = 3;
-	private int direcion;
+	private final Color[] coloresRectangulos = {
+			Color.YELLOW,
+			Color.YELLOW,
+			Color.YELLOW,
+			Color.BLUE,
+			Color.BLUE,
+			Color.LIGHT_GRAY,
+			Color.RED,
+			Color.RED,
+			Color.MAGENTA};
 	private Thread animation;
-	private int posX = 50, posY = 140, width = 120, height = 45;
+	private Rectangulo[] arrayRectangulos;
 	private Image image;
-	Graphics renderBuffer;
+	private final int[][] rectangulos = {
+			{0, 0, 90, 90},
+			{250, 0, 40, 190},
+			{80, 110, 100, 20},
+			{80, 200, 220, 90},
+			{100, 10, 90, 80},
+			{50, 140, 120, 45},
+			{200, 0, 45, 45},
+			{0, 100, 45, 200},
+			{200, 55, 50, 135}};
+	private Graphics renderBuffer;
+
+	static class Rectangulo {
+
+		private final int width;
+		private final Color color;
+		private final int height;
+		private int x;
+		private int y;
+		private static final int ABAJO = 1;
+		private static final int ARRIBA = 0;
+		private static final int DERECHA = 3;
+		private static final int IZQUIERDA = 2;
+		private int direction = Rectangulo.DERECHA;
+		private final int limitXR, limitYU, limitXL, limitYD;
+
+		public Rectangulo(int x, int y, int width, int height, Color color) {
+
+			this.x = this.limitXL = x;
+			this.y = this.limitYD = y;
+			this.width = width;
+			this.height = height;
+			this.color = color;
+			this.limitXR = x + 25;
+			this.limitYU = y + 10;
+		}
+
+		public void paintRect(Graphics g) {
+
+			g.setColor(color);
+			g.fillRect(x, y, width, height);
+		}
+
+		public void mover() {
+
+			switch (this.direction) {
+
+				case Rectangulo.ARRIBA:
+
+					this.y--;
+
+					if (this.y <= this.limitYD) {
+						this.direction = Rectangulo.DERECHA;
+					}
+					//System.out.println("Arriba");
+					break;
+
+				case Rectangulo.ABAJO:
+
+					this.y++;
+
+					if (this.y >= this.limitYU) {
+						this.direction = Rectangulo.IZQUIERDA;
+					}
+					//System.out.println("Abajo");
+					break;
+
+				case Rectangulo.IZQUIERDA:
+
+					this.x--;
+
+					if (this.x <= this.limitXL) {
+						this.direction = Rectangulo.ARRIBA;
+					}
+					//System.out.println("Izquierda");
+					break;
+
+				case Rectangulo.DERECHA:
+
+					this.x++;
+					if (this.x >= this.limitXR) {
+						this.direction = Rectangulo.ABAJO;
+					}
+					//System.out.println(x);
+					break;
+			}
+		}
+
+	}
 
 	@Override
 	public void init() {
 
 		super.init();
-		direcion = Mondrian2.DERECHA;
 		image = this.createImage(300, 300);
 		renderBuffer = image.getGraphics();
+		arrayRectangulos = new Rectangulo[9];
+		initRectangulos();
+	}
+
+	private void initRectangulos() {
+
+		for (int i = 0; i < rectangulos.length; i++) {
+
+			for (int j = 0; j < rectangulos[0].length; j++) {
+
+				arrayRectangulos[i] = new Rectangulo(rectangulos[i][0], rectangulos[i][1], rectangulos[i][2], rectangulos[i][3], coloresRectangulos[i]);
+			}
+		}
 	}
 
 	@Override
@@ -38,20 +143,11 @@ public class Mondrian2 extends JApplet implements Runnable {
 
 		renderBuffer.setColor(Color.WHITE);
 		renderBuffer.fillRect(0, 0, 300, 300);
-		renderBuffer.setColor(Color.YELLOW);
-		renderBuffer.fillRect(0, 0, 90, 90);
-		renderBuffer.fillRect(250, 0, 40, 190);
-		renderBuffer.fillRect(80, 110, 100, 20);
-		renderBuffer.setColor(Color.BLUE);
-		renderBuffer.fillRect(80, 200, 220, 90);
-		renderBuffer.fillRect(100, 10, 90, 80);
-		renderBuffer.setColor(Color.LIGHT_GRAY);
-		renderBuffer.fillRect(posX, posY, width, height);
-		renderBuffer.setColor(Color.RED);
-		renderBuffer.fillRect(200, 0, 45, 45);
-		renderBuffer.fillRect(0, 100, 45, 200);
-		renderBuffer.setColor(Color.MAGENTA);
-		renderBuffer.fillRect(200, 55, 50, 135);
+		for (int i = 0; i < arrayRectangulos.length; i++) {
+
+			arrayRectangulos[i].paintRect(renderBuffer);
+		}
+
 		g.drawImage(image, 0, 0, this);
 	}
 
@@ -59,18 +155,26 @@ public class Mondrian2 extends JApplet implements Runnable {
 	public void update(Graphics g) {
 
 		paint(g);
+
 	}
 
 	@Override
 	public void run() {
 
 		do {
-
-			mover();
-			delay(10);
+			moverRectangulos();
+			delay(100);
 			repaint();
 
 		} while (true);
+	}
+
+	private void moverRectangulos() {
+
+		for (int i = 0; i < arrayRectangulos.length; i++) {
+
+			arrayRectangulos[i].mover();
+		}
 	}
 
 	private static void delay(int ms) {
@@ -80,62 +184,6 @@ public class Mondrian2 extends JApplet implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void mover(){
-
-		switch (this.direcion) {
-			case Mondrian2.ARRIBA:
-				this.posY--;
-				if (this.posY <= 140) {
-					this.direcion = Mondrian2.DERECHA;
-				}
-				//System.out.println("Arriba");
-				break;
-			case Mondrian2.ABAJO:
-				this.posY++;
-				if (this.posY >= 150) {
-					this.direcion = Mondrian2.IZQUIERDA;
-				}
-				//System.out.println("Abajo");
-				break;
-			case Mondrian2.IZQUIERDA:
-				this.posX--;
-				if (this.posX <= 50) {
-					this.direcion = Mondrian2.ARRIBA;
-				}
-				//System.out.println("Izquierda");
-				break;
-			case Mondrian2.DERECHA:
-				this.posX++;
-				if (this.posX >= 75) {
-					this.direcion = Mondrian2.ABAJO;
-				}
-				//System.out.println("Derecha");
-				break;
-		}
-	}
-
-	class Rectangulo {
-
-		private int x, y, width, height;
-		private Color color;
-
-		public Rectangulo(int x, int y, int width, int height, Color color) {
-
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
-			this.color = color;
-		}
-
-		public void paintRect(Graphics g) {
-
-			g.setColor(color);
-			g.fillRect(x, y, width, height);
-		}
-
 	}
 
 }

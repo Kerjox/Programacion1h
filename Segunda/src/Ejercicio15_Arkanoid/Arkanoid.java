@@ -2,45 +2,16 @@ package Ejercicio15_Arkanoid;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 public class Arkanoid extends JApplet implements Runnable {
 
-	private List<Brick> bricks = new ArrayList<>();
-	private Image image;
-	Graphics renderBuffer;
-	Pelota pelota;
 	Thread game;
-
-	@Override
-	public void run() {
-
-		do {
-			pelota.moverPelota();
-			repaint();
-			checkCollide();
-			delay(10);
-		}while (true);
-	}
-
-	private void checkCollide() {
-
-		bricks.removeIf(brick -> brick.contains(pelota.x + 10, pelota.y));
-		pelota.setCollide(true);
-	}
-
-	@Override
-	public void start() {
-
-		game = new Thread(this);
-		game.start();
-	}
+	Pelota pelota;
+	Graphics renderBuffer;
+	private final List<Brick> bricks = new ArrayList<>();
+	private Image image;
 
 	@Override
 	public void init() {
@@ -52,6 +23,72 @@ public class Arkanoid extends JApplet implements Runnable {
 		pelota = new Pelota(getWidth(), getHeight());
 
 
+	}
+
+	@Override
+	public void paint(Graphics g) {
+
+		renderBuffer.setColor(Color.BLACK);
+		renderBuffer.fillRect(0, 0, getWidth(), getHeight());
+		paintBricks(renderBuffer);
+		pelota.pintarPelota(renderBuffer);
+		g.drawImage(image, 0, 0, this);
+	}
+
+	@Override
+	public void run() {
+
+		do {
+			pelota.moverPelota();
+			repaint();
+			checkCollide();
+			delay(10);
+		} while (true);
+	}
+
+	@Override
+	public void start() {
+
+		game = new Thread(this);
+		game.start();
+	}
+
+	private void checkCollide() {
+
+		for (Brick brick : bricks) {
+
+			int direction = pelota.getDirection();
+			if (brick.contains(pelota.x + 10, pelota.y)) {                              // Colisiona Arriba
+
+				bricks.remove(brick);
+
+				if (direction == Pelota.UL) pelota.setDirection(Pelota.DL);
+				else pelota.setDirection(Pelota.DR);
+
+			} else if (brick.contains(pelota.x, pelota.y + 10)) {                       // Colisiona Izquierda
+
+				bricks.remove(brick);
+
+				if (direction == Pelota.UL) pelota.setDirection(Pelota.UR);
+				else pelota.setDirection(Pelota.DR);
+
+			} else if (brick.contains(pelota.x + 20, pelota.y + 10)) {                // Colisiona Derecha
+
+				bricks.remove(brick);
+
+				if (direction == Pelota.UR) pelota.setDirection(Pelota.UL);
+				else pelota.setDirection(Pelota.DL);
+
+			} else if (brick.contains(pelota.x + 10, pelota.y + 20)) {                // Colisiona Abajo
+
+				bricks.remove(brick);
+
+				if (direction == Pelota.DL) pelota.setDirection(Pelota.UL);
+				else pelota.setDirection(Pelota.UR);
+
+			}
+		}
+		//bricks.removeIf(brick -> brick.contains(pelota.x + 10, pelota.y));
 	}
 
 	private static void delay(int ms) {
@@ -90,16 +127,6 @@ public class Arkanoid extends JApplet implements Runnable {
 				}
 			}
 		}
-	}
-
-	@Override
-	public void paint(Graphics g) {
-
-		renderBuffer.setColor(Color.BLACK);
-		renderBuffer.fillRect(0, 0, getWidth(), getHeight());
-		paintBricks(renderBuffer);
-		pelota.pintarPelota(renderBuffer);
-		g.drawImage(image, 0, 0, this);
 	}
 
 	private void paintBricks(Graphics g) {

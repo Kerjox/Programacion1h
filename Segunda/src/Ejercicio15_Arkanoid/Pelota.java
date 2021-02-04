@@ -12,7 +12,6 @@ public class Pelota extends Rectangle {
 	private final int bgHeight;
 	private final int bgWidth;
 	private final Random r = new Random();
-	private boolean collide;
 	private Color color;
 	private int direction;
 
@@ -28,11 +27,6 @@ public class Pelota extends Rectangle {
 	public Pelota(int bgWidth, int bgHeight) {
 
 		this(20, bgWidth, bgHeight);
-	}
-
-	public void setCollide(boolean collide) {
-
-		this.collide = collide;
 	}
 
 	private void randomColor() {
@@ -104,6 +98,16 @@ public class Pelota extends Rectangle {
 				//System.out.println("Abajo Izquierda");
 				break;
 		}
+	}
+
+	public int getDirection() {
+
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+
+		this.direction = direction;
 	}
 
 	public void pintarPelota(Graphics g) {

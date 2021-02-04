@@ -55,39 +55,41 @@ public class Arkanoid extends JApplet implements Runnable {
 
 	private void checkCollide() {
 
+		Brick brickToBrake = null;
 		for (Brick brick : bricks) {
 
 			int direction = pelota.getDirection();
 			if (brick.contains(pelota.x + 10, pelota.y)) {                              // Colisiona Arriba
 
-				bricks.remove(brick);
+				brickToBrake = brick;
 
 				if (direction == Pelota.UL) pelota.setDirection(Pelota.DL);
 				else pelota.setDirection(Pelota.DR);
 
 			} else if (brick.contains(pelota.x, pelota.y + 10)) {                       // Colisiona Izquierda
 
-				bricks.remove(brick);
+				brickToBrake = brick;
 
 				if (direction == Pelota.UL) pelota.setDirection(Pelota.UR);
 				else pelota.setDirection(Pelota.DR);
 
 			} else if (brick.contains(pelota.x + 20, pelota.y + 10)) {                // Colisiona Derecha
 
-				bricks.remove(brick);
+				brickToBrake = brick;
 
 				if (direction == Pelota.UR) pelota.setDirection(Pelota.UL);
 				else pelota.setDirection(Pelota.DL);
 
 			} else if (brick.contains(pelota.x + 10, pelota.y + 20)) {                // Colisiona Abajo
 
-				bricks.remove(brick);
+				brickToBrake = brick;
 
 				if (direction == Pelota.DL) pelota.setDirection(Pelota.UL);
 				else pelota.setDirection(Pelota.UR);
 
 			}
 		}
+		bricks.remove(brickToBrake);
 		//bricks.removeIf(brick -> brick.contains(pelota.x + 10, pelota.y));
 	}
 

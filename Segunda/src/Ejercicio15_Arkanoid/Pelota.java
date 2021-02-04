@@ -1,36 +1,38 @@
-package Ejercicio14_Pelota.Juego1;
+package Ejercicio15_Arkanoid;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Pelota {
+public class Pelota extends Rectangle {
 
 	public static final int DL = 1;
 	public static final int DR = 0;
 	public static final int UL = 2;
 	public static final int UR = 3;
+	private final int bgHeight;
+	private final int bgWidth;
+	private final Random r = new Random();
+	private boolean collide;
 	private Color color;
 	private int direction;
-	private final Random r = new Random();
-	private final int width;
-	private final int height;
-	private int x, y;
-	private int bgWidth, bgHeight;
 
 	public Pelota(int diameter, int bgWidth, int bgHeight) {
 
-		this.x = r.nextInt(bgWidth - diameter);
-		this.y = r.nextInt(bgHeight - diameter);
-		this.width = this.height = diameter;
+		super((int) (Math.random() * bgWidth - diameter), 300, diameter, diameter);
 		this.bgWidth = bgWidth;
 		this.bgHeight = bgHeight;
 		randomColor();
-		this.direction = r.nextInt(3);
+		this.direction = Pelota.UR;
 	}
 
 	public Pelota(int bgWidth, int bgHeight) {
 
-		this((int) (Math.random() * 25) + 5, bgWidth, bgHeight);
+		this(20, bgWidth, bgHeight);
+	}
+
+	public void setCollide(boolean collide) {
+
+		this.collide = collide;
 	}
 
 	private void randomColor() {
@@ -38,10 +40,8 @@ public class Pelota {
 		this.color = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
 	}
 
-	public void mover() {
+	public void moverPelota() {
 
-		//System.out.printf("X: %d \n", x);
-		//System.out.printf("Y: %d \n", y);
 		switch (this.direction) {
 
 

@@ -2,20 +2,32 @@ package Ejercicio10_Restaurante;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Restaurante {
 
-	private JPanel mainPanel;
+	private final String[] comidas = {"Desayuno", "Comida", "Cena"};
 	private JComboBox<String> comidasComboBox;
-	private JLabel titulo;
-	private JList<String> list1;
 	private JLabel comidasElegidas;
-	private String[] comidas = {"Desayuno", "Comida", "Cena"};
-	private String[][] platos = {
+	private JList<String> list1;
+	private JPanel mainPanel;
+	private final String[][] platos = {
 			{"Leche", "Colacao", "Café"},
 			{"Pasta", "Bocadillo", "Alubias", "Carrilleras"},
 			{"Sopa Castellana", "Hamburguesa", "Salchichas"}};
+	private JLabel titulo;
+
+	public Restaurante() {
+
+		initTitle();
+		initComboBox();
+		initList();
+		listeners();
+
+	}
 
 	public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
@@ -25,15 +37,6 @@ public class Restaurante {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
-	}
-
-	public Restaurante() {
-
-		initTitle();
-		initComboBox();
-		initList();
-		listeners();
-
 	}
 
 	private void initList() {
@@ -59,7 +62,7 @@ public class Restaurante {
 			public void mouseClicked(MouseEvent e) {
 
 				super.mouseClicked(e);
-				String comboBoxSelected = comidasComboBox.getItemAt(comidasComboBox.getSelectedIndex()).toString();
+				String comboBoxSelected = comidasComboBox.getItemAt(comidasComboBox.getSelectedIndex());
 				comidasElegidas.setText(comboBoxSelected + ": " + getSelectedItems());
 
 			}

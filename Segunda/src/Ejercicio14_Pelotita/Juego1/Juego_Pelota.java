@@ -1,4 +1,4 @@
-package Ejercicio14_Pelota.Juego1;
+package Ejercicio14_Pelotita.Juego1;
 
 import javax.swing.*;
 import java.awt.*;

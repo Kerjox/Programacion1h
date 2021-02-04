@@ -1,18 +1,19 @@
-package Ejercicio14_Pelota.Juego2;
+package Ejercicio14_Pelotita.Juego2;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Pelota extends Rectangle{
+public class Pelota extends Rectangle {
 
 	public static final int DL = 1;
 	public static final int DR = 0;
 	public static final int UL = 2;
 	public static final int UR = 3;
+	private final Random r = new Random();
+	private final int bgWidth;
+	private final int bgHeight;
 	private Color color;
 	private int direction;
-	private final Random r = new Random();
-	private int bgWidth, bgHeight;
 
 	public Pelota(int diameter, int bgWidth, int bgHeight) {
 
@@ -35,8 +36,6 @@ public class Pelota extends Rectangle{
 
 	public void mover() {
 
-		//System.out.printf("X: %d \n", x);
-		//System.out.printf("Y: %d \n", y);
 		switch (this.direction) {
 
 

@@ -7,10 +7,11 @@ import java.util.List;
 
 public class Arkanoid extends JApplet implements Runnable {
 
+	private final List<Brick> bricks = new ArrayList<>();
 	Thread game;
 	Pelota pelota;
+	Raqueta raqueta;
 	Graphics renderBuffer;
-	private final List<Brick> bricks = new ArrayList<>();
 	private Image image;
 
 	@Override
@@ -19,9 +20,10 @@ public class Arkanoid extends JApplet implements Runnable {
 		this.setSize(new Dimension(600, 400));
 		image = this.createImage(getWidth(), getHeight());
 		renderBuffer = image.getGraphics();
+
 		initBricks();
 		pelota = new Pelota(getWidth(), getHeight());
-
+		initRaqueta();
 
 	}
 
@@ -32,6 +34,7 @@ public class Arkanoid extends JApplet implements Runnable {
 		renderBuffer.fillRect(0, 0, getWidth(), getHeight());
 		paintBricks(renderBuffer);
 		pelota.pintarPelota(renderBuffer);
+		raqueta.pintar(renderBuffer);
 		g.drawImage(image, 0, 0, this);
 	}
 
@@ -41,8 +44,9 @@ public class Arkanoid extends JApplet implements Runnable {
 		do {
 			pelota.moverPelota();
 			repaint();
-			checkCollide();
-			delay(10);
+			checkCollideBricks();
+			checkCollideRaqueta();
+			delay(1);
 		} while (true);
 	}
 
@@ -53,7 +57,22 @@ public class Arkanoid extends JApplet implements Runnable {
 		game.start();
 	}
 
-	private void checkCollide() {
+	private void initRaqueta() {
+
+		raqueta = new Raqueta(300, 380, 80, 10, Color.CYAN);
+		addMouseMotionListener(raqueta.mover);
+	}
+
+	private void checkCollideRaqueta() {
+
+		if (raqueta.intersects(pelota)) {
+
+			if (pelota.getDirection() == Pelota.DL) pelota.setDirection(Pelota.UL);
+			else pelota.setDirection(Pelota.UR);
+		}
+	}
+
+	private void checkCollideBricks() {
 
 		Brick brickToBrake = null;
 		for (Brick brick : bricks) {
@@ -89,8 +108,7 @@ public class Arkanoid extends JApplet implements Runnable {
 
 			}
 		}
-		bricks.remove(brickToBrake);
-		//bricks.removeIf(brick -> brick.contains(pelota.x + 10, pelota.y));
+		if (brickToBrake != null) brickToBrake.removeBrick((ArrayList<Brick>) bricks);
 	}
 
 	private static void delay(int ms) {
@@ -111,19 +129,19 @@ public class Arkanoid extends JApplet implements Runnable {
 
 				switch (i) {
 					case 0:
-						bricks.add(new Brick(x, 10, 50, 20, Color.RED));
+						bricks.add(new Brick(x, 10, 50, 20, 4));
 						x += 50 + 5;
 						break;
 					case 1:
-						bricks.add(new Brick(x, 35, 50, 20, Color.YELLOW));
+						bricks.add(new Brick(x, 35, 50, 20, 3));
 						x += 50 + 5;
 						break;
 					case 2:
-						bricks.add(new Brick(x, 60, 50, 20, Color.GREEN));
+						bricks.add(new Brick(x, 60, 50, 20, 2));
 						x += 50 + 5;
 						break;
 					case 3:
-						bricks.add(new Brick(x, 85, 50, 20, Color.BLUE));
+						bricks.add(new Brick(x, 85, 50, 20, 1));
 						x += 50 + 5;
 						break;
 				}
@@ -135,7 +153,7 @@ public class Arkanoid extends JApplet implements Runnable {
 
 		for (Brick brick : bricks) {
 
-			brick.pintar(renderBuffer);
+			brick.pintar(g);
 		}
 	}
 

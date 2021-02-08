@@ -75,7 +75,8 @@ class Raqueta extends Brick {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 
-				x = e.getX() - width / 2;
+				int mouseX = e.getX();
+				if (mouseX + width / 2 <= Arkanoid.BGWIDTH && mouseX - width / 2 >= 0) x = mouseX - width / 2;
 			}
 		};
 

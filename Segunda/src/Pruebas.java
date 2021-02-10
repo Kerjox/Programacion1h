@@ -3,9 +3,8 @@ import java.util.Arrays;
 
 public class Pruebas {
 	public static void main(String[] args) {
-		SecureRandom rng = new SecureRandom();
-		byte[] randomBytes = new byte[64];
-		rng.nextBytes(randomBytes); // Fills randomBytes with random bytes (duh)
-		System.out.println(Arrays.toString(randomBytes));
+
+		String a = "$2y$10$cU.9SseE4nD18djgbCLx8OqiVMBztjTh37VdRNBpOFxQXk3yrFKMm";
+		System.out.println(a.length());
 	}
 }

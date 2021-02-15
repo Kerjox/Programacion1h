@@ -1,4 +1,4 @@
-package Ejercicio17;
+package Ejercicio17_Palabras;
 
 import java.awt.*;
 

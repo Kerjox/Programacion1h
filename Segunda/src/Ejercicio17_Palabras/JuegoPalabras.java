@@ -1,4 +1,4 @@
-package Ejercicio17;
+package Ejercicio17_Palabras;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +49,7 @@ public class JuegoPalabras extends JApplet implements Runnable {
 	public void init() {
 
 		this.image = this.createImage(BGWIDTH, BGHEIGHT);
-		renderBuffer = image.getGraphics();
+		this.renderBuffer = image.getGraphics();
 		initPalabras();
 
 	}
@@ -66,7 +66,7 @@ public class JuegoPalabras extends JApplet implements Runnable {
 		addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 
 				Palabra word = palabras.get(0);
 				if (word.contains(e.getX(), e.getY())) {

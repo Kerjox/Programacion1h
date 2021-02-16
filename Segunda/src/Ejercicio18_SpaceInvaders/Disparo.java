@@ -4,12 +4,12 @@ import java.awt.*;
 
 public class Disparo extends Rectangle {
 
-	private Color color;
+	private final Color color;
 
-	public Disparo(int x, int y) {
+	public Disparo(int x) {
 
-		super(x, y, 10, 30);
-		this.color = Color.RED;
+		super(x, 360, 4, 15);
+		this.color = Color.WHITE;
 	}
 
 	public void paint(Graphics g) {
@@ -20,6 +20,7 @@ public class Disparo extends Rectangle {
 
 	public void move() {
 
-
+		y -= 2;
 	}
+
 }

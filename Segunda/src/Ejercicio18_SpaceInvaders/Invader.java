@@ -4,14 +4,16 @@ import java.awt.*;
 
 public class Invader extends Rectangle {
 
-	private Color color;
+	private final Color color;
 	private boolean direction;
+	private final int speed;
 
 	public Invader() {
 
 		super((int) (Math.random()* SpaceInvaders.BGWIDHT), (int) (Math.random()* 100), (int) (Math.random()*20) + 50, 10);
 		this.color = new Color((int) (Math.random()*255), (int) (Math.random()*255), (int) (Math.random()*255));
 		this.direction = false;
+		this.speed = (int) (Math.random() * 4 + 1);
 	}
 
 	public void paint(Graphics g) {
@@ -25,14 +27,14 @@ public class Invader extends Rectangle {
 		if (this.direction) {
 			if (this.x > 0) {
 
-				this.x--;
+				this.x -= speed;
 			}else {
 				direction = false;
 			}
 		}else {
 			if (this.x + this.width < SpaceInvaders.BGWIDHT) {
 
-				this.x++;
+				this.x += speed;
 			}else {
 				direction = true;
 			}

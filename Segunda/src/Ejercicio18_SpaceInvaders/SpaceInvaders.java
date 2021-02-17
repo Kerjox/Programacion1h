@@ -20,6 +20,9 @@ public class SpaceInvaders extends JApplet implements Runnable{
 	private final int numberInvaders = 10;
 	private boolean gameOver = false;
 	private Ship nave;
+	private final int spawnAt = 2000;
+	private int contSpawn = 0;
+
 
 	@Override
 	public void init() {
@@ -43,6 +46,15 @@ public class SpaceInvaders extends JApplet implements Runnable{
 				nave.move(e.getX() - 28);
 			}
 		});
+	}
+
+	private void spawnMoreInvaders() {
+
+		if (this.contSpawn >= this.spawnAt) {
+
+			this.invadersList.add(new Invader());
+			this.contSpawn = 0;
+		} else this.contSpawn += 20;
 	}
 
 	private void clickListener() {
@@ -80,6 +92,7 @@ public class SpaceInvaders extends JApplet implements Runnable{
 			moveDisparos();
 			checkCollide();
 			repaint();
+			spawnMoreInvaders();
 			delay(20);
 		}while(true);
 	}

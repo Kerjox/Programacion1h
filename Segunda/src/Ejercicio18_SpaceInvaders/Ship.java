@@ -40,7 +40,10 @@ public class Ship {
 
 	public void move(int x) {
 
-		this.posX = x;
+		if (x < SpaceInvaders.BGWIDHT - 56 && x > 0) {
+
+			this.posX = x;
+		}
 	}
 
 	public void paint(Graphics g) {

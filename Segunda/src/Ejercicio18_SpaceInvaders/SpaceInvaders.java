@@ -27,6 +27,7 @@ public class SpaceInvaders extends JApplet implements Runnable{
 	@Override
 	public void init() {
 
+		resize(BGWIDHT, BGHEIGHT);
 		this.image = this.createImage(BGWIDHT, BGHEIGHT);
 		this.renderBuffer = image.getGraphics();
 		disparosList = new ArrayList<>();
@@ -99,26 +100,21 @@ public class SpaceInvaders extends JApplet implements Runnable{
 
 	private void checkCollide() {
 
-		Invader invaderToRemove = null;
-		Disparo disparoToRemove = null;
-
 		for (Invader invader : invadersList) {
 
+			boolean finish = false;
 			for (Disparo disparo : disparosList) {
 
 				if (invader.contains(disparo.getX() + 1, disparo.getY())) {
 
-					invaderToRemove = invader;
-					disparoToRemove = disparo;
+					disparosList.remove(disparo);
+					invadersList.remove(invader);
+					nave.setBullets(nave.getBullets() + 2);
+					finish = true;
+					break;
 				}
 			}
-		}
-
-		if (invaderToRemove != null) {
-
-			invadersList.remove(invaderToRemove);
-			disparosList.remove(disparoToRemove);
-			nave.setBullets(nave.getBullets() + 2);
+			if (finish) break;
 		}
 
 		if (invadersList.size() == 0) {

@@ -13,7 +13,7 @@ public class SpaceInvaders extends JApplet implements Runnable{
 	private Thread game;
 	private Image image;
 	private Graphics renderBuffer;
-	public static final int BGWIDHT = 600;
+	public static final int BGWIDTH = 600;
 	public static final int BGHEIGHT = 400;
 	private List<Invader> invadersList;
 	private List<Disparo> disparosList;
@@ -27,8 +27,8 @@ public class SpaceInvaders extends JApplet implements Runnable{
 	@Override
 	public void init() {
 
-		resize(BGWIDHT, BGHEIGHT);
-		this.image = this.createImage(BGWIDHT, BGHEIGHT);
+		resize(BGWIDTH, BGHEIGHT);
+		this.image = this.createImage(BGWIDTH, BGHEIGHT);
 		this.renderBuffer = image.getGraphics();
 		disparosList = new ArrayList<>();
 		nave = new Ship();
@@ -150,20 +150,20 @@ public class SpaceInvaders extends JApplet implements Runnable{
 	private void youWin() {
 
 		renderBuffer.setColor(Color.BLACK);
-		renderBuffer.fillRect(0, 0, BGWIDHT, BGHEIGHT);
+		renderBuffer.fillRect(0, 0, BGWIDTH, BGHEIGHT);
 		renderBuffer.setColor(Color.WHITE);
 		renderBuffer.setFont(new Font("serif", Font.PLAIN, 30));
-		renderBuffer.drawString("You Win", BGWIDHT / 2 - 50, BGHEIGHT / 2);
+		renderBuffer.drawString("You Win", BGWIDTH / 2 - 50, BGHEIGHT / 2);
 		repaint();
 	}
 
 	private void gameOver() {
 
 		renderBuffer.setColor(Color.BLACK);
-		renderBuffer.fillRect(0, 0, BGWIDHT, BGHEIGHT);
+		renderBuffer.fillRect(0, 0, BGWIDTH, BGHEIGHT);
 		renderBuffer.setColor(Color.WHITE);
 		renderBuffer.setFont(new Font("serif", Font.PLAIN, 30));
-		renderBuffer.drawString("Game Over", BGWIDHT / 2 - 50, BGHEIGHT / 2);
+		renderBuffer.drawString("Game Over", BGWIDTH / 2 - 50, BGHEIGHT / 2);
 		repaint();
 	}
 
@@ -197,7 +197,7 @@ public class SpaceInvaders extends JApplet implements Runnable{
 		if (!gameOver) {
 
 			renderBuffer.setColor(Color.BLACK);
-			renderBuffer.fillRect(0, 0, BGWIDHT, BGHEIGHT);
+			renderBuffer.fillRect(0, 0, BGWIDTH, BGHEIGHT);
 			nave.paint(renderBuffer);
 			for (Invader invader : invadersList) {
 

@@ -10,7 +10,7 @@ public class Invader extends Rectangle {
 
 	public Invader() {
 
-		super((int) (Math.random()* SpaceInvaders.BGWIDHT), (int) (Math.random()* 100), (int) (Math.random()*20) + 50, 10);
+		super((int) (Math.random()* SpaceInvaders.BGWIDTH), (int) (Math.random()* 100), (int) (Math.random()*20) + 50, 10);
 		this.color = new Color((int) (Math.random()*255), (int) (Math.random()*255), (int) (Math.random()*255));
 		this.direction = false;
 		this.speed = (int) (Math.random() * 4 + 1);
@@ -32,7 +32,7 @@ public class Invader extends Rectangle {
 				direction = false;
 			}
 		}else {
-			if (this.x + this.width < SpaceInvaders.BGWIDHT) {
+			if (this.x + this.width < SpaceInvaders.BGWIDTH) {
 
 				this.x += speed;
 			}else {

@@ -2,10 +2,11 @@ package Ejercicio19_CrossyRoad;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrossyRoad extends JApplet implements Runnable {
+public class CrossyRoad extends JApplet implements Runnable, KeyEventDispatcher  {
 
 	public static final int BGWIDTH = 600;
 	public static final int BGHEIGHT = 400;
@@ -13,8 +14,10 @@ public class CrossyRoad extends JApplet implements Runnable {
 	private List<Car> carList;
 	private Image image;
 	private Graphics renderBuffer;
-	private final int spawnCarAt = 1000;
+	private final int spawnCarAt = 1200;
 	private int contSpawn = 0;
+	private Frog ranita;
+	private boolean gameOver = false;
 
 	@Override
 	public void run() {
@@ -24,6 +27,8 @@ public class CrossyRoad extends JApplet implements Runnable {
 			moverCoches();
 			checkCochesFin();
 			spawnNewCar();
+			checkCollide();
+			checkWin();
 			repaint();
 			delay(20);
 		}while(true);
@@ -40,16 +45,22 @@ public class CrossyRoad extends JApplet implements Runnable {
 	public void init() {
 
 		resize(BGWIDTH, BGHEIGHT);
+		requestFocusInWindow();
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this);
 		this.image = this.createImage(BGWIDTH, BGHEIGHT);
 		this.renderBuffer = image.getGraphics();
 		initCars();
+		ranita = new Frog();
 	}
 
 	@Override
 	public void paint(Graphics g) {
+		if (!gameOver) {
 
-		drawRoad(renderBuffer);
-		drawCars(renderBuffer);
+			drawRoad(renderBuffer);
+			drawCars(renderBuffer);
+			ranita.paint(renderBuffer);
+		}
 		g.drawImage(image, 0, 0, this);
 	}
 
@@ -139,6 +150,54 @@ public class CrossyRoad extends JApplet implements Runnable {
 		}else {
 
 			contSpawn += 20;
+		}
+	}
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent e) {
+
+		ranita.move(KeyEvent.getKeyText(e.getKeyCode()));
+		return false;
+	}
+
+	private void checkCollide() {
+
+		for (Car car : carList) {
+
+			if (car.intersects(ranita)) {
+
+				gameOver();
+				game.stop();
+			}
+		}
+	}
+
+	private void gameOver() {
+
+		this.renderBuffer.setColor(Color.BLACK);
+		this.renderBuffer.fillRect(0, 0, BGWIDTH, BGHEIGHT);
+		this.renderBuffer.setColor(Color.WHITE);
+		this.renderBuffer.setFont(new Font("serif", Font.PLAIN, 30));
+		this.renderBuffer.drawString("Game Over", BGWIDTH / 2 - 50, BGHEIGHT / 2);
+		this.gameOver = true;
+		repaint();
+	}
+
+	private void gameWin() {
+
+		this.renderBuffer.setColor(Color.BLACK);
+		this.renderBuffer.fillRect(0, 0, BGWIDTH, BGHEIGHT);
+		this.renderBuffer.setColor(Color.WHITE);
+		this.renderBuffer.setFont(new Font("serif", Font.PLAIN, 30));
+		this.renderBuffer.drawString("You Win", BGWIDTH / 2 - 50, BGHEIGHT / 2);
+		this.gameOver = true;
+		repaint();
+	}
+
+	private void checkWin() {
+
+		if ((int) ranita.getY() <= 100) {
+			gameWin();
 		}
 	}
 

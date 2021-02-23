@@ -1,7 +1,6 @@
 package Ejercicio16_FlappyBird;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Random;
 
 public class Pipe{

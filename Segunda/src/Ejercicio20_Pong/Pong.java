@@ -3,6 +3,8 @@ package Ejercicio20_Pong;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Pong extends JApplet implements Runnable, KeyEventDispatcher {
 
@@ -17,6 +19,7 @@ public class Pong extends JApplet implements Runnable, KeyEventDispatcher {
 	private Pad padLeft;
 
 	private Pelota pelota;
+	private boolean goal = false;
 
 	private int scoreLeft = 0;
 	private int scoreRight = 0;
@@ -26,9 +29,11 @@ public class Pong extends JApplet implements Runnable, KeyEventDispatcher {
 
 		do {
 
-			pelota.move();
-			checkCollide();
-			checkGoal();
+			if (!goal) {
+				pelota.move();
+				checkCollide();
+				checkGoal();
+			}
 			repaint();
 			delay(5);
 		}while(true);
@@ -53,7 +58,14 @@ public class Pong extends JApplet implements Runnable, KeyEventDispatcher {
 		padLeft = new Pad(20, 20);
 		padRight = new Pad(560, 20);
 		pelota = new Pelota(20);
+		addMouseListener(new MouseAdapter() {
 
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+				goal = false;
+			}
+		});
 	}
 
 	@Override
@@ -132,17 +144,19 @@ public class Pong extends JApplet implements Runnable, KeyEventDispatcher {
 
 	private void checkGoal() {
 
-		System.out.printf("%d : %d \n", scoreLeft, scoreRight);
+		//System.out.printf("%d : %d \n", scoreLeft, scoreRight);
 		if (pelota.getX() <= 0) {
 
 			scoreRight++;
-			pelota.setX(BGWIDTH / 2);
-			pelota.setY(BGHEIGTH / 2);
+			pelota.setX((int) (padLeft.getX() + 10));
+			pelota.setY((int) padLeft.getY() + 30);
+			this.goal = true;
 		} else if (pelota.getX() + 20 >= BGWIDTH) {
 
 			scoreLeft++;
-			pelota.setX(BGWIDTH / 2);
-			pelota.setY(BGHEIGTH / 2);
+			pelota.setX((int) (padRight.getX() - 20));
+			pelota.setY((int) padRight.getY() + 30);
+			this.goal = true;
 		}
 	}
 

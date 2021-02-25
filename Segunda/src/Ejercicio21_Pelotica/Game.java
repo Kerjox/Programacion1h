@@ -19,6 +19,9 @@ public class Game extends JApplet implements Runnable {
 	private List<Pelotica> peloticaList;
 	private boolean gameOver = false;
 	private Random r = new Random();
+	private int timeLeft = 30000;                   // En milisegundos
+
+	private int delay = 20;
 
 	@Override
 	public void run() {
@@ -27,37 +30,41 @@ public class Game extends JApplet implements Runnable {
 
 			movePeloticas();
 			repaint();
-			delay(5);
+			checkTimeLeft();
+			delay(delay);
 		}while (true);
 	}
 
 	@Override
 	public void start() {
 
-		game.start();
+		this.game.start();
 	}
 
 	@Override
 	public void init() {
 
 		resize(BGWIDTH, BGHEIGHT);
-		game = new Thread(this);
-		image = this.createImage(BGWIDTH, BGHEIGHT);
-		renderBuffer = image.getGraphics();
-		peloticaList = new ArrayList<>();
-		peloticaList.add(new Pelotica(100));
+		this.game = new Thread(this);
+		this.image = this.createImage(BGWIDTH, BGHEIGHT);
+		this.renderBuffer = image.getGraphics();
+		this.peloticaList = new ArrayList<>();
+		this.peloticaList.add(new Pelotica(100));
 		clickListener();
 	}
 
 	@Override
 	public void paint(Graphics g) {
+
 		if (!gameOver) {
 
-			renderBuffer.setColor(Color.BLACK);
-			renderBuffer.fillRect(0, 0, BGWIDTH, BGWIDTH);
+			this.renderBuffer.setColor(Color.BLACK);
+			this.renderBuffer.fillRect(0, 0, BGWIDTH, BGWIDTH);
+			this.renderBuffer.setColor(Color.WHITE);
+			this.renderBuffer.drawString("Time left: " + this.timeLeft / 1000, 20, 20);
 			paintPeloticas();
 		}
-		g.drawImage(image, 0, 0, this);
+		g.drawImage(this.image, 0, 0, this);
 	}
 
 	private static void delay(int ms) {
@@ -73,7 +80,7 @@ public class Game extends JApplet implements Runnable {
 
 		for (Pelotica pelotica: peloticaList) {
 
-			pelotica.paint(renderBuffer);
+			pelotica.paint(this.renderBuffer);
 		}
 	}
 
@@ -110,26 +117,38 @@ public class Game extends JApplet implements Runnable {
 					}
 
 					peloticaList.remove(peloticaClicked);
+					delay--;
 				}
 
 				if (peloticaList.size() <= 0) {
 
-					gameOver();
+					gameOver("You Win");
 				}
 			}
 		});
 	}
 
-	private void gameOver() {
+	private void gameOver(String word) {
 
-		gameOver = true;
-		renderBuffer.setColor(Color.BLACK);
-		renderBuffer.fillRect(0, 0, BGWIDTH, BGHEIGHT);
-		renderBuffer.setColor(Color.WHITE);
-		renderBuffer.setFont(new Font("serif", Font.PLAIN, 30));
-		renderBuffer.drawString("Game Over", BGWIDTH / 2 - 50, BGHEIGHT / 2);
+		this.gameOver = true;
+		this.renderBuffer.setColor(Color.BLACK);
+		this.renderBuffer.fillRect(0, 0, BGWIDTH, BGHEIGHT);
+		this.renderBuffer.setColor(Color.WHITE);
+		this.renderBuffer.setFont(new Font("serif", Font.PLAIN, 30));
+		this.renderBuffer.drawString(word, BGWIDTH / 2 - 50, BGHEIGHT / 2);
 		repaint();
-		game.stop();
+		this.game.stop();
+	}
+
+	private void checkTimeLeft() {
+
+		if (this.timeLeft <= 0) {
+
+			gameOver("Game Over");
+		}else {
+
+			this.timeLeft -= this.delay;
+		}
 	}
 
 }

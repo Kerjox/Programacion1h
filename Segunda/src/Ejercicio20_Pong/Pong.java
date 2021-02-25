@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 public class Pong extends JApplet implements Runnable, KeyEventDispatcher {
 
 	public static final int BGWIDTH = 600;
-	public static final int BGHEIGTH = 400;
+	public static final int BGHEIGHT = 400;
 
 	private Thread game;
 	private Image image;
@@ -42,7 +42,7 @@ public class Pong extends JApplet implements Runnable, KeyEventDispatcher {
 	@Override
 	public void start() {
 
-		resize(BGWIDTH, BGHEIGTH);
+		resize(BGWIDTH, BGHEIGHT);
 		requestFocusInWindow();
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this);
 		game.start();
@@ -53,7 +53,7 @@ public class Pong extends JApplet implements Runnable, KeyEventDispatcher {
 	public void init() {
 
 		game = new Thread(this);
-		image = this.createImage(BGWIDTH, BGHEIGTH);
+		image = this.createImage(BGWIDTH, BGHEIGHT);
 		renderBuffer = image.getGraphics();
 		padLeft = new Pad(20, 20);
 		padRight = new Pad(560, 20);
@@ -72,7 +72,7 @@ public class Pong extends JApplet implements Runnable, KeyEventDispatcher {
 	public void paint(Graphics g) {
 
 		renderBuffer.setColor(Color.BLACK);
-		renderBuffer.fillRect(0, 0, BGWIDTH, BGHEIGTH);
+		renderBuffer.fillRect(0, 0, BGWIDTH, BGHEIGHT);
 		padRight.paint(renderBuffer);
 		padLeft.paint(renderBuffer);
 		pelota.paint(renderBuffer);

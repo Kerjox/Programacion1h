@@ -1,8 +1,8 @@
-package Ejercicio20_Pong;
+package Ejercicio21_Pelotica;
 
 import java.awt.*;
 
-public class Pelota extends Rectangle {
+public class Pelotica extends Rectangle {
 
 	public static final int DL = 1;
 	public static final int DR = 0;
@@ -31,11 +31,18 @@ public class Pelota extends Rectangle {
 		this.direction = direction;
 	}
 
-	public Pelota(int diameter) {
+	public Pelotica(int diameter) {
 
 		super((int) (Math.random()* 500 + 20), 300, diameter, diameter);
 		this.color = Color.RED;
-		this.direction = Pelota.UR;
+		this.direction = UR;
+	}
+
+	public Pelotica(int x, int y, int diameter, int direction) {
+
+		super(x, y, diameter, diameter);
+		this.color = Color.RED;
+		this.direction = direction;
 	}
 
 	public void paint(Graphics g) {
@@ -53,10 +60,10 @@ public class Pelota extends Rectangle {
 				x += 1;
 				y += 1;
 
-				if (y + height >= Pong.BGHEIGHT) direction = UR;
-				else if (x + width >= Pong.BGWIDTH) {
+				if (y + height >= Game.BGHEIGHT) direction = UR;
+				else if (x + width >= Game.BGWIDTH) {
+
 					direction = DL;
-					System.out.println("Punto LEFT");
 				}
 				//System.out.println("Abajo Derecha");
 				break;
@@ -70,7 +77,6 @@ public class Pelota extends Rectangle {
 				else if (x <= 0) {
 
 					direction = UR;
-					System.out.println("Punto RIGHT");
 				}
 				//System.out.println("Arriba Izquierda");
 				break;
@@ -80,10 +86,9 @@ public class Pelota extends Rectangle {
 				x += 1;
 				y -= 1;
 
-				if (x + width >= Pong.BGWIDTH) {
+				if (x + width >= Game.BGWIDTH) {
 
 					direction = UL;
-					System.out.println("Punto LEFT");
 				} else if (y <= 0) direction = DR;
 				//System.out.println("Arriba Derecha");
 				break;
@@ -96,9 +101,8 @@ public class Pelota extends Rectangle {
 				if (x <= 0) {
 
 					direction = DR;
-					System.out.println("Punto RIGHT");
 
-				} else if (y + height >= Pong.BGHEIGHT) {
+				} else if (y + height >= Game.BGHEIGHT) {
 
 					direction = UL;
 
@@ -109,3 +113,4 @@ public class Pelota extends Rectangle {
 	}
 
 }
+

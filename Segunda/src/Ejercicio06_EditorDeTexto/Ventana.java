@@ -1,7 +1,5 @@
 package Ejercicio06_EditorDeTexto;
 
-import org.jetbrains.annotations.NotNull;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -162,7 +160,6 @@ public class Ventana {
 		pw.close();
 	}
 
-	@NotNull
 	private String getContentFile(File file) throws IOException {
 
 		FileReader fr = null;

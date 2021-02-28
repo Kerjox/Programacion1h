@@ -10,13 +10,13 @@ public class Pelotica extends Rectangle {
 	public static final int UR = 3;
 	private final Color color;
 	private int direction;
-	private float velX, velY;
+	private double velX, velY;
 
 	public Pelotica(int diameter) {
 
 		super((int) (Math.random() * 500 + 20), 300, diameter, diameter);
-		this.velX = (float) (Math.random() * 2 + 1);
-		this.velY = (float) (Math.random() * 2 + 1);
+		this.velX = (Math.random() * 2 + 1);
+		this.velY = (Math.random() * 2 + 1);
 		this.color = Color.RED;
 		this.direction = UR;
 	}

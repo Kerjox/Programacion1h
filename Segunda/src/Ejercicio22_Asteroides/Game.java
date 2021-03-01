@@ -15,7 +15,6 @@ public class Game extends JApplet implements Runnable {
 	private Image image;
 	private Graphics renderBuffer;
 	private List<Asteroid> asteroidsList;
-	private boolean gameOver = false;
 	private Sun sun;
 	private Random r = new Random();
 

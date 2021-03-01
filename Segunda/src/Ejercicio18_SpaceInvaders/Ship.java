@@ -3,7 +3,6 @@ package Ejercicio18_SpaceInvaders;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Ship {
@@ -16,7 +15,7 @@ public class Ship {
 	public Ship() {
 
 		try {
-			this.ship = ImageIO.read(new File("/home/kerjox/IdeaProjects/Programacion1h/Segunda/src/Ejercicio18_SpaceInvaders/destroying.png"));
+			this.ship = ImageIO.read(Ship.class.getResource("destroying.png"));
 		} catch (
 				IOException e) {
 			e.printStackTrace();

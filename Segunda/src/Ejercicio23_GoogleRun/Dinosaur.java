@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Dinosaur extends Rectangle implements Runnable{
+public class Dinosaur extends Rectangle implements Runnable {
 
 	private final Thread jump;
 	private boolean firstStart = true;
@@ -16,7 +16,7 @@ public class Dinosaur extends Rectangle implements Runnable{
 		super(50, Game.HEIGHT / 2 - 40, 30, 70);
 		this.jump = new Thread(this);
 		try {
-			image = ImageIO.read(getClass().getResource("dino.png"));
+			image = ImageIO.read(getClass().getResource("img/dino.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -30,6 +30,7 @@ public class Dinosaur extends Rectangle implements Runnable{
 	}
 
 	public void run() {
+
 		do {
 
 			if (firstStart) {
@@ -42,7 +43,7 @@ public class Dinosaur extends Rectangle implements Runnable{
 				if (i < 70) {
 
 					this.y--;
-				}else {
+				} else {
 
 					this.y++;
 				}
@@ -50,7 +51,7 @@ public class Dinosaur extends Rectangle implements Runnable{
 			}
 
 			jump.suspend();
-		}while(true);
+		} while (true);
 	}
 
 	private static void delay(int ms) {

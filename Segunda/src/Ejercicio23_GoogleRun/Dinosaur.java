@@ -1,23 +1,32 @@
 package Ejercicio23_GoogleRun;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Dinosaur extends Rectangle implements Runnable{
 
 	private final Thread jump;
 	private boolean firstStart = true;
+	private BufferedImage image;
 
 	public Dinosaur() {
 
-		super(50, Game.HEIGHT / 2, 15, 30);
+		super(50, Game.HEIGHT / 2 - 40, 30, 70);
 		this.jump = new Thread(this);
+		try {
+			image = ImageIO.read(getClass().getResource("dino.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		jump.start();
 	}
 
 	public void paint(Graphics g) {
 
 		g.setColor(Color.WHITE);
-		g.fillOval(this.x, this.y, this.width, this.height);
+		g.drawImage(image, this.x, this.y, this.width, this.height, null);
 	}
 
 	public void run() {

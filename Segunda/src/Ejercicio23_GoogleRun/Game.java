@@ -10,44 +10,25 @@ import java.util.Random;
 
 public class Game extends JApplet implements Runnable {
 
-	public static final int WIDTH = 1024;
 	public static final int HEIGHT = 720;
-
-	private Thread game;
-	private Image image;
-	private Graphics renderBuffer;
-	private List<Obstacle> obstaclesList;
-	private boolean gameOver = false;
-	private Random r = new Random();
-
+	public static final int WIDTH = 1024;
+	private int countNewObstacle = (int) (Math.random() * 2000 + 1000);
 	private Dinosaur dino;
-	private int countNewObstacle = 1000;
-
-
-	@Override
-	public void run() {
-
-		do {
-
-			moveObstacles();
-			spawnNewObstacle();
-			checkCollide();
-			repaint();
-			delay(5);
-		}while(true);
-	}
-
-	@Override
-	public void start() {
-
-		game.start();
-	}
+	private Thread game;
+	private boolean gameOver = false;
+	private Image image;
+	private boolean intersect;
+	private List<Obstacle> obstaclesList;
+	private final Random r = new Random();
+	private Graphics renderBuffer;
+	private int contAciertos = 0;
+	private int contFallos = 0;
 
 	@Override
 	public void init() {
 
 		resize(WIDTH, HEIGHT);
-		this.game = new Thread(this::run);
+		this.game = new Thread(this);
 		this.image = this.createImage(WIDTH, HEIGHT);
 		this.renderBuffer = this.image.getGraphics();
 		this.dino = new Dinosaur();
@@ -59,17 +40,38 @@ public class Game extends JApplet implements Runnable {
 	@Override
 	public void paint(Graphics g) {
 
-		if (!this.gameOver) {
+		if (! this.gameOver) {
 
 			this.renderBuffer.setColor(Color.BLACK);
 			this.renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
 			this.renderBuffer.setColor(Color.WHITE);
 			this.renderBuffer.drawLine(0, HEIGHT / 2 + 5, WIDTH, HEIGHT / 2 + 5);
 			this.renderBuffer.drawLine(0, HEIGHT / 2 + 32, WIDTH, HEIGHT / 2 + 32);
+			this.renderBuffer.drawString("A: " + contAciertos,20, 20);
+			this.renderBuffer.drawString("F: " + contFallos,20, 40);
 			paintObstacles();
 			this.dino.paint(renderBuffer);
 		}
-		g.drawImage(image, 0,0, this);
+		g.drawImage(image, 0, 0, this);
+	}
+
+	@Override
+	public void run() {
+
+		do {
+
+			moveObstacles();
+			checkCollide();
+			spawnNewObstacle();
+			repaint();
+			delay(5);
+		} while (true);
+	}
+
+	@Override
+	public void start() {
+
+		game.start();
 	}
 
 	private static void delay(int ms) {
@@ -124,9 +126,9 @@ public class Game extends JApplet implements Runnable {
 		if (countNewObstacle <= 0) {
 
 			obstaclesList.add(new Obstacle());
-			countNewObstacle = (int) (Math.random() * 2000 + 1234);
+			countNewObstacle = (int) (Math.random() * 2000 + 1000);
 
-		}else {
+		} else {
 			countNewObstacle -= 5;
 		}
 	}
@@ -144,13 +146,15 @@ public class Game extends JApplet implements Runnable {
 
 	private void checkCollide() {
 
-		for (Obstacle obstavle : obstaclesList) {
+		intersect = obstaclesList.get(0).intersects(dino);
 
-			if (obstavle.intersects(dino)){
+		if ((obstaclesList.get(0).getX()) == dino.getX() && !intersect) {
 
-				gameOver();
-				game.stop();
-			}
+			contAciertos++;
+		} else if ((obstaclesList.get(0).getX() == dino.getX())){
+
+			contFallos++;
 		}
 	}
+
 }

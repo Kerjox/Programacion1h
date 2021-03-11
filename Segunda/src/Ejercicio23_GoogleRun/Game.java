@@ -17,7 +17,6 @@ public class Game extends JApplet implements Runnable {
 	private Thread game;
 	private boolean gameOver = false;
 	private Image image;
-	private boolean intersect;
 	private List<Obstacle> obstaclesList;
 	private final Random r = new Random();
 	private Graphics renderBuffer;
@@ -146,9 +145,9 @@ public class Game extends JApplet implements Runnable {
 
 	private void checkCollide() {
 
-		intersect = obstaclesList.get(0).intersects(dino);
+		boolean intersect = obstaclesList.get(0).intersects(dino);
 
-		if ((obstaclesList.get(0).getX()) == dino.getX() && !intersect) {
+		if (!intersect && (obstaclesList.get(0).getX()) == dino.getX()) {
 
 			contAciertos++;
 		} else if ((obstaclesList.get(0).getX() == dino.getX())){

@@ -5,13 +5,13 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Guerrillero extends Rectangle implements Runnable{
+public class Vaquero extends Rectangle implements Runnable{
 
 	public Thread animation;
 	private ArrayList<Image> images;
 	private int indexImage;
 
-	public Guerrillero(int x, int y) {
+	public Vaquero(int x, int y) {
 
 		super(x, y, 100, 200);
 
@@ -48,7 +48,7 @@ public class Guerrillero extends Rectangle implements Runnable{
 
 			Image imageToLoad = null;
 			try {
-				imageToLoad = ImageIO.read(getClass().getResource("./Sprites/Guerrillero/g" + i + ".gif"));
+				imageToLoad = ImageIO.read(getClass().getResource("./Sprites/Vaquero/v" + i + ".gif"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -74,3 +74,4 @@ public class Guerrillero extends Rectangle implements Runnable{
 	}
 
 }
+

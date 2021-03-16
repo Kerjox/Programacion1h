@@ -2,17 +2,25 @@ package Ejercicio01_Caminar;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class Game extends JApplet implements Runnable {
+public class Game extends JApplet implements Runnable, KeyEventDispatcher {
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
 
+	private static final int GUERRILLERO = 0;
+	private static final int HAMPON = 1;
+	private static final int VAQUERO = 2;
+
 	private Thread game;
 	private Image image;
 	private Graphics renderBuffer;
-	private ArrayList<Guerrillero> guerrilleros;
+	private ArrayList<Guerrillero> guerrillerosList;
+	private ArrayList<Hampon> hamponesList;
+	private ArrayList<Vaquero> vaquerosList;
+	private int player;
 
 	@Override
 	public void run() {
@@ -30,13 +38,21 @@ public class Game extends JApplet implements Runnable {
 		this.image = this.createImage(WIDTH, HEIGHT);
 		this.renderBuffer = this.image.getGraphics();
 		this.game = new Thread(this::run);
-		generateGuerrilleros();
+		this.player = 0;
+		initGuerrilleros();
+		initHampones();
+		initVaqueros();
+
+		suspendAnimationsPlayers();
+		startAnimationGuerrilleros();
 	}
 
 	@Override
 	public void start() {
 
 		resize(WIDTH, HEIGHT);
+		requestFocusInWindow();
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this);
 		game.start();
 	}
 
@@ -45,16 +61,8 @@ public class Game extends JApplet implements Runnable {
 
 		renderBuffer.setColor(Color.BLACK);
 		renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
-		paintGuerrilleros();
+		paintPlayer();
 		g.drawImage(image, 0, 0, this);
-	}
-
-	private void paintGuerrilleros() {
-
-		for (Guerrillero guerrillero : guerrilleros) {
-
-			guerrillero.paint(renderBuffer);
-		}
 	}
 
 	private static void delay(int ms) {
@@ -66,13 +74,135 @@ public class Game extends JApplet implements Runnable {
 		}
 	}
 
-	private void generateGuerrilleros() {
+	private void initGuerrilleros() {
 
-		this.guerrilleros = new ArrayList<>();
-		guerrilleros.add(new Guerrillero(50, 50));
-		guerrilleros.add(new Guerrillero(50, 300));
+		this.guerrillerosList = new ArrayList<>();
+		this.guerrillerosList.add(new Guerrillero(50, 50));
+		this.guerrillerosList.add(new Guerrillero(150, 50));
+
+	}
+
+	private void initHampones() {
+
+		this.hamponesList = new ArrayList<>();
+		this.hamponesList.add(new Hampon(50, 50));
+	}
+
+	private void initVaqueros() {
+
+		this.vaquerosList = new ArrayList<>();
+		this.vaquerosList.add(new Vaquero(50, 50));
+
+	}
+
+	private void paintGuerrilleros() {
+
+		for (Guerrillero guerrillero : guerrillerosList) {
+
+			guerrillero.paint(renderBuffer);
+		}
+	}
+
+	private void paintHampones() {
+
+		for (Hampon hampon : hamponesList) {
+
+			hampon.paint(renderBuffer);
+		}
+	}
+
+	private void paintVaqueros() {
+
+		for (Vaquero vaquero : vaquerosList) {
+
+			vaquero.paint(renderBuffer);
+		}
 	}
 
 
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent e) {
 
+		switch (e.getKeyCode()) {
+
+			case 71:
+				if (player == GUERRILLERO) break;
+				player = GUERRILLERO;
+				suspendAnimationsPlayers();
+				startAnimationGuerrilleros();
+				break;
+
+			case 72:
+				if (player == HAMPON) break;
+				player = HAMPON;
+				suspendAnimationsPlayers();
+				startAnimationHampones();
+				break;
+			case 86:
+				if (player == VAQUERO) break;
+				player = VAQUERO;
+				suspendAnimationsPlayers();
+				startAnimationVaqueros();
+				break;
+		}
+		return false;
+	}
+
+	private void paintPlayer() {
+
+		switch (this.player) {
+
+			case 0:
+				paintGuerrilleros();
+				break;
+			case 1:
+				paintHampones();
+				break;
+			case 2:
+				paintVaqueros();
+				break;
+		}
+	}
+
+	private void suspendAnimationsPlayers() {
+
+		for (Guerrillero guerrillero : guerrillerosList) {
+
+			guerrillero.animation.suspend();
+		}
+
+		for (Hampon hampon : hamponesList) {
+
+			hampon.animation.suspend();
+		}
+
+		for (Vaquero vaquero : vaquerosList) {
+
+			vaquero.animation.suspend();
+		}
+	}
+
+	private void startAnimationGuerrilleros() {
+
+		for (Guerrillero guerrillero : guerrillerosList) {
+
+			guerrillero.animation.resume();
+		}
+	}
+
+	private void startAnimationHampones() {
+
+		for (Hampon hampon : hamponesList) {
+
+			hampon.animation.resume();
+		}
+	}
+
+	private void startAnimationVaqueros() {
+
+		for (Vaquero vaquero : vaquerosList) {
+
+			vaquero.animation.resume();
+		}
+	}
 }

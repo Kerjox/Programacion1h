@@ -6,14 +6,20 @@ import java.io.IOException;
 
 public class Pieza extends Rectangle {
 
+	private int index;
 	private Image img;
 
-	public Pieza(int index) {
+	protected Pieza() {
+
+	}
+
+	protected Pieza(int index) {
 
 		super();
 
-		this.x = (int) (Math.random() * Game.HEIGHT) - 60;
-		this.y = (int) (Math.random() * Game.HEIGHT) - 60;
+		this.index = index - 1;
+		this.x = (int) (Math.random() * 400) + 400;
+		this.y = (int) (Math.random() * Game.HEIGHT);
 
 		loadImage(index);
 
@@ -21,7 +27,7 @@ public class Pieza extends Rectangle {
 		this.height = img.getHeight(null);
 	}
 
-	public void setPos(Point points) {
+	protected void setPos(Point points) {
 
 		this.x = points.x - 30;
 		this.y = points.y - 30;
@@ -36,9 +42,14 @@ public class Pieza extends Rectangle {
 		}
 	}
 
-	public void paint(Graphics g) {
+	protected void paint(Graphics g) {
 
 		g.drawImage(img, this.x, this.y, null);
+	}
+
+	public int getIndex() {
+
+		return index;
 	}
 
 }

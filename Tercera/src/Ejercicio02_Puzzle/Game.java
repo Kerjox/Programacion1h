@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Game extends JApplet {
+public class Game extends JApplet{
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
@@ -22,12 +22,24 @@ public class Game extends JApplet {
 		this.renderBuffer = image.getGraphics();
 		this.puzzle = new Puzzle();
 
+		listeners();
+	}
+
+	private void listeners() {
+
 		addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 
 				piezaToMove = puzzle.getObjectClicked(e.getPoint());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+				puzzle.moveToCorrectPosition(piezaToMove);
+				repaint();
 			}
 		});
 
@@ -54,10 +66,11 @@ public class Game extends JApplet {
 	@Override
 	public void paint(Graphics g) {
 
-		renderBuffer.setColor(Color.BLACK);
-		renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
-		puzzle.paint(renderBuffer);
-		g.drawImage(image, 0, 0, this);
+		this.renderBuffer.setColor(Color.BLACK);
+		this.renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
+		this.puzzle.paintImagePuzzle(this.renderBuffer);
+		this.puzzle.paint(this.renderBuffer);
+		g.drawImage(this.image, 0, 0, this);
 	}
 
 }

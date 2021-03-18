@@ -56,7 +56,7 @@ public class Puzzle {
 
 	public void paintGrid(Graphics g) {
 
-		g.setColor(Color.GREEN);
+		g.setColor(Color.WHITE);
 		for (int i = 0; i < 5; i++) {
 
 			for (int j = 0; j < 5; j++) {

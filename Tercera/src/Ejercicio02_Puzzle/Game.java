@@ -37,7 +37,7 @@ public class Game extends JApplet{
 
 					case 1:
 						piezaToMove = puzzle.getObjectClicked(e.getPoint());
-						if (piezaToMove.isColocada()) {
+						if (piezaToMove != null && piezaToMove.isColocada()) {
 							piezaToMove = null;
 						}
 						break;
@@ -48,6 +48,7 @@ public class Game extends JApplet{
 
 					case 3:
 						help = !help;
+						repaint();
 						break;
 				}
 			}

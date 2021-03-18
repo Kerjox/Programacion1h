@@ -3,29 +3,30 @@ package Ejercicio02_Puzzle;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class Puzzle extends Pieza{
+public class Puzzle {
 
-	private static final int[][] coordsPiezas = {
-			{30, 30}, {90, 30}, {150, 30}, {210, 30}, {270, 30},
-			{30, 90}, {90, 90}, {150, 90}, {210, 90}, {270, 90},
-			{30, 150}, {90, 150}, {150, 150}, {210, 150}, {270, 150},
-			{30, 210}, {90, 210}, {150, 210}, {210, 210}, {270, 210},
-			{30, 270}, {90, 270}, {150, 270}, {210, 270}, {270, 270}
-	};
-	private ArrayList<Pieza> piezasList;
+	private Piezas[][] piezas;
 	private Image puzzleImage;
-
-	public int[][] getCoordsPiezas() {
-
-		return coordsPiezas;
-	}
 
 	public Puzzle() {
 
 		loadPiezas();
 		loadPuzzleImage();
+	}
+
+	private void loadPiezas() {
+
+		piezas = new Piezas[5][5];
+
+		for (int i = 0; i < 5; i++) {
+
+			for (int j = 0; j < 5; j++) {
+
+				piezas[i][j] = new Piezas(i * 5 + j);
+			}
+		}
+
 	}
 
 	private void loadPuzzleImage() {
@@ -37,21 +38,14 @@ public class Puzzle extends Pieza{
 		}
 	}
 
-	private void loadPiezas() {
-
-		piezasList = new ArrayList<>();
-
-		for (int i = 1; i <= 25; i++) {
-
-			piezasList.add(new Pieza(i));
-		}
-	}
-
 	public void paint(Graphics g) {
 
-		for (Pieza pieza : piezasList) {
+		for (Piezas[] piezas : piezas) {
 
-			pieza.paint(g);
+			for (Piezas pieza : piezas) {
+
+				pieza.paint(g);
+			}
 		}
 	}
 
@@ -60,33 +54,57 @@ public class Puzzle extends Pieza{
 		g.drawImage(puzzleImage, 50, 100, null);
 	}
 
-	public Pieza getObjectClicked(Point p) {
+	public void paintGrid(Graphics g) {
 
-		for (Pieza pieza : piezasList) {
+		g.setColor(Color.GREEN);
+		for (int i = 0; i < 5; i++) {
 
-			if (pieza.contains(p)) {
+			for (int j = 0; j < 5; j++) {
 
-				return pieza;
+				g.drawRect(50 + (i * 60), 100 + (j * 60), 60, 60);
+			}
+		}
+	}
+
+	public Piezas getObjectClicked(Point p) {
+
+		for (Piezas[] piezas : piezas) {
+
+			for (Piezas pieza : piezas) {
+
+				if (pieza.contains(p)) {
+
+					return pieza;
+				}
 			}
 		}
 
 		return null;
 	}
 
-	public void moveToCorrectPosition(Pieza pieza) {
+	public void checkCorrectPosition(Piezas pieza) {
 
 		if (pieza == null) return;
 
 		int index = pieza.getIndex();
-		System.out.println(index);
 
-		int posX = coordsPiezas[index][0] + 50;
-		int posY = coordsPiezas[index][1] + 100;
+		Point correctPosition = getCorrectPoints(index);
 
-		if (pieza.contains(posX, posY)) {
+		if (pieza.contains(correctPosition)) {
 
-			pieza.setPos(new Point(posX, posY));
-			System.out.println("Posicion correcta");
+			pieza.setPos(correctPosition);
+			pieza.setColocada(true);
+			//System.out.println("Posicion correcta");
 		}
+	}
+
+	private Point getCorrectPoints(int i) {
+
+		int x = 60 * (i % 5) + 30 + 50;
+		int y = 60 * (i / 5) + 30 + 100;
+
+		//System.out.printf("%d %d \n", x, y);
+
+		return new Point(x, y);
 	}
 }

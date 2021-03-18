@@ -13,7 +13,8 @@ public class Game extends JApplet{
 	private Image image;
 	private Graphics renderBuffer;
 	private Puzzle puzzle;
-	private Pieza piezaToMove;
+	private Piezas piezaToMove;
+	private boolean help = false;
 
 	@Override
 	public void init() {
@@ -32,14 +33,33 @@ public class Game extends JApplet{
 			@Override
 			public void mousePressed(MouseEvent e) {
 
-				piezaToMove = puzzle.getObjectClicked(e.getPoint());
+				switch (e.getButton()) {
+
+					case 1:
+						piezaToMove = puzzle.getObjectClicked(e.getPoint());
+						if (piezaToMove.isColocada()) {
+							piezaToMove = null;
+						}
+						break;
+
+					case 2:
+						puzzle.getObjectClicked(e.getPoint()).setColocada(false);
+						break;
+
+					case 3:
+						help = !help;
+						break;
+				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 
-				puzzle.moveToCorrectPosition(piezaToMove);
-				repaint();
+				if (e.getButton() == 1) {
+
+					puzzle.checkCorrectPosition(piezaToMove);
+					repaint();
+				}
 			}
 		});
 
@@ -68,7 +88,13 @@ public class Game extends JApplet{
 
 		this.renderBuffer.setColor(Color.BLACK);
 		this.renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
-		this.puzzle.paintImagePuzzle(this.renderBuffer);
+
+		if (help) {
+
+			this.puzzle.paintImagePuzzle(this.renderBuffer);
+		}
+
+		this.puzzle.paintGrid(this.renderBuffer);
 		this.puzzle.paint(this.renderBuffer);
 		g.drawImage(this.image, 0, 0, this);
 	}

@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 public class Game extends JApplet {
 
+	public static final int HEIGHT = 700;
 	public static final int WIDTH = 900;
-	public static final int HEIGHT = 600;
-
+	private DeckOfCards deckOfCards;
+	private Rectangle getNewCard;
 	private Image image;
 	private Graphics renderBuffer;
-	private CardPackage cardPackage;
 
 	@Override
 	public void init() {
@@ -21,12 +21,22 @@ public class Game extends JApplet {
 		resize(WIDTH, HEIGHT);
 
 		this.image = this.createImage(WIDTH, HEIGHT);
-		this.renderBuffer = image.getGraphics();
-		cardPackage = new CardPackage();
+		this.renderBuffer = this.image.getGraphics();
+		this.deckOfCards = new DeckOfCards();
+		this.getNewCard = new Rectangle(0, 0, 100, 150);
 		initListeners();
 	}
 
+	@Override
+	public void paint(Graphics g) {
 
+		this.renderBuffer.setColor(new Color(0, 31, 6));
+		this.renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
+		paintCardsInGame(this.renderBuffer);
+		this.deckOfCards.paintDeck(this.renderBuffer);
+		this.deckOfCards.paintCardFromDeck(this.renderBuffer);
+		g.drawImage(this.image, 0, 0, this);
+	}
 
 	private void initListeners() {
 
@@ -34,6 +44,17 @@ public class Game extends JApplet {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+
+				if (getNewCard.contains(e.getPoint())) {
+
+					//System.out.println("Sacar carta");
+					deckOfCards.nextCardInDeck();
+					repaint();
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
 
 
 			}
@@ -45,41 +66,22 @@ public class Game extends JApplet {
 			public void mouseDragged(MouseEvent e) {
 
 
+				repaint();
 			}
 		});
 	}
 
-	@Override
-	public void paint(Graphics g) {
+	private void paintCardsInGame(Graphics g) {
 
-		renderBuffer.setColor(new Color(0, 31, 6));
-		renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
-		paintCards(renderBuffer);
-		g.drawImage(image, 0, 0, this);
-	}
+		ArrayList<ArrayList<Card>> cardsInGame = this.deckOfCards.getCardsInGame();
 
-	private void paintCards(Graphics g) {
+		for (int i = 0; i < cardsInGame.size(); i++) {
 
-		ArrayList<ArrayList<Card>> p = cardPackage.getP();
+			for (int j = 0; j < cardsInGame.get(i).size(); j++) {
 
-		for (int i = 0; i < 7; i++) {
-
-			for (int j = 0; j <= i; j++) {
-
-				if (j == i) {
-
-					p.get(i).get(j).paint(renderBuffer, 110 * i, 30 * j);
-				}else {
-
-
-				}
+				cardsInGame.get(i).get(j).paint(this.renderBuffer, 110 * i, 30 * j + 200);
 			}
 		}
-	}
-
-	private void moveStack(int stack) {
-
-
 	}
 
 }

@@ -1,30 +1,19 @@
 package Arquero_Game;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
 
 public class Balloon extends Rectangle {
 
-	private Image img;
+	private final Image img;
 
-	public Balloon() {
+	public Balloon(Image image) {
 
 		this.x = (int) (Math.random() * 200 + 600);
 		this.y = Game.HEIGHT;
 		this.width = 50;
 		this.height = 60;
-		loadImage();
+		this.img = image;
 
-	}
-
-	private void loadImage() {
-
-		try {
-			img = ImageIO.read(getClass().getResource("./img/globos/globo.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void paint(Graphics g) {

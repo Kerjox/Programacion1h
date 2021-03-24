@@ -1,15 +1,19 @@
 package Arquero_Game;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game extends JApplet implements Runnable {
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
+
+	private Image balloonImg;
 
 	private Thread game;
 	private Image image;
@@ -43,6 +47,7 @@ public class Game extends JApplet implements Runnable {
 		archer = new Archer();
 		arrows = new ArrayList<>();
 		balloons = new ArrayList<>();
+		loadImageBalloon();
 		listeners();
 	}
 
@@ -69,6 +74,15 @@ public class Game extends JApplet implements Runnable {
 		try {
 			Thread.sleep(ms);
 		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void loadImageBalloon() {
+
+		try {
+			balloonImg = ImageIO.read(getClass().getResource("./img/globos/globo.png"));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -131,7 +145,7 @@ public class Game extends JApplet implements Runnable {
 
 		if (this.timeNewBalloon <= 0) {
 
-			balloons.add(new Balloon());
+			balloons.add(new Balloon(balloonImg));
 			this.timeNewBalloon = 2000;
 		} else {
 
@@ -187,10 +201,11 @@ public class Game extends JApplet implements Runnable {
 
 				for (Balloon balloon : balloons) {
 
-					if (arrow.intersects(balloon)) {
+					if (balloon.contains(arrow.getX() + arrow.getWidth(), arrow.getY() + arrow.getHeight() / 2)) {
 
 						arrowToremove = arrow;
 						balloonToremove = balloon;
+
 					}
 				}
 			}

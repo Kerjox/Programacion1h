@@ -14,6 +14,8 @@ public class Game extends JApplet {
 	private Rectangle getNewCard;
 	private Image image;
 	private Graphics renderBuffer;
+	private int indexCardPressed;
+	private int indexListCardPressed;
 
 	@Override
 	public void init() {
@@ -49,7 +51,13 @@ public class Game extends JApplet {
 
 					//System.out.println("Sacar carta");
 					deckOfCards.nextCardInDeck();
+					deckOfCards.moveCards(1, 0, 0);
 					repaint();
+				}else {
+
+//					indexCardPressed = deckOfCards.getIndexCardPressed(e.getPoint());
+//					indexListCardPressed = deckOfCards.getListCardPressed(e.getPoint());
+
 				}
 			}
 
@@ -77,9 +85,17 @@ public class Game extends JApplet {
 
 		for (int i = 0; i < cardsInGame.size(); i++) {
 
-			for (int j = 0; j < cardsInGame.get(i).size(); j++) {
+			int sizeList = cardsInGame.get(i).size();
 
-				cardsInGame.get(i).get(j).paint(this.renderBuffer, 110 * i, 30 * j + 200);
+			for (int j = 0; j < sizeList; j++) {
+
+				Card card = cardsInGame.get(i).get(j);
+
+				if (card.isHidden() && j == sizeList - 1) {
+
+					card.setHidden(false);
+				}
+				card.paint(this.renderBuffer, 110 * i, 30 * j + 200);
 			}
 		}
 	}

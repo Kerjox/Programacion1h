@@ -119,4 +119,24 @@ public class DeckOfCards {
 		} else this.indexDeck++;
 	}
 
+	public void moveCards(int indexList, int fromIndex, int toList) {
+
+		cardsInGame.get(1).get(0).setHidden(false);
+
+		int p = cardsInGame.get(indexList).size() - fromIndex;
+
+		for (int i = fromIndex; i < p; i++) {
+
+			System.out.println("Mover");
+
+			cardsInGame.get(toList).add(cardsInGame.get(indexList).get(i));
+		}
+		for (int i = fromIndex; i < p; i++) {
+
+			cardsInGame.get(indexList).remove(fromIndex);
+		}
+	}
+
+
+
 }

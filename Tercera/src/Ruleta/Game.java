@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class Game extends JApplet {
@@ -14,14 +15,16 @@ public class Game extends JApplet {
 	private Image image;
 	private Graphics renderBuffer;
 	private Tablero tablero;
-	private int cash = 1000;
+	private Integer cash = 1000;
+	private byte number = 0;
+	private Rectangle botonApostar;
 
 	private ArrayList<Rectangle> fichasSacar;
 	private ArrayList<Ficha> fichas;
 
 	private Ficha fichaToMove = null;
 
-	private ArrayList<Casilla> casillasApostadas = new ArrayList<>();
+	private ArrayList<Apuesta> apuestas;
 
 	@Override
 	public void init() {
@@ -31,6 +34,8 @@ public class Game extends JApplet {
 		this.renderBuffer = this.image.getGraphics();
 		this.tablero = new Tablero();
 		this.fichas = new ArrayList<>();
+		this.apuestas = new ArrayList<>();
+		this.botonApostar = new Rectangle(500, 10, 40, 40);
 
 		initFichasTablero();
 		initListeners();
@@ -42,6 +47,10 @@ public class Game extends JApplet {
 		this.renderBuffer.setColor(Color.BLACK);
 		this.renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
 		this.tablero.paint(this.renderBuffer);
+		this.renderBuffer.setColor(Color.RED);
+		this.renderBuffer.fillRect(500, 10, 40, 40);
+		this.renderBuffer.setColor(Color.WHITE);
+		this.renderBuffer.drawString(String.valueOf(this.number), 60, 50);
 		paintFichas(renderBuffer);
 		showCash();
 
@@ -73,6 +82,46 @@ public class Game extends JApplet {
 			@Override
 			public void mousePressed(MouseEvent e) {
 
+				switch (e.getButton()) {
+
+					case 1:
+
+						leftClick(e);
+						break;
+
+					case 3:
+
+						rightClick(e);
+						break;
+				}
+
+				repaint();
+
+			}
+
+			private void rightClick(MouseEvent e) {
+
+				fichas.removeIf(ficha -> ficha.contains(e.getPoint()));
+			}
+
+			private void leftClick(MouseEvent e) {
+
+				if (botonApostar.contains(e.getPoint())) {
+
+					for (Ficha ficha : fichas) {
+
+						apuestas.clear();
+						ArrayList<Casilla> casillasApostadas = tablero.getCasillasApostadas(ficha);
+						apuestas.add(new Apuesta(ficha.getValue(), casillasApostadas));
+
+						number = (byte) (Math.random() * 35 + 1);
+						for (Apuesta apuesta : apuestas) {
+
+							cash += apuesta.getProfit(number);
+						}
+					}
+				}
+
 				sacarFicha(e);
 				loadFicha(e);
 			}
@@ -97,7 +146,7 @@ public class Game extends JApplet {
 
 					if (ficha.contains(e.getPoint())) {
 
-						System.out.println(fichasSacar.indexOf(ficha));
+						//System.out.println(fichasSacar.indexOf(ficha));
 						fichas.add(new Ficha(fichasSacar.indexOf(ficha), e.getPoint()));
 						repaint();
 					}
@@ -107,7 +156,6 @@ public class Game extends JApplet {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 
-				System.out.println(tablero.getCasilla(fichaToMove));
 				fichaToMove = null;
 			}
 		});

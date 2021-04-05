@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class Game extends JApplet {
@@ -59,7 +58,7 @@ public class Game extends JApplet {
 
 	private void showCash() {
 
-		this.renderBuffer.setColor(Color.GREEN);
+		this.renderBuffer.setColor(this.cash > 0 ? Color.GREEN: Color.RED);
 		this.renderBuffer.drawString(String.valueOf(this.cash), 10, 20);
 	}
 

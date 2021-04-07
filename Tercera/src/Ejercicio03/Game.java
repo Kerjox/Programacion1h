@@ -1,21 +1,11 @@
 package Ejercicio03;
 
-import sun.applet.AppletAudioClip;
-import sun.applet.Main;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Properties;
 
 public class Game extends JApplet {
 
@@ -45,8 +35,19 @@ public class Game extends JApplet {
 
 				if (e.getButton() == 1) {
 
-					tablero.move(e.getPoint());
-					correct.play();
+					if (tablero.move(new Point(e.getPoint().x / 80, e.getPoint().y / 80))) {
+
+						correct.play();
+					} else {
+
+						error.play();
+					}
+					if (tablero.verify()) {
+
+						System.out.println("Correcto");
+						exito.play();
+					}
+					repaint();
 				}
 			}
 		});
@@ -55,6 +56,8 @@ public class Game extends JApplet {
 	@Override
 	public void paint(Graphics g) {
 
+		this.renderBuffer.setColor(Color.WHITE);
+		this.renderBuffer.fillRect(0, 0, 400, 400);
 		tablero.paint(renderBuffer);
 		g.drawImage(image, 0, 0, this);
 	}

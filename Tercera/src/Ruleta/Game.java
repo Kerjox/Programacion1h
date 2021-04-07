@@ -113,7 +113,7 @@ public class Game extends JApplet {
 						ArrayList<Casilla> casillasApostadas = tablero.getCasillasApostadas(ficha);
 						apuestas.add(new Apuesta(ficha.getValue(), casillasApostadas));
 
-						number = (byte) (Math.random() * 35 + 1);
+						number = (byte) (Math.random() * 36 + 1);
 						for (Apuesta apuesta : apuestas) {
 
 							cash += apuesta.getProfit(number);

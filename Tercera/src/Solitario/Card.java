@@ -17,6 +17,7 @@ public class Card extends Rectangle {
 	private int family;
 	private boolean hidden;
 	private Image img;
+
 	public Card(int index, Image imageBack) {
 
 		getFamilyAndColor(index);
@@ -58,6 +59,9 @@ public class Card extends Rectangle {
 	}
 
 	public void paint(Graphics g, int x, int y) {
+
+		this.x = x;
+		this.y = y;
 
 		if (this.hidden) {
 

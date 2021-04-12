@@ -4,18 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 public class Game extends JApplet {
 
-	public static final int HEIGHT = 700;
 	public static final int WIDTH = 900;
+	public static final int HEIGHT = 1000;
 	private DeckOfCards deckOfCards;
 	private Rectangle getNewCard;
 	private Image image;
 	private Graphics renderBuffer;
-	private int indexCardPressed;
-	private int indexListCardPressed;
+	private Point p;
 
 	@Override
 	public void init() {
@@ -26,6 +24,7 @@ public class Game extends JApplet {
 		this.renderBuffer = this.image.getGraphics();
 		this.deckOfCards = new DeckOfCards();
 		this.getNewCard = new Rectangle(0, 0, 100, 150);
+		this.p = new Point();
 		initListeners();
 	}
 
@@ -34,9 +33,10 @@ public class Game extends JApplet {
 
 		this.renderBuffer.setColor(new Color(0, 31, 6));
 		this.renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
-		paintCardsInGame(this.renderBuffer);
+		this.deckOfCards.paintCardsInGame(this.renderBuffer);
 		this.deckOfCards.paintDeck(this.renderBuffer);
 		this.deckOfCards.paintCardFromDeck(this.renderBuffer);
+		deckOfCards.animateMovement(this.p, renderBuffer);
 		g.drawImage(this.image, 0, 0, this);
 	}
 
@@ -51,20 +51,22 @@ public class Game extends JApplet {
 
 					//System.out.println("Sacar carta");
 					deckOfCards.nextCardInDeck();
-					deckOfCards.moveCards(1, 0, 0);
+					//deckOfCards.moveCards(4, 3, 0);
 					repaint();
 				}else {
 
-//					indexCardPressed = deckOfCards.getIndexCardPressed(e.getPoint());
-//					indexListCardPressed = deckOfCards.getListCardPressed(e.getPoint());
-
+					p = e.getPoint();
+					deckOfCards.loadCardPressed(e.getPoint());
+					repaint();
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 
-
+				//deckOfCards.move();
+				deckOfCards.unloadCardPressed();
+				repaint();
 			}
 		});
 
@@ -73,31 +75,10 @@ public class Game extends JApplet {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 
-
+				p = e.getPoint();
 				repaint();
 			}
 		});
-	}
-
-	private void paintCardsInGame(Graphics g) {
-
-		ArrayList<ArrayList<Card>> cardsInGame = this.deckOfCards.getCardsInGame();
-
-		for (int i = 0; i < cardsInGame.size(); i++) {
-
-			int sizeList = cardsInGame.get(i).size();
-
-			for (int j = 0; j < sizeList; j++) {
-
-				Card card = cardsInGame.get(i).get(j);
-
-				if (card.isHidden() && j == sizeList - 1) {
-
-					card.setHidden(false);
-				}
-				card.paint(this.renderBuffer, 110 * i, 30 * j + 200);
-			}
-		}
 	}
 
 }

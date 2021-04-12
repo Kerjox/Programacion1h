@@ -7,16 +7,19 @@ import java.util.ArrayList;
 
 public class DeckOfCards {
 
+	private final ArrayList<Card> cardsInMovement;
 	private Image backImage;
+	private Card cardPressed;
 	private ArrayList<Card> cards;
 	private ArrayList<Card> cardsInDeck;
 	private ArrayList<ArrayList<Card>> cardsInGame;
-
 	private int indexDeck;
+	private int indexDeckCardsInMovement;
 
 	public DeckOfCards() {
 
 		this.indexDeck = 0;
+		this.cardsInMovement = new ArrayList<>();
 
 		loadBackImage();
 		initCards();
@@ -29,7 +32,7 @@ public class DeckOfCards {
 
 		this.cardsInDeck = new ArrayList<>();
 
-		for (int i = 27; i < 52; i++) {
+		for (int i = 28; i < 52; i++) {
 
 			this.cardsInDeck.add(this.cards.get(i));
 		}
@@ -49,11 +52,6 @@ public class DeckOfCards {
 		}
 	}
 
-	public ArrayList<ArrayList<Card>> getCardsInGame() {
-
-		return cardsInGame;
-	}
-
 	private void initCards() {
 
 		this.cards = new ArrayList<>();
@@ -70,7 +68,7 @@ public class DeckOfCards {
 
 		for (int i = 0; i < 7; i++) {
 
-			this.cardsInGame.add(new ArrayList<Card>());
+			this.cardsInGame.add(new ArrayList<>());
 		}
 
 		int index = 0;
@@ -119,24 +117,134 @@ public class DeckOfCards {
 		} else this.indexDeck++;
 	}
 
-	public void moveCards(int indexList, int fromIndex, int toList) {
+	public void moveCards(int toList) {
 
-		cardsInGame.get(1).get(0).setHidden(false);
+		for (Card card : this.cardsInMovement) {
 
-		int p = cardsInGame.get(indexList).size() - fromIndex;
-
-		for (int i = fromIndex; i < p; i++) {
-
-			System.out.println("Mover");
-
-			cardsInGame.get(toList).add(cardsInGame.get(indexList).get(i));
+			this.cardsInGame.get(toList).add(card);
 		}
-		for (int i = fromIndex; i < p; i++) {
+	}
 
-			cardsInGame.get(indexList).remove(fromIndex);
+	public void animateMovement(Point p, Graphics g) {
+
+		if (this.cardsInMovement.size() == 0) return;
+
+		for (int i = 0; i < this.cardsInMovement.size(); i++) {
+
+			this.cardsInMovement.get(i).paint(g, (int) p.getX() - 45, (int) p.getY() + (30 * i));
 		}
 	}
 
 
+	public void loadCardPressed(Point p) {
+
+		for (int i = 0; i < this.cardsInGame.size(); i++) {
+
+			if (this.cardPressed != null) break;
+
+			for (int j = this.cardsInGame.get(i).size() - 1; j >= 0; j--) {
+
+				if (! this.cardsInGame.get(i).get(j).isHidden() && this.cardsInGame.get(i).get(j).contains(p)) {
+
+					System.out.printf("%d : %d \n", i, j);
+					this.cardPressed = this.cardsInGame.get(i).get(j);
+					loadCardsInMovement(i, j);
+
+					this.indexDeckCardsInMovement = i;
+					break;
+				}
+			}
+		}
+	}
+
+	public void unloadCardPressed() {
+
+		this.cardPressed = null;
+
+		int destinationList = getDestinationList();
+
+		if (destinationList < 0) {
+
+			for (Card card : this.cardsInMovement) {
+
+				this.cardsInGame.get(this.indexDeckCardsInMovement).add(card);
+			}
+		} else if (canMove()) {
+
+			moveCards(destinationList);
+		}
+
+		this.cardsInMovement.clear();
+	}
+
+	private boolean canMove() {
+
+		return true;
+	}
+
+	private int getDestinationList() {
+
+		for (int i = 0; i < this.cardsInGame.size(); i++) {
+
+			for (Card card : this.cardsInGame.get(i)) {
+
+				if (card.intersects(this.cardsInMovement.get(0)) && i != this.indexDeckCardsInMovement) {
+
+					return i;
+				}
+			}
+		}
+
+		return - 1;
+	}
+
+	public void paintCardsInGame(Graphics g) {
+
+		//if (this.cardPressed != null) return;
+
+		for (int i = 0; i < this.cardsInGame.size(); i++) {
+
+			int sizeList = this.cardsInGame.get(i).size();
+
+			for (int j = 0; j < sizeList; j++) {
+
+				Card card = this.cardsInGame.get(i).get(j);
+
+				if (card.isHidden() && j == sizeList - 1 && this.cardPressed == null) {
+
+					card.setHidden(false);
+				}
+				card.paint(g, 110 * i, 30 * j + 200);
+			}
+		}
+	}
+
+	private void loadCardsInMovement(int i, int j) {
+
+		int size = this.cardsInGame.get(i).size();
+
+		for (int u = j; u < size; u++) {
+
+			this.cardsInMovement.add(this.cardsInGame.get(i).get(u));
+		}
+
+		for (int u = j; u < size; u++) {
+
+			this.cardsInGame.get(i).remove(j);
+		}
+	}
+
+	public void prueba() {
+
+		System.out.println("Prueba");
+		for (ArrayList<Card> cards : this.cardsInGame) {
+
+			for (Card card : cards) {
+
+				System.out.println(card);
+			}
+		}
+
+	}
 
 }

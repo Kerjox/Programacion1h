@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Apuesta {
 
-	private int value;
-	private ArrayList<Casilla> casillasApostadas;
+	private final int value;
+	private final ArrayList<Casilla> casillasApostadas;
 
 	public Apuesta(int value, ArrayList<Casilla> casillasApostadas) {
 

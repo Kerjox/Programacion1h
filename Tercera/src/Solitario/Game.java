@@ -37,6 +37,7 @@ public class Game extends JApplet {
 		this.deckOfCards.paintDeck(this.renderBuffer);
 		this.deckOfCards.paintCardFromDeck(this.renderBuffer);
 		deckOfCards.animateMovement(this.p, renderBuffer);
+		this.deckOfCards.paintFinishList(this.renderBuffer);
 		g.drawImage(this.image, 0, 0, this);
 	}
 
@@ -49,11 +50,12 @@ public class Game extends JApplet {
 
 				if (getNewCard.contains(e.getPoint())) {
 
-					//System.out.println("Sacar carta");
 					deckOfCards.nextCardInDeck();
-					//deckOfCards.moveCards(4, 3, 0);
 					repaint();
-				}else {
+				}else if ((e.getX() > 180 && e.getX() < 280) && (e.getY() > 0 && e.getY() < 150)) {
+
+					deckOfCards.loadCardFromDeck();
+				} else {
 
 					p = e.getPoint();
 					deckOfCards.loadCardPressed(e.getPoint());
@@ -64,7 +66,6 @@ public class Game extends JApplet {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 
-				//deckOfCards.move();
 				deckOfCards.unloadCardPressed();
 				repaint();
 			}

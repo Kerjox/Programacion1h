@@ -19,7 +19,7 @@ public class Apuesta {
 
 			if (casilla.getValue() == number) {
 
-				return this.value * (36 / this.casillasApostadas.size()) - this.value;
+				return this.value * (36 / this.casillasApostadas.size());
 			}
 		}
 

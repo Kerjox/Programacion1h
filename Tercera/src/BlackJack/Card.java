@@ -8,11 +8,23 @@ public class Card {
 
 	private final Image img;
 	private final Integer value;
+	private boolean visible;
+
+	public void setVisible(boolean visible) {
+
+		this.visible = visible;
+	}
+
+	public boolean isVisible() {
+
+		return this.visible;
+	}
 
 	public Card(Integer value, String palo) {
 
 		this.img = getImage(value, palo);
 		this.value = value > 10 ? 10 : value;
+		this.visible = true;
 	}
 
 	public Integer getValue() {
@@ -32,7 +44,12 @@ public class Card {
 
 	public void paint(Graphics g, int x, int y) {
 
-		g.drawImage(img, x, y, 40, 80, null);
+		g.drawImage(this.img, x, y, 120, 200, null);
+	}
+
+	public void paint(Image img, Graphics g, int x, int y) {
+
+		g.drawImage(img, x, y, 120, 200, null);
 	}
 
 }

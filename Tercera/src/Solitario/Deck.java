@@ -4,30 +4,30 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class DeckOfCards {
+public class Deck {
 
 	private final ArrayList<Card> cardsInMovement;
 	private Image backImage;
 	private Card cardPressed;
-	private Card cardToMoveFromDeck;
 	private ArrayList<Card> cards;
 	private ArrayList<Card> cardsInDeck;
 	private ArrayList<ArrayList<Card>> cardsInGame;
-	private Rectangle finish;
+	private Rectangle finishRectangle;
 	private ArrayList<Card>[] finishList;
 	private ArrayList<Rectangle> firstRectanglesCards;
 	private int indexDeck;
 	private int indexDeckCardsInMovement;
 
-	public DeckOfCards() {
+	public Deck() {
 
 		this.indexDeck = 0;
 		this.cardsInMovement = new ArrayList<>();
 
 		loadBackImage();
 		initCards();
-		shakeCards();
+		Collections.shuffle(this.cards);
 		initSevenArrays();
 		initCardsInDeck();
 		initFirstRectanglesCards();
@@ -37,11 +37,12 @@ public class DeckOfCards {
 	private void initFinish() {
 
 		this.finishList = new ArrayList[4];
+
 		for (int i = 0; i < 4; i++) {
 
 			this.finishList[i] = new ArrayList<>();
 		}
-		this.finish = new Rectangle(500, 0, 400, 150);
+		this.finishRectangle = new Rectangle(500, 0, 400, 150);
 
 	}
 
@@ -61,20 +62,6 @@ public class DeckOfCards {
 		for (int i = 28; i < 52; i++) {
 
 			this.cardsInDeck.add(this.cards.get(i));
-		}
-	}
-
-	private void shakeCards() {
-
-		int size = this.cards.size();
-
-		for (int i = 0; i < 1000; i++) {
-
-			int card1 = (int) (Math.random() * size);
-			int card2 = (int) (Math.random() * size);
-			Card card = this.cards.get(card1);
-			this.cards.set(card1, this.cards.get(card2));
-			this.cards.set(card2, card);
 		}
 	}
 
@@ -170,12 +157,6 @@ public class DeckOfCards {
 
 	public void animateMovement(Point p, Graphics g) {
 
-		if (this.cardToMoveFromDeck != null) {
-
-			this.cardToMoveFromDeck.paint(g, (int) p.getX() - 45, (int) p.getY());
-			return;
-		}
-
 		if (this.cardsInMovement.size() == 0) return;
 
 		for (int i = 0; i < this.cardsInMovement.size(); i++) {
@@ -193,7 +174,7 @@ public class DeckOfCards {
 
 			for (int j = this.cardsInGame.get(i).size() - 1; j >= 0; j--) {
 
-				if (! this.cardsInGame.get(i).get(j).isHidden() && this.cardsInGame.get(i).get(j).contains(p)) {
+				if (!this.cardsInGame.get(i).get(j).isHidden() && this.cardsInGame.get(i).get(j).contains(p)) {
 
 					//System.out.printf("%d : %d \n", i, j);
 					this.cardPressed = this.cardsInGame.get(i).get(j);
@@ -210,25 +191,57 @@ public class DeckOfCards {
 
 		for (int i = 0; i < 4; i++) {
 
-			for (int j = 0; j < this.finishList[i].size(); j++) {
+			if (this.finishList[i].size() > 0) {
 
-				this.finishList[i].get(j).paint(g, 500 + (150 * i), 0);
+				this.finishList[i].get(this.finishList[i].size() - 1).paint(g, 500 + (150 * i), 0);
 			}
 		}
 	}
 
 	public void unloadCardPressed() {
 
-		if (this.cardPressed == null) return;
+		if (this.cardPressed == null && this.cardsInMovement.size() == 0) return;
 
 		this.cardPressed = null;
 
-		int destinationList = getDestinationList(this.cardsInMovement.get(0));
+		Card firstCardInMovement = this.cardsInMovement.get(0);
+
+		if (firstCardInMovement.contains(this.finishRectangle)) {
+
+			System.out.println("sdasdawdawdasdadaewfafaefaefa");
+			ArrayList<Card> finishList = this.finishList[firstCardInMovement.getFamily()];
+
+			if (finishList.size() + 1 == firstCardInMovement.getIndex()) {
+
+				finishList.add(firstCardInMovement);
+				if (this.cardsInDeck.contains(firstCardInMovement)) {
+
+					this.cardsInDeck.remove(firstCardInMovement);
+				} else {
+
+					for (Card card : this.cardsInMovement) {
+
+						this.cardsInGame.get(this.indexDeckCardsInMovement).add(card);
+					}
+				}
+			}
+			this.cardsInMovement.clear();
+			return;
+		}
+
+		int destinationList = getDestinationList(firstCardInMovement);
+		System.out.printf("Destino: %d \n", destinationList);
 
 		if (destinationList >= 0 && canMove(destinationList)) {
 
+			System.out.println("Mover");
 			moveCards(destinationList);
-		} else {
+
+			if (this.cardsInDeck.contains(firstCardInMovement)) {
+
+				this.cardsInDeck.remove(firstCardInMovement);
+			}
+		} else if (!this.cardsInDeck.contains(firstCardInMovement)){
 
 			for (Card card : this.cardsInMovement) {
 
@@ -240,6 +253,8 @@ public class DeckOfCards {
 	}
 
 	private boolean canMove(int destinationList) {
+
+		if (this.cardsInGame.get(destinationList).size() == 0 && this.cardsInMovement.get(0).getIndex() == 13) return true;
 
 		Card card = this.cardsInGame.get(destinationList).get(this.cardsInGame.get(destinationList).size() - 1);
 		Card cardIncoming = this.cardsInMovement.get(0);
@@ -333,7 +348,8 @@ public class DeckOfCards {
 
 	public void loadCardFromDeck() {
 
-		this.cardToMoveFromDeck = this.cardsInDeck.get(this.indexDeck);
+		//this.cardToMoveFromDeck = this.cardsInDeck.get(this.indexDeck);
+		this.cardsInMovement.add(this.cardsInDeck.get(this.indexDeck));
 	}
 
 }

@@ -9,7 +9,7 @@ public class Game extends JApplet {
 
 	public static final int WIDTH = 900;
 	public static final int HEIGHT = 1000;
-	private DeckOfCards deckOfCards;
+	private Deck deck;
 	private Rectangle getNewCard;
 	private Image image;
 	private Graphics renderBuffer;
@@ -22,7 +22,7 @@ public class Game extends JApplet {
 
 		this.image = this.createImage(WIDTH, HEIGHT);
 		this.renderBuffer = this.image.getGraphics();
-		this.deckOfCards = new DeckOfCards();
+		this.deck = new Deck();
 		this.getNewCard = new Rectangle(0, 0, 100, 150);
 		this.p = new Point();
 		initListeners();
@@ -33,11 +33,13 @@ public class Game extends JApplet {
 
 		this.renderBuffer.setColor(new Color(0, 31, 6));
 		this.renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
-		this.deckOfCards.paintCardsInGame(this.renderBuffer);
-		this.deckOfCards.paintDeck(this.renderBuffer);
-		this.deckOfCards.paintCardFromDeck(this.renderBuffer);
-		deckOfCards.animateMovement(this.p, renderBuffer);
-		this.deckOfCards.paintFinishList(this.renderBuffer);
+		this.renderBuffer.setColor(Color.red);
+		this.renderBuffer.fillRect(500, 0, 400, 150);
+		this.deck.paintCardsInGame(this.renderBuffer);
+		this.deck.paintDeck(this.renderBuffer);
+		this.deck.paintCardFromDeck(this.renderBuffer);
+		deck.animateMovement(this.p, renderBuffer);
+		this.deck.paintFinishList(this.renderBuffer);
 		g.drawImage(this.image, 0, 0, this);
 	}
 
@@ -50,15 +52,15 @@ public class Game extends JApplet {
 
 				if (getNewCard.contains(e.getPoint())) {
 
-					deckOfCards.nextCardInDeck();
+					deck.nextCardInDeck();
 					repaint();
 				}else if ((e.getX() > 180 && e.getX() < 280) && (e.getY() > 0 && e.getY() < 150)) {
 
-					deckOfCards.loadCardFromDeck();
+					deck.loadCardFromDeck();
 				} else {
 
 					p = e.getPoint();
-					deckOfCards.loadCardPressed(e.getPoint());
+					deck.loadCardPressed(e.getPoint());
 					repaint();
 				}
 			}
@@ -66,7 +68,7 @@ public class Game extends JApplet {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 
-				deckOfCards.unloadCardPressed();
+				deck.unloadCardPressed();
 				repaint();
 			}
 		});

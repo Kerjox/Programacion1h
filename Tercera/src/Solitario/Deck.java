@@ -14,8 +14,8 @@ public class Deck {
 	private ArrayList<Card> cards;
 	private ArrayList<Card> cardsInDeck;
 	private ArrayList<ArrayList<Card>> cardsInGame;
-	private Rectangle finishRectangle;
 	private ArrayList<Card>[] finishList;
+	private Rectangle finishRectangle;
 	private ArrayList<Rectangle> firstRectanglesCards;
 	private int indexDeck;
 	private int indexDeckCardsInMovement;
@@ -42,7 +42,7 @@ public class Deck {
 
 			this.finishList[i] = new ArrayList<>();
 		}
-		this.finishRectangle = new Rectangle(500, 0, 400, 150);
+		this.finishRectangle = new Rectangle(400, 0, 500, 150);
 
 	}
 
@@ -174,7 +174,7 @@ public class Deck {
 
 			for (int j = this.cardsInGame.get(i).size() - 1; j >= 0; j--) {
 
-				if (!this.cardsInGame.get(i).get(j).isHidden() && this.cardsInGame.get(i).get(j).contains(p)) {
+				if (! this.cardsInGame.get(i).get(j).isHidden() && this.cardsInGame.get(i).get(j).contains(p)) {
 
 					//System.out.printf("%d : %d \n", i, j);
 					this.cardPressed = this.cardsInGame.get(i).get(j);
@@ -193,7 +193,7 @@ public class Deck {
 
 			if (this.finishList[i].size() > 0) {
 
-				this.finishList[i].get(this.finishList[i].size() - 1).paint(g, 500 + (150 * i), 0);
+				this.finishList[i].get(this.finishList[i].size() - 1).paint(g, 400 + (120 * i), 0);
 			}
 		}
 	}
@@ -206,9 +206,8 @@ public class Deck {
 
 		Card firstCardInMovement = this.cardsInMovement.get(0);
 
-		if (firstCardInMovement.contains(this.finishRectangle)) {
+		if (firstCardInMovement.intersects(this.finishRectangle)) {
 
-			System.out.println("sdasdawdawdasdadaewfafaefaefa");
 			ArrayList<Card> finishList = this.finishList[firstCardInMovement.getFamily()];
 
 			if (finishList.size() + 1 == firstCardInMovement.getIndex()) {
@@ -217,12 +216,19 @@ public class Deck {
 				if (this.cardsInDeck.contains(firstCardInMovement)) {
 
 					this.cardsInDeck.remove(firstCardInMovement);
+					cardHasBeenRemovedFromDeck();
 				} else {
 
 					for (Card card : this.cardsInMovement) {
 
-						this.cardsInGame.get(this.indexDeckCardsInMovement).add(card);
+						removeCardFromGame(card);
 					}
+				}
+			} else {
+
+				for (Card card : this.cardsInMovement) {
+
+					this.cardsInGame.get(this.indexDeckCardsInMovement).add(card);
 				}
 			}
 			this.cardsInMovement.clear();
@@ -230,18 +236,19 @@ public class Deck {
 		}
 
 		int destinationList = getDestinationList(firstCardInMovement);
-		System.out.printf("Destino: %d \n", destinationList);
+		//System.out.printf("Destino: %d \n", destinationList);
 
 		if (destinationList >= 0 && canMove(destinationList)) {
 
-			System.out.println("Mover");
+			System.out.println("Mover desde ");
 			moveCards(destinationList);
 
 			if (this.cardsInDeck.contains(firstCardInMovement)) {
 
 				this.cardsInDeck.remove(firstCardInMovement);
+				cardHasBeenRemovedFromDeck();
 			}
-		} else if (!this.cardsInDeck.contains(firstCardInMovement)){
+		} else if (! this.cardsInDeck.contains(firstCardInMovement)) {
 
 			for (Card card : this.cardsInMovement) {
 
@@ -252,9 +259,26 @@ public class Deck {
 		this.cardsInMovement.clear();
 	}
 
+	private void cardHasBeenRemovedFromDeck() {
+
+		if (this.indexDeck != 0) {
+
+			this.indexDeck--;
+		}
+	}
+
+	private void removeCardFromGame(Card card) {
+
+		for (ArrayList<Card> cardArrayList : this.cardsInGame) {
+
+			cardArrayList.remove(card);
+		}
+	}
+
 	private boolean canMove(int destinationList) {
 
-		if (this.cardsInGame.get(destinationList).size() == 0 && this.cardsInMovement.get(0).getIndex() == 13) return true;
+		if (this.cardsInGame.get(destinationList).size() == 0 && this.cardsInMovement.get(0).getIndex() == 13)
+			return true;
 
 		Card card = this.cardsInGame.get(destinationList).get(this.cardsInGame.get(destinationList).size() - 1);
 		Card cardIncoming = this.cardsInMovement.get(0);
@@ -275,7 +299,6 @@ public class Deck {
 			}
 		}
 
-		System.out.println(c.getIndex());
 		if (c.getIndex() == 13) {
 
 			return checkEmptyLists(c);
@@ -298,8 +321,6 @@ public class Deck {
 	}
 
 	public void paintCardsInGame(Graphics g) {
-
-		//if (this.cardPressed != null) return;
 
 		for (int i = 0; i < this.cardsInGame.size(); i++) {
 
@@ -348,7 +369,6 @@ public class Deck {
 
 	public void loadCardFromDeck() {
 
-		//this.cardToMoveFromDeck = this.cardsInDeck.get(this.indexDeck);
 		this.cardsInMovement.add(this.cardsInDeck.get(this.indexDeck));
 	}
 

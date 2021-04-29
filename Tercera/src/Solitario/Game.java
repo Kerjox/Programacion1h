@@ -34,12 +34,12 @@ public class Game extends JApplet {
 		this.renderBuffer.setColor(new Color(0, 31, 6));
 		this.renderBuffer.fillRect(0, 0, WIDTH, HEIGHT);
 		this.renderBuffer.setColor(Color.red);
-		this.renderBuffer.fillRect(500, 0, 400, 150);
+		this.renderBuffer.drawRect(500, 0, 400, 150);
 		this.deck.paintCardsInGame(this.renderBuffer);
 		this.deck.paintDeck(this.renderBuffer);
 		this.deck.paintCardFromDeck(this.renderBuffer);
-		deck.animateMovement(this.p, renderBuffer);
 		this.deck.paintFinishList(this.renderBuffer);
+		this.deck.animateMovement(this.p, renderBuffer);
 		g.drawImage(this.image, 0, 0, this);
 	}
 

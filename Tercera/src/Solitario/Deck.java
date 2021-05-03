@@ -240,7 +240,6 @@ public class Deck {
 
 		if (destinationList >= 0 && canMove(destinationList)) {
 
-			System.out.println("Mover desde ");
 			moveCards(destinationList);
 
 			if (this.cardsInDeck.contains(firstCardInMovement)) {
@@ -352,19 +351,6 @@ public class Deck {
 
 			this.cardsInGame.get(i).remove(j);
 		}
-	}
-
-	public void prueba() {
-
-		System.out.println("Prueba");
-		for (ArrayList<Card> cards : this.cardsInGame) {
-
-			for (Card card : cards) {
-
-				System.out.println(card);
-			}
-		}
-
 	}
 
 	public void loadCardFromDeck() {

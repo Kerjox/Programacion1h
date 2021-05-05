@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Deck {
@@ -27,7 +28,11 @@ public class Deck {
 
 		loadBackImage();
 		initCards();
+		System.out.println(this.cards.toArray().hashCode());
+
 		Collections.shuffle(this.cards);
+		System.out.println(this.cards.toArray().hashCode());
+
 		initSevenArrays();
 		initCardsInDeck();
 		initFirstRectanglesCards();

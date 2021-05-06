@@ -2,6 +2,8 @@ package DeMemory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Game extends JApplet implements Runnable{
 
@@ -16,7 +18,8 @@ public class Game extends JApplet implements Runnable{
 
 		while(true) {
 
-
+			this.cards.flipIncorrectCards();
+			repaint();
 			delay(10);
 		}
 	}
@@ -24,12 +27,31 @@ public class Game extends JApplet implements Runnable{
 	@Override
 	public void init() {
 
-		this.dimension = new Dimension(800, 600);
-		resize(this.dimension);
+		this.dimension = new Dimension(420, 420);
 		this.game = new Thread(this);
 		this.image = this.createImage(this.dimension.width, this.dimension.height);
 		this.renderBuffer = this.image.getGraphics();
 		this.cards = new Cards();
+		initListeners();
+	}
+
+	@Override
+	public void start() {
+
+		resize(this.dimension);
+		game.start();
+	}
+
+	private void initListeners() {
+
+		addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+				cards.cardClicked(e.getPoint());
+			}
+		});
 	}
 
 	@Override

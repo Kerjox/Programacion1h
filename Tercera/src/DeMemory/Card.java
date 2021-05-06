@@ -4,11 +4,18 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
-public class Card extends Rectangle{
+public class Card extends Rectangle {
 
 	private Image img;
+
+	public Integer getColor() {
+
+		return color;
+	}
+
 	private Integer color;
 	private boolean reversed;
+	private Image backImage;
 
 	public boolean isReversed() {
 
@@ -20,12 +27,13 @@ public class Card extends Rectangle{
 		this.reversed = reversed;
 	}
 
-	public Card(Integer indexImg, Integer color) {
+	public Card(Integer indexImg, Integer color, Image backImage) {
 
 		this.width = this.height = 80;
 		this.reversed = true;
 		this.color = color;
-		//getImage(indexImg);
+		this.backImage = backImage;
+		this.img = getImage(indexImg);
 	}
 
 	private Image getImage(Integer value) {
@@ -42,7 +50,14 @@ public class Card extends Rectangle{
 
 		this.x = x;
 		this.y = y;
-		g.drawImage(this.img, this.x, this.y, this.width, this.height, null);
+
+		if (this.reversed) {
+
+			g.drawImage(this.backImage, this.x, this.y, this.width, this.height, null);
+		} else {
+
+			g.drawImage(this.img, this.x, this.y, this.width, this.height, null);
+		}
 	}
 
 }

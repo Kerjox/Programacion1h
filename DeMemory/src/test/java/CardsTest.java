@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
+
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -14,17 +16,16 @@ import java.util.List;
 class CardsTest {
 
 	@Spy
-	private List<Card> mockCardsSelected;
+	private List<Card> spyCardsSelected;
 
-	@Mock
+	@Spy
 	private Cards cardsClass;
 
 	@Mock
+	private Image mockImage;
+
+	@Mock
 	private List<Card> mockCards;
-	@Mock
-	private Card mockCard;
-	@Mock
-	private Image mockBackImage;
 
 	@Test
 	@DisplayName("Paint Test")
@@ -40,28 +41,40 @@ class CardsTest {
 	@Test
 	void flipIncorrectCardsTest() {
 
-		//when(this.cards.getBackImage()).thenReturn(null);
-		//when(card.getImage(anyInt())).thenReturn(null);
-
-		mockCards = new ArrayList<>();
-
-		for (int i = 0; i < 16; i++) {
-
-			mockCards.add(this.mockCard);
-		}
-
-		System.out.println(cardsClass);
-		when(cardsClass.getCards()).thenReturn(mockCards);
-
-		this.mockCardsSelected = new ArrayList<>();
-		this.cardsClass.setCardsSelected(this.mockCardsSelected);
+		this.cardsClass.setCardsSelected(this.spyCardsSelected);
 		this.cardsClass.setCorrect(true);
+		when(this.spyCardsSelected.size()).thenReturn(2);
 
-		when(this.mockCardsSelected.size()).thenReturn(2);
-		//when(this.cardsSelected.get(Mockito.anyInt())).thenReturn(new Card(null, 0, null));
+		this.cardsClass.flipIncorrectCards();
+		verify(this.cardsClass, times(0)).flipSelectedCards();
+		verify(this.spyCardsSelected, times(1)).clear();
 
-		verify(this.mockCardsSelected, times(1)).clear();
 
+		this.cardsClass.setCorrect(false);
+		this.cardsClass.setContTimeToflip(this.cardsClass.getTimeToFlip());
+		doNothing().when(this.cardsClass).flipSelectedCards();
+
+		this.cardsClass.flipIncorrectCards();
+		verify(this.cardsClass, times(1)).flipSelectedCards();
+		verify(this.spyCardsSelected, times(2)).clear();
+	}
+
+	@Test
+	void flipSelectedCardsTest() {
+
+		Card card = new Card(1, 0, this.mockImage);
+		Card spyCard = spy(card);
+		List<Card> cardsList = new ArrayList<>();
+
+		this.cardsClass.setCardsSelected(cardsList);
+
+		cardsList.add(spyCard);
+		this.cardsClass.flipSelectedCards();
+		verify(spyCard, times(1)).setReversed(true);
+
+		cardsList.add(spyCard);
+		this.cardsClass.flipSelectedCards();
+		verify(spyCard, times(3)).setReversed(true);
 	}
 
 }

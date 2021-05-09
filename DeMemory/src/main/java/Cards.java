@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,8 +9,8 @@ import java.util.List;
 public class Cards {
 
 	private final Image backImage;
-	private List<Card> cards;
 	private final int timeToFlip = 1000;
+	private List<Card> cards;
 	private List<Card> cardsSelected;
 	private int contTimeToflip = 0;
 	private boolean correct;
@@ -18,23 +19,23 @@ public class Cards {
 
 		this.cards = new ArrayList<>();
 		this.cardsSelected = new ArrayList<>();
-		this.backImage = null;//getBackImage();
+		this.backImage = getBackImage();
 		this.cards = getCards();
 	}
 
-	public boolean isCorrect() {
+	public int getTimeToFlip() {
 
-		return correct;
+		return timeToFlip;
+	}
+
+	public void setContTimeToflip(int contTimeToflip) {
+
+		this.contTimeToflip = contTimeToflip;
 	}
 
 	public void setCorrect(boolean correct) {
 
 		this.correct = correct;
-	}
-
-	public List<Card> getCardsSelected() {
-
-		return cardsSelected;
 	}
 
 	public void setCardsSelected(List<Card> cardsSelected) {
@@ -45,7 +46,7 @@ public class Cards {
 	protected Image getBackImage() {
 
 		try {
-			return ImageIO.read(getClass().getResource("./images/reverso.png"));
+			return ImageIO.read(Cards.class.getClassLoader().getResource("images/reverso.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -65,6 +66,11 @@ public class Cards {
 		Collections.shuffle(cards);
 
 		return cards;
+	}
+
+	public void setCards(List<Card> cards) {
+
+		this.cards = cards;
 	}
 
 	public void paint(Graphics g) {

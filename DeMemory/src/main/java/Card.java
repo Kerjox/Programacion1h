@@ -35,7 +35,7 @@ public class Card extends Rectangle {
 	protected Image getImage(Integer value) {
 
 		try {
-			return ImageIO.read(getClass().getResource("./images/img" + value + ".png"));
+			return ImageIO.read(Card.class.getClassLoader().getResource("images/img" + value + ".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

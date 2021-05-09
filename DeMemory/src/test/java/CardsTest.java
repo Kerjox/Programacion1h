@@ -2,9 +2,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -68,6 +69,9 @@ class CardsTest {
 
 		this.cardsClass.setCardsSelected(cardsList);
 
+		this.cardsClass.flipSelectedCards();
+		verify(spyCard, times(0)).setReversed(true);
+
 		cardsList.add(spyCard);
 		this.cardsClass.flipSelectedCards();
 		verify(spyCard, times(1)).setReversed(true);
@@ -75,6 +79,12 @@ class CardsTest {
 		cardsList.add(spyCard);
 		this.cardsClass.flipSelectedCards();
 		verify(spyCard, times(3)).setReversed(true);
+
+		assertThrows(NullPointerException.class, () -> {
+
+			this.cardsClass.setCardsSelected(null);
+			this.cardsClass.flipSelectedCards();
+		});
 	}
 
 }

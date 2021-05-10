@@ -6,6 +6,7 @@ import org.mockito.Mock;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -23,20 +24,84 @@ class CardsTest {
 	private Cards cardsClass;
 
 	@Mock
+	private List<Card> mockCards;
+
+	@Mock
 	private Image mockImage;
 
 	@Mock
-	private List<Card> mockCards;
+	private Point mockPoint;
+
+	@Mock
+	private Graphics mockG;
 
 	@Test
 	@DisplayName("Paint Test")
 	void paintTest() {
 
+		Card card = new Card(1, 0, this.mockImage);
+		Card spyCard = spy(card);
+		this.cardsClass.setCards(this.mockCards);
+		doReturn(spyCard).when(this.mockCards).get(anyInt());
+		this.cardsClass.paint(this.mockG);
+
+		verify(spyCard, times(16)).paint(any(Graphics.class), anyInt(), anyInt());
+	}
+
+	@Test
+	void getCardsTest(){
+
+		assertEquals(16, this.cardsClass.getCards().size());
 	}
 
 	@Test
 	void cardClickedTest() {
 
+		//when(this.spyCardsSelected.size()).thenReturn(0);
+
+		Card card1 = new Card(1, 0, this.mockImage);
+		Card spyCard = spy(card1);
+		List<Card> cards = new ArrayList<>();
+		cards.add(spyCard);
+
+		this.cardsClass.setCards(cards);
+		this.cardsClass.setCardsSelected(this.spyCardsSelected);
+		when(spyCard.isReversed()).thenReturn(true);
+		when(spyCard.contains(this.mockPoint)).thenReturn(true);
+
+		this.cardsClass.cardClicked(this.mockPoint);
+		verify(this.spyCardsSelected, times(1)).add(spyCard);
+		verify(spyCard, times(1)).setReversed(false);
+	}
+
+	@Test
+	void isSameColorTest() {
+
+		Card card1 = new Card(1, 0, this.mockImage);
+		Card card2 = new Card(1, 0, this.mockImage);
+
+		assertTrue(this.cardsClass.isSameColor(card1, card2));
+
+		card2.setColor(1);
+
+		assertFalse(this.cardsClass.isSameColor(card1, card2));
+
+		assertThrows(NullPointerException.class, () -> {
+
+			this.cardsClass.isSameColor(card1, null);
+		});
+	}
+
+	@Test
+	void isFullCardsSelectedTest() {
+
+		this.cardsClass.setCardsSelected(this.spyCardsSelected);
+		when(this.spyCardsSelected.size()).thenReturn(2);
+		doReturn(true).when(this.cardsClass).isSameColor(any(), any());
+
+		this.cardsClass.isFullCardsSelected();
+
+		assertTrue(this.cardsClass.isCorrect());
 	}
 
 	@Test

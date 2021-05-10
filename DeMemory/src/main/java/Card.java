@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public class Card extends Rectangle {
 
-	private final Integer color;
 	private final Image backImage;
+	private Integer color;
 	private final Image img;
 	private boolean reversed;
 	public Card(Integer indexImg, Integer color, Image backImage) {
@@ -20,6 +20,11 @@ public class Card extends Rectangle {
 	public Integer getColor() {
 
 		return color;
+	}
+
+	public void setColor(Integer color) {
+
+		this.color = color;
 	}
 
 	public boolean isReversed() {

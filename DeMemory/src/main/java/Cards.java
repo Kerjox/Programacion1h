@@ -1,6 +1,5 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +20,17 @@ public class Cards {
 		this.cardsSelected = new ArrayList<>();
 		this.backImage = getBackImage();
 		this.cards = getCards();
+		Collections.shuffle(this.cards);
+	}
+
+	public boolean isCorrect() {
+
+		return correct;
+	}
+
+	public void setCorrect(boolean correct) {
+
+		this.correct = correct;
 	}
 
 	public int getTimeToFlip() {
@@ -31,11 +41,6 @@ public class Cards {
 	public void setContTimeToflip(int contTimeToflip) {
 
 		this.contTimeToflip = contTimeToflip;
-	}
-
-	public void setCorrect(boolean correct) {
-
-		this.correct = correct;
 	}
 
 	public void setCardsSelected(List<Card> cardsSelected) {
@@ -62,8 +67,6 @@ public class Cards {
 			cards.add(new Card(i + 1, i, this.backImage));
 			cards.add(new Card(i + 1, i, this.backImage));
 		}
-
-		Collections.shuffle(cards);
 
 		return cards;
 	}
@@ -97,11 +100,16 @@ public class Cards {
 				}
 			}
 
-			if (this.cardsSelected.size() == 2) {
+			isFullCardsSelected();
+		}
+	}
 
-				this.correct = isSameColor(this.cardsSelected.get(0), this.cardsSelected.get(1));
-				this.contTimeToflip = 0;
-			}
+	protected void isFullCardsSelected() {
+
+		if (this.cardsSelected.size() == 2) {
+
+			this.correct = isSameColor(this.cardsSelected.get(0), this.cardsSelected.get(1));
+			this.contTimeToflip = 0;
 		}
 	}
 

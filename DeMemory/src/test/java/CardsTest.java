@@ -6,7 +6,6 @@ import org.mockito.Mock;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -21,7 +20,7 @@ class CardsTest {
 	private List<Card> spyCardsSelected;
 
 	@Spy
-	private Cards cardsClass;
+	private Cards spyCardsClass;
 
 	@Mock
 	private List<Card> mockCards;
@@ -36,25 +35,27 @@ class CardsTest {
 	private Graphics mockG;
 
 	@Test
-	@DisplayName("Paint Test")
+	@DisplayName("Paint")
 	void paintTest() {
 
 		Card card = new Card(1, 0, this.mockImage);
 		Card spyCard = spy(card);
-		this.cardsClass.setCards(this.mockCards);
+		this.spyCardsClass.setCards(this.mockCards);
 		doReturn(spyCard).when(this.mockCards).get(anyInt());
-		this.cardsClass.paint(this.mockG);
+		this.spyCardsClass.paint(this.mockG);
 
 		verify(spyCard, times(16)).paint(any(Graphics.class), anyInt(), anyInt());
 	}
 
 	@Test
-	void getCardsTest(){
+	@DisplayName("Get Cards")
+	void getCardsTest() {
 
-		assertEquals(16, this.cardsClass.getCards().size());
+		assertEquals(16, this.spyCardsClass.getCards().size());
 	}
 
 	@Test
+	@DisplayName("Card Clicked")
 	void cardClickedTest() {
 
 		//when(this.spyCardsSelected.size()).thenReturn(0);
@@ -64,91 +65,95 @@ class CardsTest {
 		List<Card> cards = new ArrayList<>();
 		cards.add(spyCard);
 
-		this.cardsClass.setCards(cards);
-		this.cardsClass.setCardsSelected(this.spyCardsSelected);
+		this.spyCardsClass.setCards(cards);
+		this.spyCardsClass.setCardsSelected(this.spyCardsSelected);
 		when(spyCard.isReversed()).thenReturn(true);
 		when(spyCard.contains(this.mockPoint)).thenReturn(true);
 
-		this.cardsClass.cardClicked(this.mockPoint);
+		this.spyCardsClass.cardClicked(this.mockPoint);
 		verify(this.spyCardsSelected, times(1)).add(spyCard);
 		verify(spyCard, times(1)).setReversed(false);
 	}
 
 	@Test
+	@DisplayName("Is Same Color?")
 	void isSameColorTest() {
 
 		Card card1 = new Card(1, 0, this.mockImage);
 		Card card2 = new Card(1, 0, this.mockImage);
 
-		assertTrue(this.cardsClass.isSameColor(card1, card2));
+		assertTrue(this.spyCardsClass.isSameColor(card1, card2));
 
 		card2.setColor(1);
 
-		assertFalse(this.cardsClass.isSameColor(card1, card2));
+		assertFalse(this.spyCardsClass.isSameColor(card1, card2));
 
 		assertThrows(NullPointerException.class, () -> {
 
-			this.cardsClass.isSameColor(card1, null);
+			this.spyCardsClass.isSameColor(card1, null);
 		});
 	}
 
 	@Test
-	void isFullCardsSelectedTest() {
+	@DisplayName("Are All Cards Selected?")
+	void areAllCardsSelectedTest() {
 
-		this.cardsClass.setCardsSelected(this.spyCardsSelected);
+		this.spyCardsClass.setCardsSelected(this.spyCardsSelected);
 		when(this.spyCardsSelected.size()).thenReturn(2);
-		doReturn(true).when(this.cardsClass).isSameColor(any(), any());
+		doReturn(true).when(this.spyCardsClass).isSameColor(any(), any());
 
-		this.cardsClass.isFullCardsSelected();
+		this.spyCardsClass.areAllCardsSelected();
 
-		assertTrue(this.cardsClass.isCorrect());
+		assertTrue(this.spyCardsClass.isCorrect());
 	}
 
 	@Test
+	@DisplayName("Flip Incorrect Cards")
 	void flipIncorrectCardsTest() {
 
-		this.cardsClass.setCardsSelected(this.spyCardsSelected);
-		this.cardsClass.setCorrect(true);
+		this.spyCardsClass.setCardsSelected(this.spyCardsSelected);
+		this.spyCardsClass.setCorrect(true);
 		when(this.spyCardsSelected.size()).thenReturn(2);
 
-		this.cardsClass.flipIncorrectCards();
-		verify(this.cardsClass, times(0)).flipSelectedCards();
+		this.spyCardsClass.flipIncorrectCards();
+		verify(this.spyCardsClass, times(0)).flipSelectedCards();
 		verify(this.spyCardsSelected, times(1)).clear();
 
 
-		this.cardsClass.setCorrect(false);
-		this.cardsClass.setContTimeToflip(this.cardsClass.getTimeToFlip());
-		doNothing().when(this.cardsClass).flipSelectedCards();
+		this.spyCardsClass.setCorrect(false);
+		this.spyCardsClass.setContTimeToFlip(this.spyCardsClass.getTimeToFlip());
+		doNothing().when(this.spyCardsClass).flipSelectedCards();
 
-		this.cardsClass.flipIncorrectCards();
-		verify(this.cardsClass, times(1)).flipSelectedCards();
+		this.spyCardsClass.flipIncorrectCards();
+		verify(this.spyCardsClass, times(1)).flipSelectedCards();
 		verify(this.spyCardsSelected, times(2)).clear();
 	}
 
 	@Test
+	@DisplayName("Flip Selected Cards")
 	void flipSelectedCardsTest() {
 
 		Card card = new Card(1, 0, this.mockImage);
 		Card spyCard = spy(card);
 		List<Card> cardsList = new ArrayList<>();
 
-		this.cardsClass.setCardsSelected(cardsList);
+		this.spyCardsClass.setCardsSelected(cardsList);
 
-		this.cardsClass.flipSelectedCards();
+		this.spyCardsClass.flipSelectedCards();
 		verify(spyCard, times(0)).setReversed(true);
 
 		cardsList.add(spyCard);
-		this.cardsClass.flipSelectedCards();
+		this.spyCardsClass.flipSelectedCards();
 		verify(spyCard, times(1)).setReversed(true);
 
 		cardsList.add(spyCard);
-		this.cardsClass.flipSelectedCards();
+		this.spyCardsClass.flipSelectedCards();
 		verify(spyCard, times(3)).setReversed(true);
 
 		assertThrows(NullPointerException.class, () -> {
 
-			this.cardsClass.setCardsSelected(null);
-			this.cardsClass.flipSelectedCards();
+			this.spyCardsClass.setCardsSelected(null);
+			this.spyCardsClass.flipSelectedCards();
 		});
 	}
 

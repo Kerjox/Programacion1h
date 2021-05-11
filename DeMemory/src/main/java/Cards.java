@@ -11,7 +11,7 @@ public class Cards {
 	private final int timeToFlip = 1000;
 	private List<Card> cards;
 	private List<Card> cardsSelected;
-	private int contTimeToflip = 0;
+	private int contTimeToFlip = 0;
 	private boolean correct;
 
 	public Cards() {
@@ -38,9 +38,9 @@ public class Cards {
 		return timeToFlip;
 	}
 
-	public void setContTimeToflip(int contTimeToflip) {
+	public void setContTimeToFlip(int contTimeToFlip) {
 
-		this.contTimeToflip = contTimeToflip;
+		this.contTimeToFlip = contTimeToFlip;
 	}
 
 	public void setCardsSelected(List<Card> cardsSelected) {
@@ -100,16 +100,16 @@ public class Cards {
 				}
 			}
 
-			isFullCardsSelected();
+			areAllCardsSelected();
 		}
 	}
 
-	protected void isFullCardsSelected() {
+	protected void areAllCardsSelected() {
 
 		if (this.cardsSelected.size() == 2) {
 
 			this.correct = isSameColor(this.cardsSelected.get(0), this.cardsSelected.get(1));
-			this.contTimeToflip = 0;
+			this.contTimeToFlip = 0;
 		}
 	}
 
@@ -126,13 +126,13 @@ public class Cards {
 
 				this.cardsSelected.clear();
 
-			} else if (this.contTimeToflip >= this.timeToFlip) {
+			} else if (this.contTimeToFlip >= this.timeToFlip) {
 
 				flipSelectedCards();
 				this.cardsSelected.clear();
 			}
 
-			this.contTimeToflip += 10;
+			this.contTimeToFlip += 10;
 		}
 	}
 

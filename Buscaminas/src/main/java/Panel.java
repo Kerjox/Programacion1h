@@ -1,4 +1,7 @@
+import exceptions.BombsRebaseNumberOfBoxesException;
+
 import javax.imageio.ImageIO;
+import javax.smartcardio.Card;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,19 +9,24 @@ import java.util.List;
 
 public class Panel {
 
-	private final Dimension posPanel;
-	private Dimension dimension;
-	private List<List<Box>> boxes;
-	private final int numBombs = 10;
-	private Image bombImg, boxImg;
+	protected Image bombImg, boxImg;
+	protected List<List<Box>> boxes;
+	protected Dimension dimension;
+	protected int numBombs = 10;
+	protected Dimension posPanel;
 
 	public Panel() {
 
-		this.posPanel = new Dimension(80, 120);
+	}
+
+	public Panel(int posX, int posY) {
+
+		this.posPanel = new Dimension(posX, posY);
 		this.dimension = new Dimension(10, 10);
+
 		initImages();
-		this.boxes = initBoxes();
-		plantBombs();
+		initBoxes();
+		initBombs();
 		initBombsAround();
 
 		/*
@@ -33,7 +41,31 @@ public class Panel {
 		}*/
 	}
 
-	private void initBombsAround() {
+	private void initBombs() {
+
+		try {
+			plantBombs();
+		} catch (BombsRebaseNumberOfBoxesException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setNumBombs(int numBombs) {
+
+		this.numBombs = numBombs;
+	}
+
+	public void setDimension(Dimension dimension) {
+
+		this.dimension = dimension;
+	}
+
+	public void setBoxes(List<List<Box>> boxes) {
+
+		this.boxes = boxes;
+	}
+
+	protected void initBombsAround() {
 
 		for (int i = 0; i < this.dimension.width; i++) {
 
@@ -45,14 +77,19 @@ public class Panel {
 		}
 	}
 
-	private void plantBombs() {
+	protected void plantBombs() throws BombsRebaseNumberOfBoxesException {
+
+		if (this.numBombs > this.dimension.width * this.dimension.height) {
+
+			throw new BombsRebaseNumberOfBoxesException();
+		}
 
 		int cont = 0;
 
-		while (cont <= this.numBombs) {
+		while (cont < this.numBombs) {
 
-			int x = (int) (Math.random() * 10);
-			int y = (int) (Math.random() * 10);
+			int x = (int) (Math.random() * this.dimension.width);
+			int y = (int) (Math.random() * this.dimension.height);
 
 			Box box = this.boxes.get(x).get(y);
 			if (!box.isBomb()) {
@@ -63,7 +100,7 @@ public class Panel {
 		}
 	}
 
-	private void initImages() {
+	protected void initImages() {
 
 		try {
 
@@ -76,21 +113,19 @@ public class Panel {
 
 	}
 
-	private List<List<Box>> initBoxes() {
+	protected void initBoxes() {
 
-		List<List<Box>> boxes = new ArrayList<>();
+		this.boxes = new ArrayList<>();
 
 		for (int i = 0; i < this.dimension.width; i++) {
 
-			boxes.add(new ArrayList<>());
+			this.boxes.add(new ArrayList<>());
 
 			for (int j = 0; j < this.dimension.width; j++) {
 
-				boxes.get(i).add(new Box(this.bombImg, this.boxImg));
+				this.boxes.get(i).add(new Box(this.bombImg, this.boxImg));
 			}
 		}
-
-		return boxes;
 	}
 
 	public void paintPanel(Graphics g) {
@@ -117,7 +152,7 @@ public class Panel {
 		}
 	}
 
-	public void boxPressed(Point point) {
+	public boolean boxPressed(Point point) {
 
 		for (int i = 0; i < this.boxes.size(); i++) {
 
@@ -130,7 +165,9 @@ public class Panel {
 					if (box.isBomb()) {
 
 						showBombs();
-					} else {
+
+						return true;
+					} else if (!box.isMarked()) {
 
 						box.setVisible(true);
 						if (box.getBombsAround() == 0) {
@@ -141,12 +178,17 @@ public class Panel {
 				}
 			}
 		}
+
+		return false;
 	}
 
-	private void openPanel(int x, int y) {
+	protected void openPanel(int x, int y) {
 
 		this.boxes.get(x).get(y).setVisible(true);
-		//System.out.printf("%d, %d \n", x, y);
+		open(x, y);
+	}
+
+	protected void open(int x, int y) {
 
 		if (canOpen(x + 1, y)) {
 
@@ -169,13 +211,13 @@ public class Panel {
 		}
 	}
 
-	private boolean canOpen(int x, int y) {
+	protected boolean canOpen(int x, int y) {
 
-		if (x < 0 || x > 9 || y < 0 || y > 9) return false;
+		if (isBoxOnLimits(x, y)) return false;
 
 		Box box = this.boxes.get(x).get(y);
 
-		if (!box.isVisible()) {
+		if (! box.isVisible()) {
 
 			if (box.getBombsAround() == 0) {
 
@@ -183,49 +225,31 @@ public class Panel {
 			} else {
 
 				this.boxes.get(x).get(y).setVisible(true);
+				return false;
 			}
 		}
 
 		return false;
 	}
 
-	private int findBombsAround(int i, int f) {
+	protected boolean isBoxOnLimits(int x, int y) {
+
+		return x < 0 || x > this.dimension.width - 1 || y < 0 || y > this.dimension.height - 1;
+	}
+
+	protected int findBombsAround(int i, int f) {
 
 		if (this.boxes.get(i).get(f).isBomb()) {
 
-			return -1;
+			return - 1;
 		}
+
+		int x = checkLimit(i, false);
+		int y = checkLimit(f, false);
+		int finX = checkLimit(i, true);
+		int finY = checkLimit(f, true);
 
 		int cont = 0;
-		int x, y, finX, finY;
-
-		if (i + 1 >= this.dimension.width) {
-
-			x = i - 1;
-			finX = i;
-		} else if (i - 1 < 0) {
-
-			x = i;
-			finX = i + 1;
-		} else {
-
-			x = i - 1;
-			finX = i + 1;
-		}
-
-		if (f + 1 >= this.dimension.height) {
-
-			y = f - 1;
-			finY = f;
-		} else if (f - 1 < 0) {
-
-			y = f;
-			finY = f + 1;
-		} else {
-
-			y = f - 1;
-			finY = f + 1;
-		}
 
 		for (int j = x; j <= finX; j++) {
 
@@ -241,6 +265,25 @@ public class Panel {
 		return cont;
 	}
 
+	protected int checkLimit(int o, boolean fin) {
+
+		int out;
+
+		if (o + 1 >= this.dimension.width) {
+
+			out = fin ? o : o - 1;
+		} else if (o - 1 < 0) {
+
+			out = fin ? o + 1 : o;
+		} else {
+
+			out = fin ? o + 1 : o - 1;
+
+		}
+
+		return out;
+	}
+
 	public void showBombs() {
 
 		for (List<Box> box : this.boxes) {
@@ -250,6 +293,20 @@ public class Panel {
 				if (value.isBomb()) {
 
 					value.setVisible(true);
+				}
+			}
+		}
+	}
+
+	public void toggleMark(Point point) {
+
+		for (List<Box> boxList : this.boxes) {
+
+			for (Box box : boxList) {
+
+				if (box.contains(point)) {
+
+					box.setMarked(!box.isMarked());
 				}
 			}
 		}

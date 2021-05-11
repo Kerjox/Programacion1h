@@ -7,16 +7,31 @@ public class Box extends Rectangle {
 	private final Image boxImg;
 	private boolean bomb;
 	private int bombsAround;
+	private Font font;
+	private boolean marked;
 	private boolean visible;
+
 	public Box(Image bombImg, Image boxImg) {
 
 		this.bomb = false;
 		this.visible = false;
+		this.marked = false;
 		this.bombImg = bombImg;
 		this.boxImg = boxImg;
 		this.width = DIMENSION.width;
 		this.height = DIMENSION.height;
 		this.bombsAround = 0;
+		this.font = new Font("Arial", Font.BOLD, 25);
+	}
+
+	public boolean isMarked() {
+
+		return marked;
+	}
+
+	public void setMarked(boolean marked) {
+
+		this.marked = marked;
 	}
 
 	public int getBombsAround() {
@@ -56,6 +71,7 @@ public class Box extends Rectangle {
 		this.y = y;
 
 		if (this.visible) {
+
 			if (this.bomb) {
 
 				g.drawImage(this.bombImg, x, y, DIMENSION.width, DIMENSION.height, null);
@@ -66,14 +82,26 @@ public class Box extends Rectangle {
 				g.setColor(getColor(this.bombsAround));
 				if (this.bombsAround > 0) {
 
-					g.setFont(new Font("Arial", Font.BOLD, 25));
+					g.setFont(this.font);
 					g.drawString(String.valueOf(this.bombsAround), x + 12, y + 30);
 				}
 			}
 		} else {
 
 			g.drawImage(this.boxImg, x, y, DIMENSION.width, DIMENSION.height, null);
+			drawMark(g);
 		}
+	}
+
+	private void drawMark(Graphics g) {
+
+		if (this.marked) {
+
+			g.setColor(Color.red);
+			g.setFont(this.font);
+			g.drawString("?", x + 12, y + 30);
+		}
+
 	}
 
 	private Color getColor(int n) {
@@ -82,7 +110,7 @@ public class Box extends Rectangle {
 
 			case 1:
 
-				return new Color(5, 22, 71);
+				return new Color(10, 34, 114);
 			case 2:
 
 				return new Color(19, 85, 3);

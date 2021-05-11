@@ -6,9 +6,10 @@ import java.awt.event.MouseEvent;
 public class Game extends JApplet {
 
 	private Dimension dimension;
+	private boolean fin;
 	private Image image;
-	private Graphics renderBuffer;
 	private Panel panel;
+	private Graphics renderBuffer;
 
 	@Override
 	public void init() {
@@ -17,22 +18,9 @@ public class Game extends JApplet {
 		resize(this.dimension);
 		this.image = this.createImage(this.dimension.width, this.dimension.height);
 		this.renderBuffer = this.image.getGraphics();
-		this.panel = new Panel();
+		this.panel = new Panel(80, 120);
+		this.fin = false;
 		initListeners();
-	}
-
-	private void initListeners() {
-
-		addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-
-				panel.boxPressed(e.getPoint());
-				//panel.showBombs();
-				repaint();
-			}
-		});
 	}
 
 	@Override
@@ -47,11 +35,45 @@ public class Game extends JApplet {
 		g.drawImage(image, 0, 0, this);
 	}
 
+	public void setFin(boolean fin) {
+
+		this.fin = fin;
+	}
+
+	private void initListeners() {
+
+		addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+				if (fin) return;
+
+				switch (e.getButton()) {
+
+					case 1:
+
+
+						fin = panel.boxPressed(e.getPoint());
+						//panel.showBombs();
+						repaint();
+						break;
+					case 3:
+
+						panel.toggleMark(e.getPoint());
+						repaint();
+						break;
+				}
+
+			}
+		});
+	}
+
 	private void showAxes(Graphics g) {
 
 		g.setColor(Color.WHITE);
 		g.drawString("X", 300, 100);
-		g.drawString("Y", 60,  350);
+		g.drawString("Y", 60, 350);
 
 	}
 

@@ -1,6 +1,6 @@
 package exceptions;
 
-public class BombsRebaseNumberOfBoxesException extends Throwable {
+public class BombsRebaseNumberOfBoxesException extends RuntimeException {
 
 
 }

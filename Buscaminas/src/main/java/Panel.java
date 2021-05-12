@@ -12,7 +12,7 @@ public class Panel {
 	protected Image bombImg, boxImg;
 	protected List<List<Box>> boxes;
 	protected Dimension dimension;
-	protected int numBombs = 10;
+	protected int numBombs = 50;
 	protected Dimension posPanel;
 
 	public Panel() {
@@ -22,7 +22,7 @@ public class Panel {
 	public Panel(int posX, int posY) {
 
 		this.posPanel = new Dimension(posX, posY);
-		this.dimension = new Dimension(10, 10);
+		this.dimension = new Dimension(20, 20);
 
 		initImages();
 		initBoxes();
@@ -41,12 +41,13 @@ public class Panel {
 		}*/
 	}
 
-	private void initBombs() {
+	protected void initBombs() {
 
 		try {
 			plantBombs();
 		} catch (BombsRebaseNumberOfBoxesException e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 
@@ -162,17 +163,20 @@ public class Panel {
 
 				if (box.contains(point)) {
 
-					if (box.isBomb()) {
+					if (!box.isMarked()) {
 
-						showBombs();
+						if (box.isBomb()) {
 
-						return true;
-					} else if (!box.isMarked()) {
+							showBombs();
 
-						box.setVisible(true);
-						if (box.getBombsAround() == 0) {
+							return true;
+						} else {
 
-							openPanel(i, y);
+							box.setVisible(true);
+							if (box.getBombsAround() == 0) {
+
+								openPanel(i, y);
+							}
 						}
 					}
 				}
@@ -224,12 +228,14 @@ public class Panel {
 				return true;
 			} else {
 
-				this.boxes.get(x).get(y).setVisible(true);
+				box.setVisible(true);
 				return false;
 			}
+		} else {
+
+			return false;
 		}
 
-		return false;
 	}
 
 	protected boolean isBoxOnLimits(int x, int y) {
@@ -239,9 +245,9 @@ public class Panel {
 
 	protected int findBombsAround(int i, int f) {
 
-		if (this.boxes.get(i).get(f).isBomb()) {
+		if (isBomb(i, f)) {
 
-			return - 1;
+			return -1;
 		}
 
 		int x = checkLimit(i, false);
@@ -255,7 +261,7 @@ public class Panel {
 
 			for (int k = y; k <= finY; k++) {
 
-				if (this.boxes.get(j).get(k).isBomb()) {
+				if (isBomb(j, k)) {
 
 					cont++;
 				}
@@ -263,6 +269,11 @@ public class Panel {
 		}
 
 		return cont;
+	}
+
+	protected boolean isBomb(int i, int f) {
+
+		return this.boxes.get(i).get(f).isBomb();
 	}
 
 	protected int checkLimit(int o, boolean fin) {
@@ -278,7 +289,6 @@ public class Panel {
 		} else {
 
 			out = fin ? o + 1 : o - 1;
-
 		}
 
 		return out;

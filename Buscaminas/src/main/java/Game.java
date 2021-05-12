@@ -14,7 +14,7 @@ public class Game extends JApplet {
 	@Override
 	public void init() {
 
-		this.dimension = new Dimension(600, 600);
+		this.dimension = new Dimension(1920, 1080);
 		resize(this.dimension);
 		this.image = this.createImage(this.dimension.width, this.dimension.height);
 		this.renderBuffer = this.image.getGraphics();
@@ -35,11 +35,6 @@ public class Game extends JApplet {
 		g.drawImage(image, 0, 0, this);
 	}
 
-	public void setFin(boolean fin) {
-
-		this.fin = fin;
-	}
-
 	private void initListeners() {
 
 		addMouseListener(new MouseAdapter() {
@@ -53,7 +48,6 @@ public class Game extends JApplet {
 
 					case 1:
 
-
 						fin = panel.boxPressed(e.getPoint());
 						//panel.showBombs();
 						repaint();
@@ -64,8 +58,8 @@ public class Game extends JApplet {
 						repaint();
 						break;
 				}
-
 			}
+
 		});
 	}
 

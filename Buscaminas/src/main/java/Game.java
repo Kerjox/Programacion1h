@@ -14,7 +14,7 @@ public class Game extends JApplet {
 	@Override
 	public void init() {
 
-		this.dimension = new Dimension(1920, 1080);
+		this.dimension = new Dimension(1080, 1080);
 		resize(this.dimension);
 		this.image = this.createImage(this.dimension.width, this.dimension.height);
 		this.renderBuffer = this.image.getGraphics();

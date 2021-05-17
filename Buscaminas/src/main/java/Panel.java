@@ -1,7 +1,6 @@
 import exceptions.BombsRebaseNumberOfBoxesException;
 
 import javax.imageio.ImageIO;
-import javax.smartcardio.Card;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,6 +40,21 @@ public class Panel {
 		}*/
 	}
 
+	public void setPosPanel(Dimension posPanel) {
+
+		this.posPanel = posPanel;
+	}
+
+	public List<List<Box>> getBoxes() {
+
+		return boxes;
+	}
+
+	public void setBoxes(List<List<Box>> boxes) {
+
+		this.boxes = boxes;
+	}
+
 	protected void initBombs() {
 
 		try {
@@ -59,11 +73,6 @@ public class Panel {
 	public void setDimension(Dimension dimension) {
 
 		this.dimension = dimension;
-	}
-
-	public void setBoxes(List<List<Box>> boxes) {
-
-		this.boxes = boxes;
 	}
 
 	protected void initBombsAround() {
@@ -93,7 +102,7 @@ public class Panel {
 			int y = (int) (Math.random() * this.dimension.height);
 
 			Box box = this.boxes.get(x).get(y);
-			if (!box.isBomb()) {
+			if (! box.isBomb()) {
 
 				box.setBomb(true);
 				cont++;
@@ -163,7 +172,7 @@ public class Panel {
 
 				if (box.contains(point)) {
 
-					if (!box.isMarked()) {
+					if (! box.isMarked()) {
 
 						if (box.isBomb()) {
 
@@ -247,7 +256,7 @@ public class Panel {
 
 		if (isBomb(i, f)) {
 
-			return -1;
+			return - 1;
 		}
 
 		int x = checkLimit(i, false);
@@ -316,7 +325,7 @@ public class Panel {
 
 				if (box.contains(point)) {
 
-					box.setMarked(!box.isMarked());
+					box.setMarked(! box.isMarked());
 				}
 			}
 		}

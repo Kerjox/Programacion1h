@@ -28,7 +28,6 @@ public class Tablero {
 
 		for (int i = 0; i < 4; i++) {
 
-
 			this.imagesPelotas.add(getImage(i));
 		}
 	}
@@ -48,7 +47,7 @@ public class Tablero {
 
 		for (int i = 0; i < 10; i++) {
 
-			int n = (int) (Math.random() * 3);
+			int n = (int) (Math.random() * 4);
 			Image img = this.imagesPelotas.get(n);
 			this.pelotasATirar.add(new Pelota(img));
 		}

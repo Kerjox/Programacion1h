@@ -38,7 +38,9 @@ class PanelTest {
 	/**
 	 * Para los Mocks hay que usar "when" y para los spy usamos los "doReturn", "do...", etc...
 	 */
+
 	@Test
+	@DisplayName("Inicializar bombas alrededor")
 	void initBombsAround() {
 
 		// Preparation
@@ -56,6 +58,7 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Poner bombas exception")
 	void initBombsTest() {
 
 		this.spyPanel.setDimension(new Dimension(10, 10));
@@ -67,6 +70,7 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Poner bombas")
 	void plantBombs() throws BombsRebaseNumberOfBoxesException {
 
 		Box spyBox = spy(new Box(this.mockImage, this.mockImage));
@@ -84,12 +88,7 @@ class PanelTest {
 	}
 
 	@Test
-	void initImagesTest() {
-
-
-	}
-
-	@Test
+	@DisplayName("Inicializar bombas")
 	void initBoxesTest() {
 
 		this.spyPanel.setDimension(new Dimension(10, 10));
@@ -99,6 +98,7 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Pintar el panel")
 	void paintPanelTest() {
 
 		Box spyBox = spy(new Box(this.mockImage, this.mockImage));
@@ -116,6 +116,7 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Pintar malla")
 	void paintGridTest() {
 
 		this.spyPanel.setDimension(new Dimension(10, 10));
@@ -128,6 +129,7 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Bomba presionada")
 	void boxPressedTest() {
 
 		Box spyBox = spy(new Box(this.mockImage, this.mockImage));
@@ -150,19 +152,30 @@ class PanelTest {
 		spyBox.setBomb(false);
 		when(spyBox.getBombsAround()).thenReturn(0);
 		doNothing().when(this.spyPanel).openPanel(anyInt(), anyInt());
-		this.spyPanel.boxPressed(this.mockPoint);
 
+		this.spyPanel.boxPressed(this.mockPoint);
 		verify(spyBox, times(1)).setVisible(true);
 		verify(this.spyPanel, times(1)).openPanel(anyInt(), anyInt());
 
 	}
 
 	@Test
+	@DisplayName("Recursiva Test")
 	void openPanelTest() {
 
+		Box spyBox = spy(new Box(this.mockImage, this.mockImage));
+		this.spyPanel.setBoxes(this.mockList2);
+		when(this.mockList2.get(anyInt())).thenReturn(this.mockList);
+		when(this.mockList.get(anyInt())).thenReturn(spyBox);
+		doNothing().when(this.spyPanel).open(anyInt(), anyInt());
+
+		this.spyPanel.openPanel(1, 1);
+		verify(spyBox, times(1)).setVisible(true);
+		verify(this.spyPanel, times(1)).open(anyInt(), anyInt());
 	}
 
 	@Test
+	@DisplayName("Abrir el tablero")
 	void openTest() {
 
 		Box spyBox = spy(new Box(this.mockImage, this.mockImage));
@@ -188,6 +201,7 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Se puede abrir el tablero?")
 	void canOpenTest() {
 
 		Box spyBox = spy(new Box(this.mockImage, this.mockImage));
@@ -219,6 +233,7 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Calcular bombas alrededor")
 	void findBombsAroundTest() {
 
 		doReturn(true).when(this.spyPanel).isBomb(1, 1);
@@ -237,6 +252,7 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Es bomba?")
 	void isBombTest() {
 
 		Box spyBox = spy(new Box(this.mockImage, this.mockImage));
@@ -254,6 +270,7 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Bomba pulsada en limites del tablero")
 	void checkLimitTest() {
 
 		this.spyPanel.setDimension(new Dimension(10, 10));
@@ -267,11 +284,27 @@ class PanelTest {
 	}
 
 	@Test
+	@DisplayName("Mostrar bombas")
 	void showBombsTest() {
 
+		Box spyBox = spy(new Box(this.mockImage, this.mockImage));
+		List<List<Box>> l = new ArrayList<>();
+		l.add(new ArrayList<>());
+		l.get(0).add(spyBox);
+		this.spyPanel.setBoxes(l);
+		when(spyBox.isBomb()).thenReturn(false);
+
+		this.spyPanel.showBombs();
+		verify(spyBox, times(0)).setVisible(true);
+
+		when(spyBox.isBomb()).thenReturn(true);
+
+		this.spyPanel.showBombs();
+		verify(spyBox, times(1)).setVisible(true);
 	}
 
 	@Test
+	@DisplayName("Bomba fuera de limites")
 	void isBoxOnLimitsTest() {
 
 		this.spyPanel.setDimension(new Dimension(10, 10));
@@ -280,6 +313,38 @@ class PanelTest {
 		assertFalse(this.spyPanel.isBoxOnLimits(5, 5));
 		assertFalse(this.spyPanel.isBoxOnLimits(0, 9));
 
+	}
+
+	@Test
+	@DisplayName("Marcar posible bomba")
+	void toggleMarkTest() {
+
+		Box spyBox = spy(new Box(this.mockImage, this.mockImage));
+		List<List<Box>> l = new ArrayList<>();
+		l.add(new ArrayList<>());
+		l.get(0).add(spyBox);
+		this.spyPanel.setBoxes(l);
+		when(spyBox.contains(this.mockPoint)).thenReturn(false);
+
+		this.spyPanel.toggleMark(this.mockPoint);
+		verify(spyBox, times(0)).setMarked(anyBoolean());
+
+		when(spyBox.contains(this.mockPoint)).thenReturn(true);
+
+		this.spyPanel.toggleMark(this.mockPoint);
+		verify(spyBox, times(1)).setMarked(anyBoolean());
+	}
+
+	@Test
+	@DisplayName("Constructor")
+	void constructorTest() {
+
+		Panel p = spy(new Panel(1, 1, 20, 20));
+
+		assertEquals(1, p.getPosPanel().width);
+		assertEquals(1, p.getPosPanel().height);
+		assertEquals(20, p.getDimension().width);
+		assertEquals(20, p.getDimension().height);
 	}
 
 }

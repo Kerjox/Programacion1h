@@ -18,7 +18,7 @@ public class Game extends JApplet {
 		resize(this.dimension);
 		this.image = this.createImage(this.dimension.width, this.dimension.height);
 		this.renderBuffer = this.image.getGraphics();
-		this.panel = new Panel(80, 120);
+		this.panel = new Panel(80, 120, 20, 20);
 		this.fin = false;
 		initListeners();
 	}

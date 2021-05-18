@@ -18,10 +18,10 @@ public class Panel {
 
 	}
 
-	public Panel(int posX, int posY) {
+	public Panel(int posX, int posY, int casX, int casY) {
 
 		this.posPanel = new Dimension(posX, posY);
-		this.dimension = new Dimension(20, 20);
+		this.dimension = new Dimension(casX, casY);
 
 		initImages();
 		initBoxes();
@@ -38,6 +38,21 @@ public class Panel {
 				System.out.printf("%d, ", box.getBombsAround());
 			}
 		}*/
+	}
+
+	public Dimension getDimension() {
+
+		return dimension;
+	}
+
+	public void setDimension(Dimension dimension) {
+
+		this.dimension = dimension;
+	}
+
+	public Dimension getPosPanel() {
+
+		return posPanel;
 	}
 
 	public void setPosPanel(Dimension posPanel) {
@@ -68,11 +83,6 @@ public class Panel {
 	public void setNumBombs(int numBombs) {
 
 		this.numBombs = numBombs;
-	}
-
-	public void setDimension(Dimension dimension) {
-
-		this.dimension = dimension;
 	}
 
 	protected void initBombsAround() {
@@ -305,13 +315,13 @@ public class Panel {
 
 	public void showBombs() {
 
-		for (List<Box> box : this.boxes) {
+		for (List<Box> boxes : this.boxes) {
 
-			for (Box value : box) {
+			for (Box box : boxes) {
 
-				if (value.isBomb()) {
+				if (box.isBomb()) {
 
-					value.setVisible(true);
+					box.setVisible(true);
 				}
 			}
 		}

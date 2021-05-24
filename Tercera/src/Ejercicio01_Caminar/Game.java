@@ -44,7 +44,7 @@ public class Game extends JApplet implements Runnable, KeyEventDispatcher {
 		initVaqueros();
 
 		suspendAnimationsPlayers();
-		startAnimationGuerrilleros();
+		startAnimation();
 	}
 
 	@Override
@@ -129,23 +129,53 @@ public class Game extends JApplet implements Runnable, KeyEventDispatcher {
 				if (player == GUERRILLERO) break;
 				player = GUERRILLERO;
 				suspendAnimationsPlayers();
-				startAnimationGuerrilleros();
+				startAnimation();
 				break;
 
 			case 72:
 				if (player == HAMPON) break;
 				player = HAMPON;
 				suspendAnimationsPlayers();
-				startAnimationHampones();
+				startAnimation();
 				break;
 			case 86:
 				if (player == VAQUERO) break;
 				player = VAQUERO;
 				suspendAnimationsPlayers();
-				startAnimationVaqueros();
+				startAnimation();
 				break;
 		}
 		return false;
+	}
+
+	private void startAnimation() {
+
+		switch (player) {
+
+			case GUERRILLERO:
+
+				for (Guerrillero guerrillero : guerrillerosList) {
+
+					guerrillero.animation.resume();
+				}
+				break;
+
+			case HAMPON:
+
+				for (Hampon hampon : hamponesList) {
+
+					hampon.animation.resume();
+				}
+				break;
+
+			case VAQUERO:
+
+				for (Vaquero vaquero : vaquerosList) {
+
+					vaquero.animation.resume();
+				}
+				break;
+		}
 	}
 
 	private void paintPlayer() {
@@ -179,30 +209,6 @@ public class Game extends JApplet implements Runnable, KeyEventDispatcher {
 		for (Vaquero vaquero : vaquerosList) {
 
 			vaquero.animation.suspend();
-		}
-	}
-
-	private void startAnimationGuerrilleros() {
-
-		for (Guerrillero guerrillero : guerrillerosList) {
-
-			guerrillero.animation.resume();
-		}
-	}
-
-	private void startAnimationHampones() {
-
-		for (Hampon hampon : hamponesList) {
-
-			hampon.animation.resume();
-		}
-	}
-
-	private void startAnimationVaqueros() {
-
-		for (Vaquero vaquero : vaquerosList) {
-
-			vaquero.animation.resume();
 		}
 	}
 }

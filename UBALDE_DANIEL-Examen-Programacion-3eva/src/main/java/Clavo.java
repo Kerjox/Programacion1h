@@ -4,6 +4,7 @@ public class Clavo extends Rectangle {
 
 	private int color;
 	private final Image img;
+
 	public Clavo(Clavo clavo) {
 
 		this.img = clavo.img;

@@ -258,4 +258,6 @@ public class Game extends JApplet implements Runnable, KeyEventDispatcher {
 		explosions.add(new Explosion(x, y - 20, explosionImages));
 	}
 
+
+
 }

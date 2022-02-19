@@ -23,11 +23,10 @@ public class Tablero {
 		juegoIniciado = false;
 		initImagesClavos();
 		initClavos();
-		initClavosSoluciones();
 		initSlotMaquina();
 		initSlotsJugador();
-		initSlotMaquina();
 		initSlotsSoluciones();
+		initClavosSoluciones();
 		indexSlotActivo = 0;
 		setSlotActivo(indexSlotActivo);
 	}
